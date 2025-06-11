@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "text": "What's your ideal workspace?",
+    "options": [
+      { "text": "Ready-to-use setup", "traits": { "user-friendly": 2 } },
+      { "text": "Build everything from scratch", "traits": { "customizable": 2 } },
+      { "text": "Experimental tech lab", "traits": { "cutting-edge": 2 } }
+    ]
+  }
+  // Add 7-10 questions
+]

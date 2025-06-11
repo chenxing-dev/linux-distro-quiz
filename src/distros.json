@@ -1,0 +1,21 @@
+[
+  {
+    "id": "ubuntu",
+    "name": "Ubuntu",
+    "description": "Friendly, stable, and community-focused. Perfect for beginners!",
+    "traits": ["user-friendly", "stable", "community-driven"]
+  },
+  {
+    "id": "arch",
+    "name": "Arch Linux",
+    "description": "Minimalist DIY enthusiast. You build exactly what you want.",
+    "traits": ["customizable", "minimalist", "bleeding-edge"]
+  },
+  {
+    "id": "fedora",
+    "name": "Fedora",
+    "description": "Innovator who loves new tech. The pioneer's choice.",
+    "traits": ["cutting-edge", "developer-friendly", "modern"]
+  }
+  // Add 10+ distros
+]
