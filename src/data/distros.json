@@ -3,19 +3,40 @@
     "id": "ubuntu",
     "name": "Ubuntu",
     "description": "Friendly, stable, and community-focused. Perfect for beginners!",
-    "traits": ["user-friendly", "stable", "community-driven"]
+    "traits": ["user-friendly", "stable", "community-driven"],
+    "color": "from-orange-500 to-orange-700",
+    "icon": "ubuntu",
+    "personality": "You're approachable and value simplicity and reliability. Ubuntu matches your preference for a system that just works without unnecessary complexity. Like Ubuntu, you believe technology should empower everyone.",
+    "quote": "For human beings by human beings"
   },
   {
     "id": "arch",
     "name": "Arch Linux",
     "description": "Minimalist DIY enthusiast. You build exactly what you want.",
-    "traits": ["customizable", "minimalist", "bleeding-edge"]
+    "traits": ["customizable", "minimalist", "bleeding-edge"],
+    "color": "from-blue-400 to-blue-600",
+    "icon": "linux",
+    "personality": "You're a tinkerer who loves complete control. Arch Linux matches your desire to build things exactly your way. Like Arch, you value simplicity, transparency and having full control over your environment.",
+    "quote": "Keep it simple, stupid"
   },
   {
     "id": "fedora",
     "name": "Fedora",
     "description": "Innovator who loves new tech. The pioneer's choice.",
-    "traits": ["cutting-edge", "developer-friendly", "modern"]
+    "traits": ["cutting-edge", "developer-friendly", "modern"],
+    "color": "from-blue-500 to-blue-700",
+    "icon": "fedora",
+    "personality": "You're an innovator who loves being on the cutting edge. Fedora matches your enthusiasm for new technologies and forward-thinking approaches. Like Fedora, you're not afraid to embrace change and push boundaries.",
+    "quote": "Freedom. Friends. Features. First."
+  },
+  {
+    "id": "mint",
+    "name": "Linux Mint",
+    "description": "Practical, comfortable, and efficient. The reliable workhorse.",
+    "traits": ["user-friendly", "efficient", "pragmatic"],
+    "color": "from-green-500 to-green-700",
+    "icon": "leaf",
+    "personality": "You value practicality and comfort over flashy features. Linux Mint matches your preference for a system that just gets out of your way and lets you work. Like Mint, you believe technology should serve you, not the other way around.",
+    "quote": "From freedom came elegance"
   }
-  // Add 10+ distros
 ]

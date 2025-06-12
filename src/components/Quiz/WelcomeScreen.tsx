@@ -5,15 +5,13 @@ import { faSpinner, faTerminal } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
-export const WelcomeScreen: React.FC = () => {
+const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleStartQuiz = () => {
     setIsLoading(true);
-    setTimeout(() => {
-      alert("Quiz starting! In a real implementation, this would take you to the first question.");
-      setIsLoading(false);
-    }, 1500);
+    onStart();
+    setIsLoading(false);
   };
 
   return (
@@ -68,7 +66,7 @@ export const WelcomeScreen: React.FC = () => {
                 </>
               ) : (
                 <>
-                  <FontAwesomeIcon icon={faTerminal} className="mr-3" />
+                  <FontAwesomeIcon icon={faTerminal} className="mr-2" />
                   Start the Quiz
                 </>
               )}
@@ -82,3 +80,5 @@ export const WelcomeScreen: React.FC = () => {
     </div>
   );
 };
+
+export default WelcomeScreen;
