@@ -1,7 +1,7 @@
-// import { useState } from 'react'
+import { WelcomeScreen } from "@/components/Quiz/WelcomeScreen";
 
 function App() {
-  return <>Hello World</>;
+  return <WelcomeScreen />;
 }
 
 export default App;
