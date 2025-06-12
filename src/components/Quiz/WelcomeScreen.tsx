@@ -30,7 +30,7 @@ const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
         </div>
       </Card>
 
-      <Card className="bottom-[10%] right-[5%] p-0 hidden md:block absolute w-64 h-48 bg-black/50 border border-blue-500/30 shadow-xl overflow-hidden">
+      <Card className="bottom-[5%] right-[8%] p-0 hidden md:block absolute w-64 h-48 bg-black/50 border border-blue-500/30 shadow-xl overflow-hidden">
         <div className="flex items-center p-2 bg-gray-800/80 border-b border-gray-700">
           <div className="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
           <div className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
@@ -43,7 +43,7 @@ const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
       </Card>
 
       {/* Main content */}
-      <div className="w-full max-w-4xl bg-gray-900/80 backdrop-blur-lg rounded-2xl border border-gray-700/50 shadow-2xl z-10">
+      <div className="w-full max-w-3xl bg-gray-900/80 backdrop-blur-lg rounded-2xl border border-gray-700/50 shadow-2xl z-10">
         {/* Hero section */}
         <div className="p-8 md:p-12 text-center">
           <div>

@@ -44,7 +44,7 @@ const QuizFlow: React.FC<{ onComplete: (answers: Record<number, string>) => void
   };
 
   return (
-    <div className="min-h-screen max-w-3xl mx-auto flex flex-col justify-center">
+    <div className="min-h-screen max-w-3xl p-5 mx-auto flex flex-col justify-center">
       {/* Terminal Progress Bar */}
       <div className="my-8 bg-gray-900/80 border border-gray-700/50 rounded-lg text-sm font-mono text-green-400">
         <div className="flex items-center p-2 bg-gray-800/80 border-b border-gray-700">

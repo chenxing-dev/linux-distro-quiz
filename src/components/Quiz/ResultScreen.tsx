@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import distros, { type Distro } from "@/data/distros";
-import { FaHeart, FaRedo, FaShareAlt, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { FaHeart, FaRedo, FaShareAlt, FaChevronDown, FaChevronUp, FaSpinner } from 'react-icons/fa';
 
 // Mock function to calculate result - in real app this would use trait scoring
 const calculateResult = () => {
@@ -18,12 +18,19 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
   const [result, setResult] = useState<Distro | null>(null);
   const [showDetails, setShowDetails] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [shareUrl, setShareUrl] = useState("");
+
 
   useEffect(() => {
     // Simulate calculation delay
     const timer = setTimeout(() => {
       const distroResult = calculateResult();
       setResult(distroResult);
+
+      // Generate shareable URL
+      const baseUrl = window.location.origin + window.location.pathname;
+      const shareableUrl = `${baseUrl}?distro=${distroResult.id}`;
+      setShareUrl(shareableUrl);
     }, 1000);
 
     return () => clearTimeout(timer);
@@ -31,7 +38,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
 
   const handleCopyResult = () => {
     if (result) {
-      const resultText = `I got ${result.name} on the Linux Distro Personality Quiz! ${window.location.href}`;
+      const resultText = `I got ${result.name} on the Linux Distro Personality Quiz! ${shareUrl}`;
       navigator.clipboard.writeText(resultText);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -48,11 +55,8 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
           <div className="mt-8 font-mono text-sm text-green-400 bg-gray-800/50 p-4 rounded-lg max-w-md mx-auto">
             <p className="mb-2">$ ./distro_matcher --user-profile</p>
             <div className="flex">
-              <span className="text-blue-400">[</span>
-              <div className="ml-2 animate-pulse">
-                <span className="inline-block w-2 h-4 bg-green-500 animate-pulse"></span>
-              </div>
-              <span className="text-blue-400 ml-1">] Processing personality traits</span>
+              <FaSpinner className="mr-3 animate-spin" />
+              <span className="text-blue-400">Processing personality traits</span>
             </div>
           </div>
         </div>
