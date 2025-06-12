@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLinux } from "@fortawesome/free-brands-svg-icons";
-import { faSpinner, faTerminal } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { FaLinux, FaSpinner, FaTerminal } from "react-icons/fa";
 
 const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -20,7 +18,7 @@ const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
       bg-gradient-to-br from-gray-900 via-blue-950 to-sky-900"
     >
       {/* Decorative terminal windows */}
-      <Card className="top-[10%] left-[5%] p-0 hidden md:block absolute w-64 h-48 bg-black/20 border border-blue-500/30 shadow-xl overflow-hidden">
+      <Card className="top-[10%] left-[5%] p-0 hidden md:block absolute w-64 h-48 bg-black/50 border border-blue-500/30 shadow-xl overflow-hidden">
         <div className="flex items-center p-2 bg-gray-800/80 border-b border-gray-700">
           <div className="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
           <div className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
@@ -32,7 +30,7 @@ const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
         </div>
       </Card>
 
-      <Card className="bottom-[10%] right-[5%] p-0 hidden md:block absolute w-64 h-48 bg-black/20 border border-blue-500/30 shadow-xl overflow-hidden">
+      <Card className="bottom-[10%] right-[5%] p-0 hidden md:block absolute w-64 h-48 bg-black/50 border border-blue-500/30 shadow-xl overflow-hidden">
         <div className="flex items-center p-2 bg-gray-800/80 border-b border-gray-700">
           <div className="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
           <div className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
@@ -49,8 +47,8 @@ const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
         {/* Hero section */}
         <div className="p-8 md:p-12 text-center">
           <div>
-            <h1 className="text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
-              <FontAwesomeIcon icon={faLinux} className="mr-3 text-cyan-400" />
+            <h1 className="text-3xl md:text-5xl font-bold mb-6 inline-flex bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+              <FaLinux className="mr-3 text-cyan-400 inline" />
               Linux Distro Quiz
             </h1>
 
@@ -61,12 +59,12 @@ const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
             <Button onClick={handleStartQuiz} disabled={isLoading} className="overflow-hidden p-6 relative bg-gradient-to-r from-cyan-600 to-blue-700 font-bold md:text-xl hover:from-cyan-500 hover:to-blue-600 transition-all duration-300 transform hover:-translate-y-1">
               {isLoading ? (
                 <>
-                  <FontAwesomeIcon icon={faSpinner} className="mr-3 animate-spin" />
+                  <FaSpinner className="mr-3 animate-spin" />
                   Loading Quiz...
                 </>
               ) : (
                 <>
-                  <FontAwesomeIcon icon={faTerminal} className="mr-2" />
+                  <FaTerminal className="mr-2" />
                   Start the Quiz
                 </>
               )}

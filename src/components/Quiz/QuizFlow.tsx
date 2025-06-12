@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import questions from "@/data/questions.json";
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import questions from "@/data/questions";
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 const QuizFlow: React.FC<{ onComplete: (answers: Record<number, string>) => void }> = ({ onComplete }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -96,13 +95,13 @@ const QuizFlow: React.FC<{ onComplete: (answers: Record<number, string>) => void
           {/* Navigation buttons */}
           <div className="flex justify-between mt-8">
             <button onClick={handlePrevious} disabled={currentQuestion === 0} className={`px-6 py-3 rounded-lg font-medium flex items-center ${currentQuestion === 0 ? "bg-gray-700/50 text-gray-500 cursor-not-allowed" : "bg-gray-700 hover:bg-gray-600 text-gray-200"}`}>
-              <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />
+              <FaArrowLeft className="mr-2" />
               Previous
             </button>
 
             <button onClick={handleNext} disabled={!selectedOption} className={`px-6 py-3 rounded-lg font-medium flex items-center ${!selectedOption ? "bg-blue-500/50 text-blue-200 cursor-not-allowed" : "bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-cyan-500 hover:to-blue-600 text-white shadow-lg shadow-blue-500/30"}`}>
               {currentQuestion < questions.length - 1 ? "Next Question" : "See Results"}
-              <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
+              <FaArrowRight className="ml-2" />
             </button>
           </div>
         </motion.div>

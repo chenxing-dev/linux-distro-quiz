@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import distros from "@/data/distros.json";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faChevronUp, faHeart, faRedo, faShareAlt } from "@fortawesome/free-solid-svg-icons";
+import distros, { type Distro } from "@/data/distros";
+import { FaHeart, FaRedo, FaShareAlt, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 // Mock function to calculate result - in real app this would use trait scoring
 const calculateResult = () => {
@@ -14,17 +13,6 @@ interface ResultScreenProps {
   answers: Record<number, string>;
   onRetake: () => void;
 }
-
-type Distro = {
-  id: string;
-  name: string;
-  description: string;
-  traits: string[];
-  color: string;
-  icon: string;
-  personality: string;
-  quote: string;
-};
 
 const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
   const [result, setResult] = useState<Distro | null>(null);
@@ -72,6 +60,9 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
     );
   }
 
+  // Get the icon component from the result
+  const IconComponent = result.icon;
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 p-4 flex items-center justify-center">
       <AnimatePresence>
@@ -85,7 +76,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
                 <h1 className="text-2xl md:text-4xl font-bold mb-4 text-white">Your Linux Personality Match Is...</h1>
 
                 <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.3, duration: 0.5 }} className={`inline-flex items-center justify-center w-32 h-32 rounded-2xl mb-6 bg-gradient-to-br ${result.color} shadow-lg`}>
-                  <FontAwesomeIcon icon={result.icon} className="text-6xl text-white" />
+                  <IconComponent className="text-6xl text-white" />
                 </motion.div>
 
                 <motion.h2 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.5 }} className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
@@ -128,7 +119,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
                 <div className="text-center mb-8">
                   <button onClick={() => setShowDetails(!showDetails)} className="text-blue-400 hover:text-blue-300 font-medium flex items-center justify-center mx-auto">
                     {showDetails ? "Hide Technical Details" : "Show Technical Details"}
-                    <FontAwesomeIcon icon={showDetails ? faChevronUp : faChevronDown} className="ml-2" />
+                    {showDetails ? <FaChevronUp className="ml-2" /> : <FaChevronDown className="ml-2" />}
                   </button>
                 </div>
 
@@ -167,7 +158,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
             <div className="p-8 bg-gray-900/70 border-t border-gray-700/50">
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={onRetake} className="px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-700 text-white font-medium rounded-lg shadow-lg hover:from-purple-500 hover:to-indigo-600 transition-all flex items-center justify-center">
-                  <FontAwesomeIcon icon={faRedo} className="mr-2" />
+                  <FaRedo className="mr-2" />
                   Retake Quiz
                 </motion.button>
 
@@ -179,32 +170,19 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
                     </>
                   ) : (
                     <>
-                      <FontAwesomeIcon icon={faShareAlt} className="mr-2" />
+                      <FaShareAlt className="mr-2" />
                       Share Your Result
                     </>
                   )}
                 </motion.button>
               </div>
-
-              <div className="mt-8 text-center">
-                <p className="text-gray-400 mb-4">Discover other distributions:</p>
-                <div className="flex flex-wrap justify-center gap-3">
-                  {distros
-                    .filter(d => d.id !== result.id)
-                    .map((distro, index) => (
-                      <motion.div key={distro.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2 + index * 0.1, duration: 0.3 }} className={`w-12 h-12 rounded-lg flex items-center justify-center bg-gradient-to-br ${distro.color}`}>
-                        <FontAwesomeIcon icon={distro.icon} className="text-white" />
-                      </motion.div>
-                    ))}
-                </div>
-              </div>
             </div>
 
             {/* Footer */}
             <div className="py-4 text-center bg-gray-900/80 border-t border-gray-700/50">
-              <p className="text-gray-400">
+              <p className="text-gray-400 inline-flex items-center">
                 Made with
-                <FontAwesomeIcon icon={faHeart} className="text-red-500 mx-2" />
+                <FaHeart className="text-red-500 mx-2" />
                 for the Linux community
               </p>
             </div>
