@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { FaHeart, FaRedo, FaShareAlt, FaChevronDown, FaChevronUp, FaSpinner, FaCheck } from "react-icons/fa";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 
 // Mock function to calculate result - in real app this would use trait scoring
 const calculateResult = () => {
@@ -32,6 +33,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
   const [showDetails, setShowDetails] = useState(false);
   const [copied, setCopied] = useState(false);
   const [shareUrl, setShareUrl] = useState("");
+  const [showCopiedAlert, setShowCopiedAlert] = useState(false);
 
   useEffect(() => {
     // Simulate calculation delay
@@ -53,7 +55,11 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
       const resultText = `I got ${result.name} on the Linux Distro Personality Quiz! ${shareUrl}`;
       navigator.clipboard.writeText(resultText);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      setShowCopiedAlert(true);
+      setTimeout(() => {
+        setCopied(false)
+        setShowCopiedAlert(false);
+      }, 2000);
     }
   };
 
@@ -86,6 +92,17 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
 
   return (
     <div className="min-h-screen p-4 flex justify-center">
+
+      {/* Copied Alert */}
+      {showCopiedAlert && (
+        <Alert className="fixed top-4 left-4 right-4 md:left-auto md:right-4 md:w-1/3 border-zinc-900 z-50">
+          <AlertTitle>Copied to clipboard!</AlertTitle>
+          <AlertDescription>
+            Share your Linux distro match with friends
+          </AlertDescription>
+        </Alert>
+      )}
+
       <AnimatePresence>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="w-full max-w-4xl">
           <Card>

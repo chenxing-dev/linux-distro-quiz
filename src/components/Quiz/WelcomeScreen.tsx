@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { FaLinux, FaSpinner, FaTerminal } from "react-icons/fa";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
+import { LucideX } from "lucide-react";
 
 const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [showInfo, setShowInfo] = useState(true);
 
   const handleStartQuiz = () => {
     setIsLoading(true);
@@ -40,6 +43,24 @@ const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
           <p className="mt-2">Welcome to Linux Distro Quiz!</p>
         </div>
       </Card>
+
+      {/* Info Alert */}
+      {showInfo && (
+        <Alert className="fixed top-4 left-4 right-4 md:left-auto md:right-4 md:w-1/3 z-50">
+          <AlertTitle>Welcome to the Linux Distro Personality Quiz!</AlertTitle>
+          <AlertDescription>
+            Discover which Linux distribution matches your personality in just 10 questions.
+          </AlertDescription>
+          <Button
+            size="icon"
+            variant="ghost"
+            className="absolute top-2 right-2"
+            onClick={() => setShowInfo(false)}
+          >
+            <LucideX />
+          </Button>
+        </Alert>
+      )}
 
       {/* Main content */}
       <Card className="w-full max-w-4xl">
