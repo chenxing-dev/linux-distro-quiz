@@ -59,23 +59,23 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
 
   if (!result) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 p-4">
-        <Card className="w-full max-w-md bg-gray-800/70 backdrop-blur-lg border-gray-700/50">
+      <div className="flex flex-col items-center justify-center min-h-screen p-4">
+        <Card className="w-full max-w-md">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl font-bold text-white">Analyzing your answers...</CardTitle>
-            <CardDescription className="text-gray-400 mt-2">
+            <CardTitle className="text-2xl font-bold">Analyzing your answers...</CardTitle>
+            <CardDescription className="mt-2">
               Calculating your perfect Linux match
             </CardDescription>
           </CardHeader>
           <CardContent className="flex justify-center">
-            <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-cyan-500 mb-6"></div>
+            <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-l-4 my-6"></div>
           </CardContent>
           <CardFooter className="justify-center">
-            <div className="font-mono text-sm text-green-400 bg-gray-800/50 p-4 rounded-lg w-full">
+            <div className="font-mono text-sm text-zinc-50 bg-zinc-800 p-4 rounded-lg w-full">
               <p className="mb-2">$ ./distro_matcher --user-profile</p>
-              <div className="flex">
+              <div className="inline-flex items-center">
                 <FaSpinner className="mr-3 animate-spin" />
-                <span className="text-blue-400">Processing personality traits</span>
+                <span>Processing personality traits</span>
               </div>
             </div>
           </CardFooter>
