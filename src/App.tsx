@@ -22,7 +22,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900">
+    <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-800">
       {quizState === "welcome" && <WelcomeScreen onStart={startQuiz} />}
       {quizState === "quiz" && <QuizFlow onComplete={completeQuiz} />}
       {quizState === "results" && <ResultScreen answers={quizAnswers} onRetake={retakeQuiz} />}

@@ -6,7 +6,6 @@ export type Distro = {
   color: string;
   ascii: string;
   personality: string;
-  quote: string;
 };
 
 const distros: Distro[] = [
@@ -39,8 +38,7 @@ const distros: Distro[] = [
                ..';::c'  .;loooo:'
 
 `,
-    personality: "You're approachable and value simplicity and reliability. Ubuntu matches your preference for a system that just works without unnecessary complexity. Like Ubuntu, you believe technology should empower everyone.",
-    quote: "For human beings by human beings"
+    personality: "You're approachable and value simplicity and reliability. Ubuntu matches your preference for a system that just works without unnecessary complexity. Like Ubuntu, you believe technology should empower everyone."
   },
   {
     id: "arch",
@@ -58,8 +56,7 @@ const distros: Distro[] = [
  / _.~   ~._^\\
 /.^         ^.\\
 `,
-    personality: "You're a tinkerer who loves complete control. Arch Linux matches your desire to build things exactly your way. Like Arch, you value simplicity, transparency and having full control over your environment.",
-    quote: "Keep it simple, stupid"
+    personality: "You're a tinkerer who loves complete control. Arch Linux matches your desire to build things exactly your way. Like Arch, you value simplicity, transparency and having full control over your environment."
   },
   {
     id: "fedora",
@@ -87,8 +84,7 @@ const distros: Distro[] = [
 :---------------------://
 
 `,
-    personality: "You're an innovator who loves being on the cutting edge. Fedora matches your enthusiasm for new technologies and forward-thinking approaches. Like Fedora, you're not afraid to embrace change and push boundaries.",
-    quote: "Freedom. Friends. Features. First."
+    personality: "You're an innovator who loves being on the cutting edge. Fedora matches your enthusiasm for new technologies and forward-thinking approaches. Like Fedora, you're not afraid to embrace change and push boundaries."
   },
   {
     id: "mint",
@@ -117,8 +113,7 @@ const distros: Distro[] = [
             '-MMMMMMMMMMMMM-'
                \`\`-:::::-\`\`
 `,
-    personality: "You value practicality and comfort over flashy features. Linux Mint matches your preference for a system that just gets out of your way and lets you work. Like Mint, you believe technology should serve you, not the other way around.",
-    quote: "From freedom came elegance"
+    personality: "You value practicality and comfort over flashy features. Linux Mint matches your preference for a system that just gets out of your way and lets you work. Like Mint, you believe technology should serve you, not the other way around."
   },
   {
     id: "kali",
@@ -150,8 +145,7 @@ const distros: Distro[] = [
                                              .
 
     `,
-    personality: "You're a security-conscious professional who needs powerful tools. Kali Linux matches your focus on penetration testing and digital forensics. Like Kali, you're not afraid to dive deep into complex systems.",
-    quote: "The quieter you become, the more you are able to hear"
+    personality: "You're a security-conscious professional who needs powerful tools. Kali Linux matches your focus on penetration testing and digital forensics. Like Kali, you're not afraid to dive deep into complex systems."
   },
   {
     id: "tails",
@@ -181,8 +175,7 @@ Nsyh+-..+y+-   yMMMMd   :mMM+
               .//\`
 
     `,
-    personality: "You prioritize privacy and security in everything you do. Tails OS matches your need for anonymity and leaving no digital footprint. Like Tails, you believe privacy is a fundamental right.",
-    quote: "Privacy is not an option, and it shouldn't be the price we accept for just getting on the internet"
+    personality: "You prioritize privacy and security in everything you do. Tails OS matches your need for anonymity and leaving no digital footprint. Like Tails, you believe privacy is a fundamental right."
   },
   {
     id: "gentoo",
@@ -210,8 +203,7 @@ yMMNNNNNNNmmmmmNNMmhs+/-\`
 \`/ohdmmddhys+++/:.\`
   \`-//////:--.
   `,
-    personality: "You're a perfectionist who wants complete control over your system. Gentoo matches your desire to compile everything from source for ultimate optimization. Like Gentoo, you believe in doing things your way.",
-    quote: "Choice, not chance, determines destiny"
+    personality: "You're a perfectionist who wants complete control over your system. Gentoo matches your desire to compile everything from source for ultimate optimization. Like Gentoo, you believe in doing things your way."
   }
 ];
 

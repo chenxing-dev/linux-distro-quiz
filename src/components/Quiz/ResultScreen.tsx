@@ -10,7 +10,6 @@ import {
   CardFooter
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -20,7 +19,7 @@ import { FaHeart, FaRedo, FaShareAlt, FaChevronDown, FaChevronUp, FaSpinner, FaC
 // Mock function to calculate result - in real app this would use trait scoring
 const calculateResult = () => {
   // For demo purposes
-  return distros[6];
+  return distros[0];
 };
 
 interface ResultScreenProps {
@@ -86,127 +85,216 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 p-4 flex items-center justify-center">
+    <div className="min-h-screen p-4 flex justify-center">
       <AnimatePresence>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="w-full max-w-4xl">
-          <Card className="bg-gray-800/70 backdrop-blur-lg rounded-2xl overflow-hidden border border-gray-700/50 shadow-2xl">
+          <Card>
             {/* Result header */}
-            <CardHeader className="p-8 md:p-12 flex flex-col justify-center *:mx-auto bg-gradient-to-r from-blue-900/30 to-indigo-900/30">
-              <h1 className="text-2xl md:text-4xl font-bold mb-4 text-white">Your Linux Personality Match Is...</h1>
+            <CardHeader className="flex flex-col justify-center *:mx-auto">
+              <CardTitle className="text-2xl md:text-4xl font-bold">Your Linux Personality Match Is...</CardTitle>
 
               {/* ASCII Art Logo */}
-              <div className="font-mono text-xs md:text-sm leading-[1.1] text-cyan-300 whitespace-pre mb-4">{result.ascii || result.name}</div>
+              <div className="font-mono text-xs md:text-sm leading-[1.2] whitespace-pre">{result.ascii || result.name}</div>
 
-              <motion.h2 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.5 }} className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+              <motion.h2 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.5 }} className="text-3xl md:text-5xl font-bold">
                 {result.name}
               </motion.h2>
 
-              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7, duration: 0.5 }} className="text-xl text-blue-200 max-w-2xl">
+              <CardDescription className="text-xl max-w-2xl">
                 {result.description}
-              </motion.p>
+              </CardDescription>
             </CardHeader>
 
-            {/* Personality insights */}
-            <div className="p-8 bg-gray-800/60 border-t border-gray-700/50">
-              <div className="max-w-3xl mx-auto">
-                <h3 className="text-2xl font-bold text-white mb-6 text-center">Why {result.name} is Your Perfect Match</h3>
+            <CardContent>
+              {/* Personality insights */}
+              <div className="p-8">
+                <div className="max-w-3xl mx-auto">
+                  <CardTitle className="text-2xl font-bold mb-6 text-center">Why {result.name} is Your Perfect Match</CardTitle>
 
-                <motion.div className="bg-gray-900/50 p-6 rounded-xl border border-gray-700/30 mb-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9, duration: 0.5 }}>
-                  <p className="text-gray-200 text-lg leading-relaxed">{result.personality}</p>
+                  <motion.div className="p-6 mb-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9, duration: 0.5 }}>
+                    <p className="text-lg">{result.personality}</p>
+                  </motion.div>
 
-                  <div className="mt-6 p-4 bg-gray-800/50 rounded-lg border-l-4 border-cyan-500">
-                    <p className="text-cyan-300 italic">"{result.quote}"</p>
+                  {/* Traits */}
+                  <CardTitle className="text-xl font-bold mb-4">Your Key Traits</CardTitle>
+                  <div className="flex flex-wrap gap-3 justify-center mb-8">
+                    {result.traits.map((trait: string, index: number) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 1.0 + index * 0.1, duration: 0.3 }}
+                      >
+                        <Badge className="px-4 py-2">
+                          {trait.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                        </Badge>
+                      </motion.div>
+                    ))}
                   </div>
-                </motion.div>
 
-                {/* Traits */}
-                <h4 className="text-xl font-bold text-white mb-4">Your Key Traits</h4>
-                <div className="flex flex-wrap gap-3 justify-center mb-8">
-                  {result.traits.map((trait: string, index: number) => (
-                    <motion.div key={index} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 1.0 + index * 0.1, duration: 0.3 }} className="px-4 py-2 bg-gray-700 rounded-full text-cyan-300 font-medium">
-                      {trait
-                        .split("-")
-                        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                        .join(" ")}
-                    </motion.div>
-                  ))}
+                  {/* Distro details toggle */}
+                  <div className="text-center mb-8">
+                    <Button
+                      onClick={() => setShowDetails(!showDetails)}
+                      variant="ghost"
+                    >
+                      {showDetails ? 'Hide Technical Details' : 'Show Technical Details'}
+                      {showDetails ? <FaChevronUp className="ml-2" /> : <FaChevronDown className="ml-2" />}
+                    </Button>
+                  </div>
+
+                  {/* Technical details */}
+                  <AnimatePresence>
+                    {showDetails && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden">
+                        <Card>
+                          <CardHeader>
+                            <CardTitle className="text-xl font-bold">
+                              About {result.name}
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                              <div>
+                                <h5 className="font-bold mb-2">Package Manager</h5>
+                                <p className="mb-4">
+                                  {result.id === "ubuntu" || result.id === "mint"
+                                    ? "APT (Advanced Package Tool)"
+                                    : result.id === "fedora"
+                                      ? "DNF (Dandified YUM)"
+                                      : result.id === "arch"
+                                        ? "Pacman"
+                                        : result.id === "kali"
+                                          ? "APT (Advanced Package Tool)"
+                                          : result.id === "tails"
+                                            ? "APT (Advanced Package Tool)"
+                                            : "Portage"}
+                                </p>
+
+                                <h5 className="font-bold mb-2">Release Cycle</h5>
+                                <p>
+                                  {result.id === "ubuntu"
+                                    ? "Every 6 months (interim), every 2 years (LTS)"
+                                    : result.id === "arch"
+                                      ? "Rolling release"
+                                      : result.id === "fedora"
+                                        ? "Approximately every 6 months"
+                                        : result.id === "mint"
+                                          ? "Every 6 months"
+                                          : result.id === "kali"
+                                            ? "Rolling release"
+                                            : result.id === "tails"
+                                              ? "Every 6 months"
+                                              : "Rolling release"}
+                                </p>
+                              </div>
+
+                              <div>
+                                <h5 className="font-bold mb-2">Default Desktop</h5>
+                                <p className="mb-4">
+                                  {result.id === "ubuntu"
+                                    ? "GNOME"
+                                    : result.id === "arch"
+                                      ? "None (you choose!)"
+                                      : result.id === "fedora"
+                                        ? "GNOME"
+                                        : result.id === "mint"
+                                          ? "Cinnamon"
+                                          : result.id === "kali"
+                                            ? "XFCE"
+                                            : result.id === "tails"
+                                              ? "GNOME"
+                                              : "None (you choose!)"}
+                                </p>
+
+                                <h5 className="font-bold mb-2">Best For</h5>
+                                <p>
+                                  {result.id === "ubuntu"
+                                    ? "Beginners, developers, and enterprise use"
+                                    : result.id === "arch"
+                                      ? "Experienced users, tinkerers, and minimalists"
+                                      : result.id === "fedora"
+                                        ? "Developers and early adopters"
+                                        : result.id === "mint"
+                                          ? "Windows migrants and users who prefer traditional interfaces"
+                                          : result.id === "kali"
+                                            ? "Security professionals and penetration testing"
+                                            : result.id === "tails"
+                                              ? "Privacy-focused users and journalists"
+                                              : "Advanced users who want complete control"}
+                                </p>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-
-                {/* Distro details toggle */}
-                <div className="text-center mb-8">
-                  <button onClick={() => setShowDetails(!showDetails)} className="text-blue-400 hover:text-blue-300 font-medium flex items-center justify-center mx-auto">
-                    {showDetails ? "Hide Technical Details" : "Show Technical Details"}
-                    {showDetails ? <FaChevronUp className="ml-2" /> : <FaChevronDown className="ml-2" />}
-                  </button>
-                </div>
-
-                {/* Technical details */}
-                <AnimatePresence>
-                  {showDetails && (
-                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden bg-gray-900/50 rounded-xl border border-gray-700/30">
-                      <div className="p-6">
-                        <h4 className="text-xl font-bold text-white mb-4">About {result.name}</h4>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <div>
-                            <h5 className="font-bold text-cyan-300 mb-2">Package Manager</h5>
-                            <p className="text-gray-300 mb-4">{result.id === "ubuntu" || result.id === "mint" ? "APT (Advanced Package Tool)" : result.id === "fedora" ? "DNF (Dandified YUM)" : "Pacman"}</p>
-
-                            <h5 className="font-bold text-cyan-300 mb-2">Release Cycle</h5>
-                            <p className="text-gray-300">{result.id === "ubuntu" ? "Every 6 months (interim), every 2 years (LTS)" : result.id === "arch" ? "Rolling release" : result.id === "fedora" ? "Approximately every 6 months" : "Every 6 months"}</p>
-                          </div>
-
-                          <div>
-                            <h5 className="font-bold text-cyan-300 mb-2">Default Desktop</h5>
-                            <p className="text-gray-300 mb-4">{result.id === "ubuntu" ? "GNOME" : result.id === "arch" ? "None (you choose!)" : result.id === "fedora" ? "GNOME" : "Cinnamon"}</p>
-
-                            <h5 className="font-bold text-cyan-300 mb-2">Best For</h5>
-                            <p className="text-gray-300">{result.id === "ubuntu" ? "Beginners, developers, and enterprise use" : result.id === "arch" ? "Experienced users, tinkerers, and minimalists" : result.id === "fedora" ? "Developers and early adopters" : "Windows migrants and users who prefer traditional interfaces"}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
               </div>
-            </div>
+            </CardContent>
+
+
 
             {/* Action buttons */}
-            <div className="p-8 bg-gray-900/70 border-t border-gray-700/50">
+            <CardFooter className="flex-col px-16">
               {/* Shareable link */}
-              <div className="bg-gray-900/70 p-4 rounded-lg border border-gray-700/50 mb-8">
-                <h4 className="text-lg font-bold text-cyan-300 mb-3">Share Your Result</h4>
-                <div className="flex flex-col md:flex-row gap-2">
-                  <div className="flex-1 bg-gray-800/50 p-3 rounded border border-gray-700/30 truncate text-sm text-gray-300">{shareUrl}</div>
-                  <button onClick={handleCopyResult} className={`px-4 py-2 rounded flex items-center justify-center ${copied ? "bg-green-600 text-white" : "bg-blue-600 hover:bg-blue-700 text-white"}`}>
-                    {copied ? (
-                      <>
-                        <FaCheck className="mr-2" /> Copied!
-                      </>
-                    ) : (
-                      <>
-                        <FaShareAlt className="mr-2" /> Copy Link
-                      </>
-                    )}
-                  </button>
-                </div>
-              </div>
-              <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={onRetake} className="px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-700 text-white font-medium rounded-lg shadow-lg hover:from-purple-500 hover:to-indigo-600 transition-all flex items-center justify-center">
-                  <FaRedo className="mr-2" />
-                  Retake Quiz
-                </motion.button>
-              </div>
-            </div>
+              <Card className="py-4 mb-8 w-full">
+                <CardHeader>
+                  <CardTitle className="text-lg font-bold">Share Your Result</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-col md:flex-row gap-2">
+                    <div className="flex-1">
+                      <Label htmlFor="share-url" className="sr-only">Share URL</Label>
+                      <Input
+                        id="share-url"
+                        value={shareUrl}
+                        readOnly
+                        className="truncate"
+                      />
+                    </div>
+                    <Button
+                      onClick={handleCopyResult}
+                      className="min-w-[120px]"
+                    >
+                      {copied ? (
+                        <>
+                          <FaCheck className="mr-2" /> Copied!
+                        </>
+                      ) : (
+                        <>
+                          <FaShareAlt className="mr-2" /> Copy Link
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+              <Button
+                onClick={onRetake}
+              >
+                <FaRedo className="mr-2" />
+                Retake Quiz
+              </Button>
 
-            {/* Footer */}
-            <div className="py-4 text-center bg-gray-900/80 border-t border-gray-700/50">
-              <p className="text-gray-400 inline-flex items-center">
-                Made with
-                <FaHeart className="text-red-500 mx-2" />
-                for the Linux community
-              </p>
-            </div>
+              <Separator className="my-4" />
+
+              {/* Footer */}
+              <div className="py-4 text-center">
+                <p className="inline-flex items-center">
+                  Made with
+                  <FaHeart className="mx-2" />
+                  for the Linux community
+                </p>
+              </div>
+
+            </CardFooter>
+
           </Card>
         </motion.div>
       </AnimatePresence>
