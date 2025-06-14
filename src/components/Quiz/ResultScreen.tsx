@@ -2,6 +2,20 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import distros, { type Distro } from "@/data/distros";
 import { FaHeart, FaRedo, FaShareAlt, FaChevronDown, FaChevronUp, FaSpinner } from 'react-icons/fa';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 
 // Mock function to calculate result - in real app this would use trait scoring
 const calculateResult = () => {
@@ -48,18 +62,26 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
   if (!result) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 p-4">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-cyan-500 mb-6"></div>
-          <h2 className="text-2xl font-bold text-white">Analyzing your answers...</h2>
-          <p className="text-gray-400 mt-2">Calculating your perfect Linux match</p>
-          <div className="mt-8 font-mono text-sm text-green-400 bg-gray-800/50 p-4 rounded-lg max-w-md mx-auto">
-            <p className="mb-2">$ ./distro_matcher --user-profile</p>
-            <div className="flex">
-              <FaSpinner className="mr-3 animate-spin" />
-              <span className="text-blue-400">Processing personality traits</span>
+        <Card className="w-full max-w-md bg-gray-800/70 backdrop-blur-lg border-gray-700/50">
+          <CardHeader className="text-center">
+            <CardTitle className="text-2xl font-bold text-white">Analyzing your answers...</CardTitle>
+            <CardDescription className="text-gray-400 mt-2">
+              Calculating your perfect Linux match
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex justify-center">
+            <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-cyan-500 mb-6"></div>
+          </CardContent>
+          <CardFooter className="justify-center">
+            <div className="font-mono text-sm text-green-400 bg-gray-800/50 p-4 rounded-lg w-full">
+              <p className="mb-2">$ ./distro_matcher --user-profile</p>
+              <div className="flex">
+                <FaSpinner className="mr-3 animate-spin" />
+                <span className="text-blue-400">Processing personality traits</span>
+              </div>
             </div>
-          </div>
-        </div>
+          </CardFooter>
+        </Card>
       </div>
     );
   }
@@ -71,11 +93,9 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 p-4 flex items-center justify-center">
       <AnimatePresence>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="w-full max-w-4xl">
-          <div className="bg-gray-800/70 backdrop-blur-lg rounded-2xl overflow-hidden border border-gray-700/50 shadow-2xl">
+          <Card className="bg-gray-800/70 backdrop-blur-lg rounded-2xl overflow-hidden border border-gray-700/50 shadow-2xl">
             {/* Result header */}
-            <div className="relative p-8 md:p-12 text-center bg-gradient-to-r from-blue-900/30 to-indigo-900/30">
-              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxwYXRoIGQ9Ik0wIDBIMzBWMTBIMFYyMEgzMFYzMEgwVjQwSDMwVjUwSDBWNjBIMzBWNzBIMFY4MEgzMFY5MEgwVjEwMEgzMFYxMTBIMFYxMjBIMzBWMTMwSDBWMTQwSDMwVjE1MEgwVjE2MEgzMFYxNzBIMFYxODBIMzBWMTkwSDBWMjAwSDMwVjIxMEgwVjIyMEgzMFYyMzBIMFYyNDBIMzBWMTBaIiBmaWxsPSIjMWYzZjVmIiBmaWxsLW9wYWNpdHk9IjAuMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==')] opacity-20"></div>
-
+            <CardHeader className="relative p-8 md:p-12 text-center bg-gradient-to-r from-blue-900/30 to-indigo-900/30">
               <div className="relative z-10">
                 <h1 className="text-2xl md:text-4xl font-bold mb-4 text-white">Your Linux Personality Match Is...</h1>
 
@@ -190,7 +210,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
                 for the Linux community
               </p>
             </div>
-          </div>
+          </Card>
         </motion.div>
       </AnimatePresence>
     </div>
