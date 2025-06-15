@@ -3,18 +3,174 @@ export type Distro = {
   name: string;
   description: string;
   traits: string[];
-  color: string;
   ascii: string;
-  personality: string;
 };
 
 const distros: Distro[] = [
   {
+    id: "macos",
+    name: "macOS",
+    description: "You prioritize aesthetics over functionality and have more money than sense. You enjoy paying the Apple Tax™ and being locked into an ecosystem.",
+    traits: ["wealthy", "aesthetic-driven", "ecosystem-locked"],
+    ascii: `
+                     ..'
+                 ,xNMM.
+               .OMMMMo
+               lMM"
+     .;loddo:.  .olloddol;.
+   cKMMMMMMMMMMNWMMMMMMMMMM0:
+ .KMMMMMMMMMMMMMMMMMMMMMMMWd.
+ XMMMMMMMMMMMMMMMMMMMMMMMX.
+;MMMMMMMMMMMMMMMMMMMMMMMM:
+:MMMMMMMMMMMMMMMMMMMMMMMM:
+.MMMMMMMMMMMMMMMMMMMMMMMMX.
+ kMMMMMMMMMMMMMMMMMMMMMMMMWd.
+ 'XMMMMMMMMMMMMMMMMMMMMMMMMMMk
+  'XMMMMMMMMMMMMMMMMMMMMMMMMK.
+    kMMMMMMMMMMMMMMMMMMMMMMd
+     ;KMMMMMMMWXXWMMMMMMMk.
+       "cooc*"    "*coo'"
+    `,
+  },
+  {
+    id: "arch",
+    name: "Arch Linux",
+    description: "You enjoy pain and have an unhealthy relationship with documentation. You measure your worth by how many hours you've spent configuring your system.",
+    traits: ["masochistic", "documentation-obsessed", "time-rich"],
+    ascii: ` 
+                  -\`
+                 .o+\`
+                \`ooo/
+               \`+oooo:
+              \`+oooooo:
+              -+oooooo+:
+            \`/:-:++oooo+:
+           \`/++++/+++++++:
+          \`/++++++++++++++:
+         \`/+++ooooooooooooo/\`
+        ./ooosssso++osssssso+\`
+       .oossssso-\`\`\`\`/ossssss+\`
+      -osssssso.      :ssssssso.
+     :osssssss/        osssso+++.
+    /ossssssss/        +ssssooo/-
+  \`/ossssso+/:-        -:/+osssso+-
+ \`+sso+:-\`                 \`.-/+oso:
+\`++:.                           \`-/+/
+.\`                                 \`/
+`,
+  },
+  {
+    id: "gentoo",
+    name: "Gentoo",
+    description: "You genuinely believe compiling everything from source makes your computer 'faster'. You enjoy watching progress bars more than using actual software.",
+    traits: ["compiler-fetishist", "progress-bar-enjoyer", "time-waster"],
+    ascii: `
+         -/oyddmdhs+:.
+     -odNMMMMMMMMNNmhy+-\`
+   -yNMMMMMMMMMMMNNNmmdhy+-
+ \`omMMMMMMMMMMMMNmdmmmmddhhy/\`
+ omMMMMMMMMMMMNhhyyyohmdddhhhdo\`
+.ydMMMMMMMMMMdhs++so/smdddhhhhdm+\`
+ oyhdmNMMMMMMMNdyooydmddddhhhhyhNd.
+  :oyhhdNNMMMMMMMNNNmmdddhhhhhyymMh
+    .:+sydNMMMMMNNNmmmdddhhhhhhmMmy
+       /mMMMMMMNNNmmmdddhhhhhmMNhs:
+    \`oNMMMMMMMNNNmmmddddhhdmMNhs+\`
+  \`sNMMMMMMMMNNNmmmdddddmNMmhs/.
+ /NMMMMMMMMNNNNmmmdddmNMNdso:\`
++MMMMMMMNNNNNmmmmdmNMNdso/-
+yMMNNNNNNNmmmmmNNMmhs+/-\`
+/hMMNNNNNNNNMNdhs++/-\`
+\`/ohdmmddhys+++/:.\`
+  \`-//////:--.
+  `,
+  },
+  {
+    id: "popos",
+    name: "Pop!_OS",
+    description: "You unironically call yourself a 'Gamer' and think RGB lighting improves performance. Your computer has more LEDs than processing power.",
+    traits: ["gamer-identity", "rgb-enthusiast", "frame-rate-obsessed"],
+    ascii: `
+             /////////////
+         /////////////////////
+      ///////*767////////////////
+    //////7676767676*//////////////
+   /////76767//7676767//////////////
+  /////767676///*76767///////////////
+ ///////767676///76767.///7676*///////
+/////////767676//76767///767676////////
+//////////76767676767////76767/////////
+///////////76767676//////7676//////////
+////////////,7676,///////767///////////
+/////////////*7676///////76////////////
+///////////////7676////////////////////
+ ///////////////7676///767////////////
+  //////////////////////'////////////
+   //////.7676767676767676767,//////
+    /////767676767676767676767/////
+      ///////////////////////////
+         /////////////////////
+             /////////////
+`,
+  },
+  {
+    id: "debian",
+    name: "Debian",
+    description: "You value stability over everything, including new features and your own happiness. You still run software from 2015.",
+    traits: ["stability-obsessed", "change-resistant", "foss-purist"],
+    ascii: `
+        _,met$$$$$$$$$$gg.
+     ,g$$$$$$$$$$$$$$$$$$$$P.
+   ,g$$$$P""       """Y$$$$.".
+  ,$$$$P'              \`$$$$$$.
+',$$$$P       ,ggs.     \`$$$$b:
+\`d$$$$'     ,$P"'   .    $$$$$$
+ $$$$P      d$'     ,    $$$$P
+ $$$$:      $$$.   -    ,d$$$$'
+ $$$$;      Y$b._   _,d$P'
+ Y$$$$.    \`.\`"Y$$$$$$$$P"'
+ \`$$$$b      "-.__
+  \`Y$$$$b
+   \`Y$$$$.
+     \`$$$$b.
+       \`Y$$$$b.
+         \`"Y$$b._
+             \`""""
+`,
+  },
+
+  {
+    id: "mint",
+    name: "Linux Mint",
+    description: "You came from Windows and are afraid of change. You think the start menu is peak UI design.",
+    traits: ["change-averse", "windows-refugee", "comfort-seeker"],
+    ascii: `
+             ...-:::::-...
+          .-MMMMMMMMMMMMMMM-.
+      .-MMMM\`..-:::::::-..\`MMMM-.
+    .:MMMM.:MMMMMMMMMMMMMMM:.MMMM:.
+   -MMM-M---MMMMMMMMMMMMMMMMMMM.MMM-
+ \`:MMM:MM\`  :MMMM:....::-...-MMMM:MMM:\`
+ :MMM:MMM\`  :MM:\`  \`\`    \`\`  \`:MMM:MMM:
+.MMM.MMMM\`  :MM.  -MM.  .MM-  \`MMMM.MMM.
+:MMM:MMMM\`  :MM.  -MM-  .MM:  \`MMMM-MMM:
+:MMM:MMMM\`  :MM.  -MM-  .MM:  \`MMMM:MMM:
+:MMM:MMMM\`  :MM.  -MM-  .MM:  \`MMMM-MMM:
+.MMM.MMMM\`  :MM:--:MM:--:MM:  \`MMMM.MMM.
+ :MMM:MMM-  \`-MMMMMMMMMMMM-\`  -MMM-MMM:
+  :MMM:MMM:\`                \`:MMM:MMM:
+   .MMM.MMMM:--------------:MMMM.MMM.
+     '-MMMM.-MMMMMMMMMMMMMMM-.MMMM-'
+       '.-MMMM\`\`--:::::--\`\`MMMM-.'
+            '-MMMMMMMMMMMMM-'
+               \`\`-:::::-\`\`
+`,
+  },
+  {
     id: "ubuntu",
     name: "Ubuntu",
-    description: "Friendly, stable, and community-focused. Perfect for beginners!",
-    traits: ["user-friendly", "stable", "community-driven"],
-    color: "from-orange-500 to-orange-700",
+    description: "You have zero personality and just want things to work. You're the vanilla ice cream of Linux users.",
+    traits: ["vanilla", "personality-void", "default-chooser"],
     ascii: `
                              ....
               .',:clooo:  .:looooo:.
@@ -38,89 +194,66 @@ const distros: Distro[] = [
                ..';::c'  .;loooo:'
 
 `,
-    personality: "You're approachable and value simplicity and reliability. Ubuntu matches your preference for a system that just works without unnecessary complexity. Like Ubuntu, you believe technology should empower everyone."
   },
   {
-    id: "arch",
-    name: "Arch Linux",
-    description: "Minimalist DIY enthusiast. You build exactly what you want.",
-    traits: ["customizable", "minimalist", "bleeding-edge"],
-    color: "from-blue-400 to-blue-600",
+    id: "nixos",
+    name: "NixOS",
+    description: "You spend more time writing configuration files than using your computer. You believe reproducibility is more important than actually getting work done.",
+    traits: ["configuration-obsessed", "reproducibility-fanatic", "functional-programmer"],
     ascii: ` 
-       .
-      / \\
-     /   \\
-    /^.   \\
-   /  .-.  \\
-  /  (   ) _\\
- / _.~   ~._^\\
-/.^         ^.\\
+          ▗▄▄▄       ▗▄▄▄▄    ▄▄▄▖
+          ▜███▙       ▜███▙  ▟███▛
+           ▜███▙       ▜███▙▟███▛
+            ▜███▙       ▜██████▛
+     ▟█████████████████▙ ▜████▛     ▟▙
+    ▟███████████████████▙ ▜███▙    ▟██▙
+           ▄▄▄▄▖           ▜███▙  ▟███▛
+          ▟███▛             ▜██▛ ▟███▛
+         ▟███▛               ▜▛ ▟███▛
+▟███████████▛                  ▟██████████▙
+▜██████████▛                  ▟███████████▛
+      ▟███▛ ▟▙               ▟███▛
+     ▟███▛ ▟██▙             ▟███▛
+    ▟███▛  ▜███▙           ▝▀▀▀▀
+    ▜██▛    ▜███▙ ▜██████████████████▛
+     ▜▛     ▟████▙ ▜████████████████▛
+           ▟██████▙       ▜███▙
+          ▟███▛▜███▙       ▜███▙
+         ▟███▛  ▜███▙       ▜███▙
+         ▝▀▀▀    ▀▀▀▀▘       ▀▀▀▘
 `,
-    personality: "You're a tinkerer who loves complete control. Arch Linux matches your desire to build things exactly your way. Like Arch, you value simplicity, transparency and having full control over your environment."
   },
   {
-    id: "fedora",
-    name: "Fedora",
-    description: "Innovator who loves new tech. The pioneer's choice.",
-    traits: ["cutting-edge", "developer-friendly", "modern"],
-    color: "from-blue-500 to-blue-700",
+    id: "rhel",
+    name: "Red Hat Enterprise Linux",
+    description: "You wear a suit to work and bill by the hour. You pay for support you never use and feel powerful because of it.",
+    traits: ["corporate-lackey", "support-payer", "enterprise-mindset"],
     ascii: `
-          /:-------------:\\
-       :-------------------::
-     :-----------/shhOHbmp---:\\
-   /-----------omMMMNNNMMD  ---:
-  :-----------sMMMMNMNMP.    ---:
- :-----------:MMMdP-------    ---\\
-,------------:MMMd--------    ---:
-:------------:MMMd-------    .---:
-:----    oNMMMMMMMMMNho     .----:
-:--     .+shhhMMMmhhy++   .------/
-:-    -------:MMMd--------------:
-:-   --------/MMMd-------------;
-:-    ------/hMMMy------------:
-:-- :dMNdhhdNMMNo------------;
-:---:sdNMMMMNds:------------:
-:------:://:-------------::
-:---------------------://
-
+           .MMM..:MMMMMMM
+          MMMMMMMMMMMMMMMMMM
+          MMMMMMMMMMMMMMMMMMMM.
+         MMMMMMMMMMMMMMMMMMMMMM
+        ,MMMMMMMMMMMMMMMMMMMMMM:
+        MMMMMMMMMMMMMMMMMMMMMMMM
+  .MMMM'  MMMMMMMMMMMMMMMMMMMMMM
+ MMMMMM    \`MMMMMMMMMMMMMMMMMMMM.
+MMMMMMMM      MMMMMMMMMMMMMMMMMM .
+MMMMMMMMM.       \`MMMMMMMMMMMMM' MM.
+MMMMMMMMMMM.                     MMMM
+\`MMMMMMMMMMMMM.                 ,MMMMM.
+ \`MMMMMMMMMMMMMMMMM.          ,MMMMMMMM.
+    MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+      MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM:
+         MMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+            \`MMMMMMMMMMMMMMMMMMMMMMMM:
+                \`\`MMMMMMMMMMMMMMMMM'
 `,
-    personality: "You're an innovator who loves being on the cutting edge. Fedora matches your enthusiasm for new technologies and forward-thinking approaches. Like Fedora, you're not afraid to embrace change and push boundaries."
-  },
-  {
-    id: "mint",
-    name: "Linux Mint",
-    description: "Practical, comfortable, and efficient. The reliable workhorse.",
-    traits: ["user-friendly", "efficient", "pragmatic"],
-    color: "from-green-500 to-green-700",
-    ascii: `
-             ...-:::::-...
-          .-MMMMMMMMMMMMMMM-.
-      .-MMMM\`..-:::::::-..\`MMMM-.
-    .:MMMM.:MMMMMMMMMMMMMMM:.MMMM:.
-   -MMM-M---MMMMMMMMMMMMMMMMMMM.MMM-
- \`:MMM:MM\`  :MMMM:....::-...-MMMM:MMM:\`
- :MMM:MMM\`  :MM:\`  \`\`    \`\`  \`:MMM:MMM:
-.MMM.MMMM\`  :MM.  -MM.  .MM-  \`MMMM.MMM.
-:MMM:MMMM\`  :MM.  -MM-  .MM:  \`MMMM-MMM:
-:MMM:MMMM\`  :MM.  -MM-  .MM:  \`MMMM:MMM:
-:MMM:MMMM\`  :MM.  -MM-  .MM:  \`MMMM-MMM:
-.MMM.MMMM\`  :MM:--:MM:--:MM:  \`MMMM.MMM.
- :MMM:MMM-  \`-MMMMMMMMMMMM-\`  -MMM-MMM:
-  :MMM:MMM:\`                \`:MMM:MMM:
-   .MMM.MMMM:--------------:MMMM.MMM.
-     '-MMMM.-MMMMMMMMMMMMMMM-.MMMM-'
-       '.-MMMM\`\`--:::::--\`\`MMMM-.'
-            '-MMMMMMMMMMMMM-'
-               \`\`-:::::-\`\`
-`,
-    personality: "You value practicality and comfort over flashy features. Linux Mint matches your preference for a system that just gets out of your way and lets you work. Like Mint, you believe technology should serve you, not the other way around."
   },
   {
     id: "kali",
     name: "Kali Linux",
-    description: "Security-focused expert with specialized needs.",
-    traits: ["secure", "specialized", "powerful"],
-    color: "from-purple-500 to-purple-700",
+    description: "You own at least three hoodies and type really fast in terminals to impress people. You've watched Mr. Robot at least twice.",
+    traits: ["hacker-wannabe", "hoodie-collector", "terminal-poser"],
     ascii: `
 ..............
             ..,;:ccc,.
@@ -145,66 +278,34 @@ const distros: Distro[] = [
                                              .
 
     `,
-    personality: "You're a security-conscious professional who needs powerful tools. Kali Linux matches your focus on penetration testing and digital forensics. Like Kali, you're not afraid to dive deep into complex systems."
   },
   {
-    id: "tails",
-    name: "Tails OS",
-    description: "Privacy advocate who values anonymity above all.",
-    traits: ["private", "secure", "portable"],
-    color: "from-yellow-500 to-yellow-700",
+    id: "artix",
+    name: "Artix Linux",
+    description: "You think systemd is literally Satan and enjoy spending 3 hours debugging init scripts just to boot your toaster. You consider 'rc.conf' poetry and believe OpenRC is a spiritual experience.",
+    traits: ["init-obsessive", "anti-systemd-crusader", "masochistic-tinkerer"],
     ascii: `
-      \`\`
-  ./yhNh
-syy/Nshh         \`:o/
-N:dsNshh  █   \`ohNMMd
-N-/+Nshh      \`yMMMMd
-N-yhMshh       yMMMMd
-N-s:hshh  █    yMMMMd so//.
-N-oyNsyh       yMMMMd d  Mms.
-N:hohhhd:.     yMMMMd  syMMM+
-Nsyh+-..+y+-   yMMMMd   :mMM+
-+hy-      -ss/\`yMMMM     \`+d+
-  :sy/.     ./yNMMMMm      \`\`
-    .+ys- \`:+hNMMMMMMy/\`
-      \`hNmmMMMMMMMMMMMMdo.
-       dMMMMMMMMMMMMMMMMMNh:
-       +hMMMMMMMMMMMMMMMMMmy.
-         -oNMMMMMMMMMMmy+.\`
-           \`:yNMMMds/.\`
-              .//\`
-
-    `,
-    personality: "You prioritize privacy and security in everything you do. Tails OS matches your need for anonymity and leaving no digital footprint. Like Tails, you believe privacy is a fundamental right."
-  },
-  {
-    id: "gentoo",
-    name: "Gentoo",
-    description: "Ultimate control seeker who builds from source.",
-    traits: ["customizable", "optimized", "source-based"],
-    color: "from-cyan-400 to-blue-600",
-    ascii: `
-         -/oyddmdhs+:.
-     -odNMMMMMMMMNNmhy+-\`
-   -yNMMMMMMMMMMMNNNmmdhy+-
- \`omMMMMMMMMMMMMNmdmmmmddhhy/\`
- omMMMMMMMMMMMNhhyyyohmdddhhhdo\`
-.ydMMMMMMMMMMdhs++so/smdddhhhhdm+\`
- oyhdmNMMMMMMMNdyooydmddddhhhhyhNd.
-  :oyhhdNNMMMMMMMNNNmmdddhhhhhyymMh
-    .:+sydNMMMMMNNNmmmdddhhhhhhmMmy
-       /mMMMMMMNNNmmmdddhhhhhmMNhs:
-    \`oNMMMMMMMNNNmmmddddhhdmMNhs+\`
-  \`sNMMMMMMMMNNNmmmdddddmNMmhs/.
- /NMMMMMMMMNNNNmmmdddmNMNdso:\`
-+MMMMMMMNNNNNmmmmdmNMNdso/-
-yMMNNNNNNNmmmmmNNMmhs+/-\`
-/hMMNNNNNNNNMNdhs++/-\`
-\`/ohdmmddhys+++/:.\`
-  \`-//////:--.
-  `,
-    personality: "You're a perfectionist who wants complete control over your system. Gentoo matches your desire to compile everything from source for ultimate optimization. Like Gentoo, you believe in doing things your way."
-  }
+                   '
+                  'o'
+                 'ooo'
+                'ooxoo'
+               'ooxxxoo'
+              'oookkxxoo'
+             'oiioxkkxxoo'
+            ':;:iiiioxxxoo'
+               \`'.;::ioxxoo'
+          '-.      \`':;jiooo'
+         'oooio-..     \`'i:io'
+        'ooooxxxxoio:,.   \`'-;'
+       'ooooxxxxxkkxoooIi:-.  \`'
+      'ooooxxxxxkkkkxoiiiiiji'
+     'ooooxxxxxkxxoiiii:'\`     .i'
+    'ooooxxxxxoi:::'\`       .;ioxo'
+   'ooooxooi::'\`         .:iiixkxxo'
+  'ooooi:'\`                \`'';ioxxo'
+ 'i:'\`                          '':io'
+'\`                                   \`'
+    `}
 ];
 
 export default distros;

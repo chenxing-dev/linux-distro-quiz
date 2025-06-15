@@ -18,11 +18,27 @@ import { FaHeart, FaRedo, FaShareAlt, FaSpinner, FaCheck, FaDownload } from "rea
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
+import questions from "@/data/questions";
 
-// Mock function to calculate result - in real app this would use trait scoring
-const calculateResult = () => {
-  // For demo purposes
-  return distros[0];
+// Calculate result based on accumulated traits
+const calculateResult = (answers: Record<number, string>) => {
+  const traitScores: Record<string, number> = {};
+  distros.forEach(distro => {
+    traitScores[distro.id] = 0;
+  });
+
+  Object.values(answers).forEach((answer, index) => {
+    const traits = questions[index].options.find((option) => option.id === answer)?.traits || {}
+    Object.entries(traits).forEach(([distro, points]) => {
+      traitScores[distro] += points;
+    });
+  });
+
+  // Return distro with highest score
+  const distroId = Object.entries(traitScores).sort((a, b) => b[1] - a[1])[0][0]
+  console.log(traitScores)
+  const result = distros.find((distro) => distro.id == distroId)
+  return result || distros[0];
 };
 
 interface ResultScreenProps {
@@ -39,7 +55,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
   useEffect(() => {
     // Simulate calculation delay
     const timer = setTimeout(() => {
-      const distroResult = calculateResult();
+      const distroResult = calculateResult(answers);
       setResult(distroResult);
 
       // Generate shareable URL
@@ -92,7 +108,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
   }
 
   return (
-    <div className="min-h-screen p-4 flex justify-center">
+    <div className="min-h-screen p-4 flex justify-center items-center">
 
       {/* Copied Alert */}
       {showCopiedAlert && (
@@ -109,16 +125,20 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
           <Card>
             {/* Result header */}
             <CardHeader className="flex flex-col justify-center *:mx-auto">
-              <CardTitle className="text-2xl md:text-4xl font-bold">Your Linux Personality Match Is...</CardTitle>
+              <CardTitle className="text-2xl md:text-4xl font-bold">
+                {result.id === "macos"
+                  && ("Your Personality Match Is...")
+                  || ("Your Linux Personality Match Is...")}
+              </CardTitle>
 
               {/* ASCII Art Logo */}
-              <div className="font-mono text-xs md:text-sm leading-[1.2] whitespace-pre">{result.ascii || result.name}</div>
+              <div className="font-mono font-bold text-xs md:text-sm leading-4 whitespace-pre mb-4">{result.ascii || result.name}</div>
 
               <motion.h2 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.5 }} className="text-3xl md:text-5xl font-bold">
                 {result.name}
               </motion.h2>
 
-              <CardDescription className="text-xl max-w-2xl">
+              <CardDescription className="text-xl max-w-3xl text-center">
                 {result.description}
               </CardDescription>
             </CardHeader>
@@ -127,14 +147,9 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
               {/* Personality insights */}
               <div className="px-8 pt-4">
                 <div className="max-w-3xl mx-auto">
-                  <CardTitle className="text-2xl font-bold mb-6 text-center">Why {result.name} is Your Perfect Match</CardTitle>
-
-                  <motion.div className="p-6 mb-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9, duration: 0.5 }}>
-                    <p className="text-lg">{result.personality}</p>
-                  </motion.div>
 
                   {/* Traits */}
-                  <CardTitle className="text-xl font-bold mb-4">Your Key Traits</CardTitle>
+                  <CardTitle className="text-xl font-bold mb-4 text-center">Your Key Traits</CardTitle>
                   <div className="flex flex-wrap gap-3 justify-center mb-8">
                     {result.traits.map((trait: string, index: number) => (
                       <motion.div
@@ -143,12 +158,34 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 1.0 + index * 0.1, duration: 0.3 }}
                       >
-                        <Badge className="px-4 py-2">
+                        <Badge className="px-2 text-sm">
                           {trait.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
                         </Badge>
                       </motion.div>
                     ))}
                   </div>
+
+                  {result.id === "gentoo" && (
+                    <p className="text-sm">(This result took 8 hours to compile)</p>
+                  )}
+
+                  {result.id === "macos" && (
+                    <div className="my-6 p-4 rounded-lg border-l-4">
+                      <p className="font-bold">
+                        Another premium laptop?
+                        Did you know the repair cost for your last laptop could have bought:
+                      </p>
+                      <ul className="mt-2 list-disc pl-5">
+                        <li>Two decent Thinkpads</li>
+                        <li>A weekend getaway</li>
+                        <li>87 cups of coffees</li>
+                        <li>1.5 months of groceries</li>
+                      </ul>
+                      <p className="mt-2 italic">
+                        "But it just works" - until it doesn't, and you're out $300 for a simple repair.
+                      </p>
+                    </div>
+                  )}
 
                   {/* Technical details accordion */}
                   <Accordion type="single" collapsible>
