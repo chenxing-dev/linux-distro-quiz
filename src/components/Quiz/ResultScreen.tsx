@@ -14,7 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { FaHeart, FaRedo, FaShareAlt, FaChevronDown, FaChevronUp, FaSpinner, FaCheck, FaDownload } from "react-icons/fa";
+import { FaHeart, FaRedo, FaShareAlt, FaSpinner, FaCheck, FaDownload } from "react-icons/fa";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
@@ -32,7 +32,6 @@ interface ResultScreenProps {
 
 const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
   const [result, setResult] = useState<Distro | null>(null);
-  const [showDetails, setShowDetails] = useState(false);
   const [copied, setCopied] = useState(false);
   const [shareUrl, setShareUrl] = useState("");
   const [showCopiedAlert, setShowCopiedAlert] = useState(false);
