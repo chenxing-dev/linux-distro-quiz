@@ -14,8 +14,10 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { FaHeart, FaRedo, FaShareAlt, FaChevronDown, FaChevronUp, FaSpinner, FaCheck } from "react-icons/fa";
+import { FaHeart, FaRedo, FaShareAlt, FaChevronDown, FaChevronUp, FaSpinner, FaCheck, FaDownload } from "react-icons/fa";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
 
 // Mock function to calculate result - in real app this would use trait scoring
 const calculateResult = () => {
@@ -124,7 +126,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
 
             <CardContent>
               {/* Personality insights */}
-              <div className="p-8">
+              <div className="px-8 pt-4">
                 <div className="max-w-3xl mx-auto">
                   <CardTitle className="text-2xl font-bold mb-6 text-center">Why {result.name} is Your Perfect Match</CardTitle>
 
@@ -149,108 +151,58 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
                     ))}
                   </div>
 
-                  {/* Distro details toggle */}
-                  <div className="text-center mb-8">
-                    <Button
-                      onClick={() => setShowDetails(!showDetails)}
-                      variant="ghost"
-                    >
-                      {showDetails ? 'Hide Technical Details' : 'Show Technical Details'}
-                      {showDetails ? <FaChevronUp className="ml-2" /> : <FaChevronDown className="ml-2" />}
-                    </Button>
-                  </div>
+                  {/* Technical details accordion */}
+                  <Accordion type="single" collapsible>
+                    <AccordionItem value="technical">
+                      <AccordionTrigger className="text-lg font-bold border p-4 flex items-center">
+                        Technical Details
+                      </AccordionTrigger>
+                      <AccordionContent className="pt-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 rounded-lg border">
+                          <div>
+                            <h5 className="font-bold mb-2">Package Manager</h5>
+                            <p className="mb-4">
+                              {result.id === "ubuntu"
+                                ? "APT (Advanced Package Tool)"
+                                : result.id === "arch"
+                                  ? "Pacman"
+                                  : "DNF (Dandified YUM)"}
+                            </p>
 
-                  {/* Technical details */}
-                  <AnimatePresence>
-                    {showDetails && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        className="overflow-hidden">
-                        <Card>
-                          <CardHeader>
-                            <CardTitle className="text-xl font-bold">
-                              About {result.name}
-                            </CardTitle>
-                          </CardHeader>
-                          <CardContent>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                              <div>
-                                <h5 className="font-bold mb-2">Package Manager</h5>
-                                <p className="mb-4">
-                                  {result.id === "ubuntu" || result.id === "mint"
-                                    ? "APT (Advanced Package Tool)"
-                                    : result.id === "fedora"
-                                      ? "DNF (Dandified YUM)"
-                                      : result.id === "arch"
-                                        ? "Pacman"
-                                        : result.id === "kali"
-                                          ? "APT (Advanced Package Tool)"
-                                          : result.id === "tails"
-                                            ? "APT (Advanced Package Tool)"
-                                            : "Portage"}
-                                </p>
+                            <h5 className="font-bold mb-2">Release Cycle</h5>
+                            <p>
+                              {result.id === "ubuntu"
+                                ? "Every 6 months (interim), every 2 years (LTS)"
+                                : result.id === "arch"
+                                  ? "Rolling release"
+                                  : "Approximately every 6 months"}
+                            </p>
+                          </div>
 
-                                <h5 className="font-bold mb-2">Release Cycle</h5>
-                                <p>
-                                  {result.id === "ubuntu"
-                                    ? "Every 6 months (interim), every 2 years (LTS)"
-                                    : result.id === "arch"
-                                      ? "Rolling release"
-                                      : result.id === "fedora"
-                                        ? "Approximately every 6 months"
-                                        : result.id === "mint"
-                                          ? "Every 6 months"
-                                          : result.id === "kali"
-                                            ? "Rolling release"
-                                            : result.id === "tails"
-                                              ? "Every 6 months"
-                                              : "Rolling release"}
-                                </p>
-                              </div>
+                          <div>
+                            <h5 className="font-bold mb-2">Default Desktop</h5>
+                            <p className="mb-4">
+                              {result.id === "ubuntu"
+                                ? "GNOME"
+                                : result.id === "arch"
+                                  ? "None (you choose!)"
+                                  : "GNOME"}
+                            </p>
 
-                              <div>
-                                <h5 className="font-bold mb-2">Default Desktop</h5>
-                                <p className="mb-4">
-                                  {result.id === "ubuntu"
-                                    ? "GNOME"
-                                    : result.id === "arch"
-                                      ? "None (you choose!)"
-                                      : result.id === "fedora"
-                                        ? "GNOME"
-                                        : result.id === "mint"
-                                          ? "Cinnamon"
-                                          : result.id === "kali"
-                                            ? "XFCE"
-                                            : result.id === "tails"
-                                              ? "GNOME"
-                                              : "None (you choose!)"}
-                                </p>
+                            <h5 className="font-bold mb-2">Best For</h5>
+                            <p>
+                              {result.id === "ubuntu"
+                                ? "Beginners, developers, and enterprise use"
+                                : result.id === "arch"
+                                  ? "Experienced users, tinkerers, and minimalists"
+                                  : "Developers and early adopters"}
+                            </p>
+                          </div>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
 
-                                <h5 className="font-bold mb-2">Best For</h5>
-                                <p>
-                                  {result.id === "ubuntu"
-                                    ? "Beginners, developers, and enterprise use"
-                                    : result.id === "arch"
-                                      ? "Experienced users, tinkerers, and minimalists"
-                                      : result.id === "fedora"
-                                        ? "Developers and early adopters"
-                                        : result.id === "mint"
-                                          ? "Windows migrants and users who prefer traditional interfaces"
-                                          : result.id === "kali"
-                                            ? "Security professionals and penetration testing"
-                                            : result.id === "tails"
-                                              ? "Privacy-focused users and journalists"
-                                              : "Advanced users who want complete control"}
-                                </p>
-                              </div>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
                 </div>
               </div>
             </CardContent>
@@ -289,6 +241,34 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
                         </>
                       )}
                     </Button>
+
+
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button variant="outline">
+                          <FaDownload className="mr-2" /> Save Result
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-md">
+                        <DialogHeader>
+                          <DialogTitle className="text-2xl">Save Your Result</DialogTitle>
+                          <DialogDescription>
+                            Download your Linux distro match as an image
+                          </DialogDescription>
+                        </DialogHeader>
+                        <div className="space-y-4">
+                          <div className="bg-zinc-800 p-4 rounded-lg border border-zinc-700 text-center">
+                            <p className="text-zinc-50 mb-4">
+                              Your result will be saved as a PNG image that you can share on social media
+                            </p>
+                            <Button variant="secondary">
+                              <FaDownload className="mr-2" /> Download Image
+                            </Button>
+                          </div>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
+
                   </div>
                 </CardContent>
               </Card>
@@ -298,6 +278,8 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
                 <FaRedo className="mr-2" />
                 Retake Quiz
               </Button>
+
+
 
               <Separator className="my-4" />
 
