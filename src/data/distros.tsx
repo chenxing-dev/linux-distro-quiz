@@ -1,9 +1,18 @@
+import type { JSX } from "react";
+
 export type Distro = {
   id: string;
   name: string;
   description: string;
   traits: string[];
   ascii: string;
+  details: {
+    packageManager: string;
+    releaseCycle: string;
+    defaultDesktop: string;
+    bestFor: string
+  };
+  note?: () => JSX.Element
 };
 
 const distros: Distro[] = [
@@ -31,6 +40,28 @@ const distros: Distro[] = [
      ;KMMMMMMMWXXWMMMMMMMk.
        "cooc*"    "*coo'"
     `,
+    details: {
+      packageManager: "Homebrew (unofficial) or App Store",
+      releaseCycle: "Yearly major updates",
+      defaultDesktop: "Aqua (proprietary)",
+      bestFor: "Those invested in the Apple ecosystem"
+    },
+    note: () => (<div className="my-6 p-4 rounded-lg border-l-4" >
+      <p className="font-bold" >
+        Another premium laptop ?
+        Did you know the repair cost for your last laptop could have bought:
+      </p>
+      < ul className="mt-2 list-disc pl-5" >
+        <li>Two decent Thinkpads </li>
+        < li > A weekend getaway </li>
+        < li > 87 cups of coffees </li>
+        < li > 1.5 months of groceries </li>
+      </ul>
+      < p className="mt-2 italic" >
+        "But it just works" - until it doesn't, and you're out $300 for a simple repair.
+      </p>
+    </div>
+    )
   },
   {
     id: "arch",
@@ -58,6 +89,12 @@ const distros: Distro[] = [
 \`++:.                           \`-/+/
 .\`                                 \`/
 `,
+    details: {
+      packageManager: "Pacman",
+      releaseCycle: "Rolling release",
+      defaultDesktop: "None (you choose!)",
+      bestFor: "Experienced users, tinkerers, and minimalists"
+    }
   },
   {
     id: "gentoo",
@@ -84,6 +121,12 @@ yMMNNNNNNNmmmmmNNMmhs+/-\`
 \`/ohdmmddhys+++/:.\`
   \`-//////:--.
   `,
+    details: {
+      packageManager: "Portage (emerge)",
+      releaseCycle: "Rolling release",
+      defaultDesktop: "None (user-compiled)",
+      bestFor: "Advanced users, system customization enthusiasts, performance tuners"
+    }
   },
   {
     id: "popos",
@@ -112,6 +155,12 @@ yMMNNNNNNNmmmmmNNMmhs+/-\`
          /////////////////////
              /////////////
 `,
+    details: {
+      packageManager: "APT (with custom repos)",
+      releaseCycle: "6-month upgrades + LTS",
+      defaultDesktop: "COSMIC (GNOME-based)",
+      bestFor: "Gamers, beginners, NVIDIA GPU users"
+    }
   },
   {
     id: "debian",
@@ -137,6 +186,12 @@ yMMNNNNNNNmmmmmNNMmhs+/-\`
          \`"Y$$b._
              \`""""
 `,
+    details: {
+      packageManager: "APT",
+      releaseCycle: "Stable (3-5y)",
+      defaultDesktop: "GNOME (multi-arch)",
+      bestFor: "Servers, stable environments"
+    }
   },
 
   {
@@ -165,6 +220,12 @@ yMMNNNNNNNmmmmmNNMmhs+/-\`
             '-MMMMMMMMMMMMM-'
                \`\`-:::::-\`\`
 `,
+    details: {
+      packageManager: "APT",
+      releaseCycle: "LTS-based (5y support)",
+      defaultDesktop: "Cinnamon/XFCE/MATE",
+      bestFor: "Windows migrants"
+    }
   },
   {
     id: "ubuntu",
@@ -194,6 +255,12 @@ yMMNNNNNNNmmmmmNNMmhs+/-\`
                ..';::c'  .;loooo:'
 
 `,
+    details: {
+      packageManager: "APT",
+      releaseCycle: "Every 6 months (interim), every 2 years (LTS)",
+      defaultDesktop: "GNOME",
+      bestFor: "Beginners, developers, and enterprise use"
+    }
   },
   {
     id: "nixos",
@@ -222,6 +289,12 @@ yMMNNNNNNNmmmmmNNMmhs+/-\`
          ▟███▛  ▜███▙       ▜███▙
          ▝▀▀▀    ▀▀▀▀▘       ▀▀▀▘
 `,
+    details: {
+      packageManager: "Nix",
+      releaseCycle: "Rolling + stable channels",
+      defaultDesktop: "Plasma (optional)",
+      bestFor: "Reproducible environments, developers"
+    }
   },
   {
     id: "rhel",
@@ -248,6 +321,12 @@ MMMMMMMMMMM.                     MMMM
             \`MMMMMMMMMMMMMMMMMMMMMMMM:
                 \`\`MMMMMMMMMMMMMMMMM'
 `,
+    details: {
+      packageManager: "DNF (YUM-compatible)",
+      releaseCycle: "3-5y major + 6m minor",
+      defaultDesktop: "GNOME",
+      bestFor: "Enterprises"
+    }
   },
   {
     id: "kali",
@@ -276,8 +355,13 @@ MMMMMMMMMMM.                     MMMM
                                             c
                                             .'
                                              .
-
     `,
+    details: {
+      packageManager: "APT",
+      releaseCycle: "Rolling (quarterly updates)",
+      defaultDesktop: "GNOME (minimalist)",
+      bestFor: "Penetration testing"
+    }
   },
   {
     id: "artix",
@@ -305,7 +389,14 @@ MMMMMMMMMMM.                     MMMM
   'ooooi:'\`                \`'';ioxxo'
  'i:'\`                          '':io'
 '\`                                   \`'
-    `}
+    `,
+    details: {
+      packageManager: "Pacman",
+      releaseCycle: "Rolling release",
+      defaultDesktop: "None (user-choice)",
+      bestFor: "Systemd opponents"
+    }
+  }
 ];
 
 export default distros;

@@ -19,6 +19,7 @@ import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
 import questions from "@/data/questions";
+import DistroTechnicalDetails from "./DistroTechnicalDetails";
 
 // Calculate result based on accumulated traits
 const calculateResult = (answers: Record<number, string>) => {
@@ -145,7 +146,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
 
             <CardContent>
               {/* Personality insights */}
-              <div className="px-8 pt-4">
+              <div className="px-8">
                 <div className="max-w-3xl mx-auto">
 
                   {/* Traits */}
@@ -165,76 +166,16 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
                     ))}
                   </div>
 
-                  {result.id === "gentoo" && (
-                    <p className="text-sm">(This result took 8 hours to compile)</p>
-                  )}
-
-                  {result.id === "macos" && (
-                    <div className="my-6 p-4 rounded-lg border-l-4">
-                      <p className="font-bold">
-                        Another premium laptop?
-                        Did you know the repair cost for your last laptop could have bought:
-                      </p>
-                      <ul className="mt-2 list-disc pl-5">
-                        <li>Two decent Thinkpads</li>
-                        <li>A weekend getaway</li>
-                        <li>87 cups of coffees</li>
-                        <li>1.5 months of groceries</li>
-                      </ul>
-                      <p className="mt-2 italic">
-                        "But it just works" - until it doesn't, and you're out $300 for a simple repair.
-                      </p>
-                    </div>
-                  )}
+                  {result.note && <result.note />}
 
                   {/* Technical details accordion */}
-                  <Accordion type="single" collapsible>
+                  <Accordion type="single" collapsible className="border rounded-lg">
                     <AccordionItem value="technical">
-                      <AccordionTrigger className="text-lg font-bold border p-4 flex items-center">
+                      <AccordionTrigger className="text-lg font-bold px-6 flex items-center">
                         Technical Details
                       </AccordionTrigger>
-                      <AccordionContent className="pt-4">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 rounded-lg border">
-                          <div>
-                            <h5 className="font-bold mb-2">Package Manager</h5>
-                            <p className="mb-4">
-                              {result.id === "ubuntu"
-                                ? "APT (Advanced Package Tool)"
-                                : result.id === "arch"
-                                  ? "Pacman"
-                                  : "DNF (Dandified YUM)"}
-                            </p>
-
-                            <h5 className="font-bold mb-2">Release Cycle</h5>
-                            <p>
-                              {result.id === "ubuntu"
-                                ? "Every 6 months (interim), every 2 years (LTS)"
-                                : result.id === "arch"
-                                  ? "Rolling release"
-                                  : "Approximately every 6 months"}
-                            </p>
-                          </div>
-
-                          <div>
-                            <h5 className="font-bold mb-2">Default Desktop</h5>
-                            <p className="mb-4">
-                              {result.id === "ubuntu"
-                                ? "GNOME"
-                                : result.id === "arch"
-                                  ? "None (you choose!)"
-                                  : "GNOME"}
-                            </p>
-
-                            <h5 className="font-bold mb-2">Best For</h5>
-                            <p>
-                              {result.id === "ubuntu"
-                                ? "Beginners, developers, and enterprise use"
-                                : result.id === "arch"
-                                  ? "Experienced users, tinkerers, and minimalists"
-                                  : "Developers and early adopters"}
-                            </p>
-                          </div>
-                        </div>
+                      <AccordionContent>
+                        <DistroTechnicalDetails distro={result} />
                       </AccordionContent>
                     </AccordionItem>
                   </Accordion>
@@ -242,8 +183,6 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
                 </div>
               </div>
             </CardContent>
-
-
 
             {/* Action buttons */}
             <CardFooter className="flex-col px-16">
