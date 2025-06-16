@@ -16,7 +16,7 @@ const questions = [
     text: "Your relationship with documentation is:",
     options: [
       { id: "a", text: "What's documentation? I just ask ChatGPT", traits: { macos: 3, ubuntu: 2, popos: 1 } },
-      { id: "b", text: "Toilet reading material", traits: { arch: 3, gentoo: 3, rhel: 3 } },
+      { id: "b", text: "Toilet reading material", traits: { arch: 3, gentoo: 3, rhel: 2 } },
       { id: "c", text: "I write documentation as a hobby", traits: { arch: 1, nixos: 3, debian: 2 } },
       { id: "d", text: "Only for emergencies (like when Google fails)", traits: { mint: 2, popos: 2 } }
     ]
@@ -38,7 +38,7 @@ const questions = [
     text: "Choose a terminal color scheme:",
     options: [
       { id: "a", text: "Default - I'm not a terminal person.", traits: { macos: 3, mint: 2, ubuntu: 1 } },
-      { id: "b", text: "I'm here to get work done, not admire colors", traits: { gentoo: 3, debian: 2, rhel: 3 } },
+      { id: "b", text: "I'm here to get work done, not admire colors", traits: { gentoo: 3, debian: 3, rhel: 3 } },
       { id: "c", text: "Green text on black - it's hacker aesthetic", traits: { kali: 3 } },
       { id: "d", text: "Custom scheme that matches my riced desktop perfectly", traits: { arch: 3, nixos: 2, artix: 2 } }
     ]
@@ -80,7 +80,7 @@ const questions = [
     text: "The monitor(s) you use:",
     options: [
       { id: "a", text: "Whatever's built into my laptop", traits: { macos: 1, mint: 1 } },
-      { id: "b", text: "One decent 1080p monitor - does the job", traits: { ubuntu: 3, mint: 2, debian: 2, rhel: 3 } },
+      { id: "b", text: "One decent 1080p monitor - does the job", traits: { ubuntu: 3, mint: 2, debian: 3, rhel: 2 } },
       { id: "c", text: "Ultrawide monitor", traits: { popos: 3, nixos: 3 } },
       { id: "d", text: "I don't need a monitor, I SSH from my phone", traits: { kali: 2 } }
     ]
