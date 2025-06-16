@@ -113,7 +113,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
 
       {/* Copied Alert */}
       {showCopiedAlert && (
-        <Alert className="fixed top-4 left-4 right-4 md:left-auto md:right-4 md:w-1/3 border-zinc-900 z-50">
+        <Alert className="fixed top-8 inset-x-4 md:inset-x-auto md:right-8 md:w-auto md:max-w-md border-zinc-900 z-50">
           <AlertTitle>Copied to clipboard!</AlertTitle>
           <AlertDescription>
             Share your Linux distro match with friends
@@ -126,7 +126,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
           <Card>
             {/* Result header */}
             <CardHeader className="flex flex-col justify-center *:mx-auto">
-              <CardTitle className="text-2xl md:text-4xl font-bold">
+              <CardTitle className="text-2xl md:text-4xl font-bold text-center">
                 {result.id === "macos"
                   && ("Your Personality Match Is...")
                   || ("Your Linux Personality Match Is...")}
@@ -146,7 +146,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
 
             <CardContent>
               {/* Personality insights */}
-              <div className="px-8">
+              <div className="md:px-8">
                 <div className="max-w-3xl mx-auto">
 
                   {/* Traits */}
@@ -185,11 +185,11 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
             </CardContent>
 
             {/* Action buttons */}
-            <CardFooter className="flex-col px-16">
+            <CardFooter className="flex-col md:px-14">
               {/* Shareable link */}
               <Card className="py-4 mb-8 w-full">
                 <CardHeader>
-                  <CardTitle className="text-lg font-bold">Share Your Result</CardTitle>
+                  <CardTitle className="text-lg font-bold text-center md:text-left">Share Your Result</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-col md:flex-row gap-2">
@@ -260,7 +260,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
 
               {/* Footer */}
               <div className="py-4 text-center">
-                <p className="inline-flex items-center">
+                <p className="inline-flex items-center text-nowrap">
                   Made with
                   <FaHeart className="mx-2" />
                   for the Linux community

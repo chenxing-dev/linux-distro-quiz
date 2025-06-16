@@ -123,7 +123,7 @@ const QuizFlow: React.FC<{ onComplete: (answers: Record<number, string>) => void
                         }`}
                     >
                       <div className="flex items-center">
-                        <div className={`mr-3 w-5 h-5 rounded-full border-2 flex items-center justify-center ${selectedOption === option.id
+                        <div className={`mr-3 w-5 h-5 rounded-full border-2 flex-shrink-0 flex items-center justify-center ${selectedOption === option.id
                           ? 'border-zinc-500 bg-zinc-800'
                           : 'border-zinc-500'
                           }`}>
