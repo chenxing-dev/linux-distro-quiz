@@ -17,6 +17,7 @@ import { Check, ChevronRight, Copy, LinkIcon, X } from "lucide-react";
 import DistroTechnicalDetails from "./DistroTechnicalDetails";
 import { ShareCard } from "./ShareCard";
 import { QRCodeSVG } from "qrcode.react";
+import { convertToCleanUrl, isGitHubPages } from "@/lib/urlUtils";
 
 interface ResultScreenProps {
   result: Distro
@@ -35,9 +36,14 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
   const shareCardRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
 
   useEffect(() => {
-    // Generate shareable URL
-    const shareableUrl = `${getBasePath()}/result/${result.id}`;
-    setShareUrl(shareableUrl);
+    // Generate clean URL for sharing
+    const getShareableLink = () => {
+      const hashUrl = `${getBasePath()}#/result/${result.id}`;
+      return isGitHubPages() ? convertToCleanUrl() : hashUrl;
+    };
+
+    const shareableLink = getShareableLink();
+    setShareUrl(shareableLink);
   }, [result]);
 
   const handleCopyResult = () => {

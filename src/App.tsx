@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { isGitHubPages } from '@/lib/urlUtils';
 import WelcomeScreen from "@/components/Quiz/WelcomeScreen";
 import QuizFlow from "@/components/Quiz/QuizFlow";
 import ResultScreen from "@/components/Quiz/ResultScreen";
 import distros, { type Distro } from "@/data/distros";
 import questions from "@/data/questions";
 import NotFound from "@/pages/NotFound";
+import UrlCleaner from "@/components/UrlCleaner";
 
 function App() {
   const location = useLocation();
@@ -20,8 +22,16 @@ function App() {
   useEffect(() => {
     // Handle direct result links
     const handleDirectResultLink = () => {
+      // For GitHub Pages, location.pathname is always base path
+      // For direct links, we need to parse the hash
+      let path = location.pathname;
+
+      if (isGitHubPages() && location.hash) {
+        path = location.hash.substring(1);
+      }
+
       // Remove base path from the location pathname
-      const pathWithoutBase = location.pathname.replace(new RegExp(`^${basePath}`), '');
+      const pathWithoutBase = path.replace(new RegExp(`^${basePath}`), '');
 
       // Split the path into segments
       const segments = pathWithoutBase.split('/').filter(Boolean);
@@ -43,6 +53,22 @@ function App() {
 
     handleDirectResultLink();
   }, [location, navigate, basePath]);
+
+  // Update browser URL when step changes
+  useEffect(() => {
+    if (isGitHubPages()) {
+      let newPath = basePath;
+
+      if (quizState === 'results' && result) {
+        newPath = `${basePath}#/result/${result.id}`;
+      }
+
+      // Only update if it's different
+      if (window.location.hash !== `#${newPath.replace(basePath, '')}`) {
+        window.location.hash = newPath.replace(basePath, '');
+      }
+    }
+  }, [quizState, result, basePath]);
 
   // Calculate result based on accumulated traits
   const calculateResult = (answers: Record<number, string>) => {
@@ -81,21 +107,25 @@ function App() {
   };
 
   return (
-    <Routes>
-      <Route path="*" element={<NotFound />} />
-      <Route path="/" element={
-        <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-800">
-          {quizState === "welcome" && <WelcomeScreen onStart={startQuiz} />}
-          {quizState === "quiz" && <QuizFlow onComplete={completeQuiz} />}
-          {quizState === "results" && result && <ResultScreen result={result} onRetake={retakeQuiz} />}
-        </div>} />
-      <Route path="/result/:distroId" element={
-        result &&
-        <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-800">
-          <ResultScreen result={result} onRetake={retakeQuiz} />
-        </div>
-      } />
-    </Routes>
+    <>
+      <UrlCleaner />
+      <Routes>
+        <Route path="*" element={<NotFound />} />
+        <Route path="/" element={
+          <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-800">
+            {quizState === "welcome" && <WelcomeScreen onStart={startQuiz} />}
+            {quizState === "quiz" && <QuizFlow onComplete={completeQuiz} />}
+            {quizState === "results" && result && <ResultScreen result={result} onRetake={retakeQuiz} />}
+          </div>} />
+        <Route path="/result/:distroId" element={
+          result &&
+          <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-800">
+            <ResultScreen result={result} onRetake={retakeQuiz} />
+          </div>
+        } />
+      </Routes>
+    </>
+
   );
 }
 
