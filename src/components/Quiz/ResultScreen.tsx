@@ -64,7 +64,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
       setResult(distroResult);
 
       // Generate shareable URL
-      const shareableUrl = `${getBasePath()}result/${distroResult.id}`;
+      const shareableUrl = `${getBasePath()}/result/${distroResult.id}`;
       setShareUrl(shareableUrl);
     }, 1000);
 
@@ -110,23 +110,24 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
   }
 
   const shareOnWeibo = async () => {
-    const imageUrl = `${getBasePath()}share-cards/${result.id}.png`;
+    const imageUrl = `${getBasePath()}/share-cards/${result.id}.png`;
 
     // Prepare sharing data
     const text = `我在操作系统性格测试中得到了${result.name}！你也来试试吧：`;
 
     const weiboUrl = new URL("http://service.weibo.com/share/share.php");
+    weiboUrl.searchParams.append("language", "zh_cn")
     weiboUrl.searchParams.append("url", shareUrl);
     weiboUrl.searchParams.append("title", text);
     weiboUrl.searchParams.append("pic", imageUrl);
 
-    window.open(weiboUrl.toString(), "weibo_share", "width=550,height=420");
+    window.open(weiboUrl.toString(), "weibo_share");
   };
 
   return (
     <div className="min-h-screen p-4 flex justify-center items-center">
       {/* Hidden share card for image generation */}
-      <div className="">
+      <div className="hidden">
         <div ref={shareCardRef}>
           <ShareCard distro={result} shareUrl={shareUrl} />
         </div>
@@ -220,9 +221,9 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
                       <Label htmlFor="share-url" className="sr-only">
                         Share URL
                       </Label>
-                      <Input id="share-url" value={shareUrl} readOnly className="truncate font-mono" />
+                      <Input id="share-url" value={shareUrl} readOnly className="truncate font-mono font-bold" />
                     </div>
-                    <div className="flex gap-2 text-sm font-semibold">
+                    <div className="flex gap-2 text-sm font-bold">
                       <Dialog>
                         <DialogTrigger asChild>
                           <Button className="flex-1 bg-[#07C160] hover:bg-[#06ae56] text-white">
@@ -250,7 +251,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
                             <div className="p-6">
                               <div className="flex justify-center">
                                 <div className="p-5 rounded-xl border-4 border-[#07C160] shadow-lg">
-                                  <QRCodeSVG value={shareUrl} size={200} bgColor={"#FFFFFF"} fgColor={"#000000"} level={"L"} includeMargin={false} />
+                                  <QRCodeSVG value={shareUrl} size={200} bgColor={"#FFFFFF"} fgColor={"#000000"} level={"L"} />
                                 </div>
                               </div>
 

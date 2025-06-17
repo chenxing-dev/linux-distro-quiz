@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Toaster } from "@/components/ui/sonner"
 import { toast } from "sonner"
-import { FaInfoCircle, FaLinux, FaSpinner, FaTerminal } from "react-icons/fa";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
+import { FaLinux, FaSpinner, FaTerminal } from "react-icons/fa";
 
 const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -31,7 +30,7 @@ const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
       <Toaster />
 
       {/* Decorative terminal windows */}
-      <Card className="top-[10%] left-[5%] p-0 hidden md:block absolute w-64 h-48 bg-black/80 border border-zinc-500/30 shadow-xl overflow-hidden">
+      <Card className="top-[8%] left-[5%] p-0 hidden md:block absolute w-64 h-48 bg-black/90 border border-zinc-500/30 shadow-xl overflow-hidden">
         <div className="flex items-center p-2 bg-zinc-800 border-b border-zinc-700">
           <div className="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
           <div className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
@@ -43,7 +42,7 @@ const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
         </div>
       </Card>
 
-      <Card className="bottom-[5%] right-[8%] p-0 hidden md:block absolute w-64 h-48 bg-black/80 border border-zinc-500/30 shadow-xl overflow-hidden">
+      <Card className="bottom-[8%] right-[5%] p-0 hidden md:block absolute w-64 h-48 bg-black/90 border border-zinc-500/30 shadow-xl overflow-hidden">
         <div className="flex items-center p-2 bg-zinc-800 border-b border-zinc-700">
           <div className="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
           <div className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
@@ -86,45 +85,6 @@ const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
             </Button>
           </div>
         </CardHeader>
-
-        {/* Info Dialog */}
-        <CardContent className="text-center">
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button variant="outline">
-                <FaInfoCircle className="mr-2" /> How It Works
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="max-w-2xl">
-              <DialogHeader>
-                <DialogTitle className="text-2xl">How the Quiz Works</DialogTitle>
-                <DialogDescription>
-                  Learn about our methodology and how we match you with the perfect distro
-                </DialogDescription>
-              </DialogHeader>
-              <div>
-                <div className="p-2">
-                  <h3 className="font-bold mb-2">1. Personality Assessment</h3>
-                  <p>
-                    We analyze your preferences and technical approach through carefully crafted questions.
-                  </p>
-                </div>
-                <div className="p-2">
-                  <h3 className="font-bold mb-2">2. Trait Matching</h3>
-                  <p>
-                    Your answers are matched against key traits of popular Linux distributions.
-                  </p>
-                </div>
-                <div className="p-2">
-                  <h3 className="font-bold mb-2">3. Algorithmic Recommendation</h3>
-                  <p>
-                    Our algorithm calculates the best distro match based on your personality profile.
-                  </p>
-                </div>
-              </div>
-            </DialogContent>
-          </Dialog>
-        </CardContent>
       </Card>
     </div>
   );
