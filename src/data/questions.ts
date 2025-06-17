@@ -62,7 +62,7 @@ const questions = [
       { id: "a", text: "What's a systemd?", traits: { macos: 3, mint: 1, popos: 1 } },
       { id: "b", text: "It just works, no complaints", traits: {} },
       { id: "c", text: "Tolerate it under protest - it violates functional purity", traits: {} },
-      { id: "d", text: "BURN IT WITH FIRE", traits: { gentoo: 3, artix: 10 } }
+      { id: "d", text: "BURN IT WITH FIRE", traits: { gentoo: 3, artix: 5 } }
     ]
   },
   {
