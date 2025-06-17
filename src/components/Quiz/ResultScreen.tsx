@@ -45,6 +45,11 @@ interface ResultScreenProps {
   onRetake: () => void;
 }
 
+const getBasePath = () => {
+  const basePath = import.meta.env.BASE_URL || "/";
+  return `${window.location.origin}${basePath}`;
+};
+
 const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
   const [result, setResult] = useState<Distro | null>(null);
   const [copied, setCopied] = useState(false);
@@ -59,8 +64,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
       setResult(distroResult);
 
       // Generate shareable URL
-      const baseUrl = window.location.origin + window.location.pathname;
-      const shareableUrl = `${baseUrl}/result/${distroResult.id}`;
+      const shareableUrl = `${getBasePath()}result/${distroResult.id}`;
       setShareUrl(shareableUrl);
     }, 1000);
 
@@ -106,8 +110,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
   }
 
   const shareOnWeibo = async () => {
-    const baseUrl = window.location.origin + window.location.pathname;
-    const imageUrl = `${baseUrl}/share-cards/${result.id}.png`;
+    const imageUrl = `${getBasePath()}share-cards/${result.id}.png`;
 
     // Prepare sharing data
     const text = `我在操作系统性格测试中得到了${result.name}！你也来试试吧：`;
@@ -123,7 +126,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
   return (
     <div className="min-h-screen p-4 flex justify-center items-center">
       {/* Hidden share card for image generation */}
-      <div className="hidden">
+      <div className="">
         <div ref={shareCardRef}>
           <ShareCard distro={result} shareUrl={shareUrl} />
         </div>
