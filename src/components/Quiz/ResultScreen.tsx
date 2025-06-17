@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import distros, { type Distro } from "@/data/distros";
-import questions from "@/data/questions";
+import { type Distro } from "@/data/distros";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -19,29 +18,8 @@ import DistroTechnicalDetails from "./DistroTechnicalDetails";
 import { ShareCard } from "./ShareCard";
 import { QRCodeSVG } from "qrcode.react";
 
-// Calculate result based on accumulated traits
-const calculateResult = (answers: Record<number, string>) => {
-  const traitScores: Record<string, number> = {};
-  distros.forEach(distro => {
-    traitScores[distro.id] = 0;
-  });
-
-  Object.values(answers).forEach((answer, index) => {
-    const traits = questions[index].options.find(option => option.id === answer)?.traits || {};
-    Object.entries(traits).forEach(([distro, points]) => {
-      traitScores[distro] += points;
-    });
-  });
-
-  // Return distro with highest score
-  const distroId = Object.entries(traitScores).sort((a, b) => b[1] - a[1])[0][0];
-  console.log(traitScores);
-  const result = distros.find(distro => distro.id == distroId);
-  return result || distros[0];
-};
-
 interface ResultScreenProps {
-  answers: Record<number, string>;
+  result: Distro
   onRetake: () => void;
 }
 
@@ -50,8 +28,7 @@ const getBasePath = () => {
   return `${window.location.origin}${basePath}`;
 };
 
-const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
-  const [result, setResult] = useState<Distro | null>(null);
+const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
   const [copied, setCopied] = useState(false);
   const [shareUrl, setShareUrl] = useState("");
   const [showCopiedAlert, setShowCopiedAlert] = useState(false);
@@ -60,16 +37,14 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
   useEffect(() => {
     // Simulate calculation delay
     const timer = setTimeout(() => {
-      const distroResult = calculateResult(answers);
-      setResult(distroResult);
 
       // Generate shareable URL
-      const shareableUrl = `${getBasePath()}/result/${distroResult.id}`;
+      const shareableUrl = `${getBasePath()}/result/${result.id}`;
       setShareUrl(shareableUrl);
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [answers]);
+  }, [result]);
 
   const handleCopyResult = () => {
     if (result) {
