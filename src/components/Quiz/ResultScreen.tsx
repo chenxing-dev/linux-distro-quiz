@@ -10,7 +10,7 @@ import { Separator } from "@/components/ui/separator";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { FaHeart, FaRedo, FaSpinner, FaWeibo } from "react-icons/fa";
+import { FaHeart, FaRedo, FaWeibo } from "react-icons/fa";
 import { IoLogoWechat } from "react-icons/io5";
 import { Check, ChevronRight, Copy, LinkIcon, X } from "lucide-react";
 
@@ -35,15 +35,9 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
   const shareCardRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
 
   useEffect(() => {
-    // Simulate calculation delay
-    const timer = setTimeout(() => {
-
-      // Generate shareable URL
-      const shareableUrl = `${getBasePath()}/result/${result.id}`;
-      setShareUrl(shareableUrl);
-    }, 1000);
-
-    return () => clearTimeout(timer);
+    // Generate shareable URL
+    const shareableUrl = `${getBasePath()}/result/${result.id}`;
+    setShareUrl(shareableUrl);
   }, [result]);
 
   const handleCopyResult = () => {
@@ -58,31 +52,6 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
       }, 2000);
     }
   };
-
-  if (!result) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen p-4">
-        <Card className="w-full max-w-md">
-          <CardHeader className="text-center">
-            <CardTitle className="text-2xl font-bold">Analyzing your answers...</CardTitle>
-            <CardDescription className="mt-2">Calculating your perfect Linux match</CardDescription>
-          </CardHeader>
-          <CardContent className="flex justify-center">
-            <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-l-4 my-6"></div>
-          </CardContent>
-          <CardFooter className="justify-center">
-            <div className="font-mono text-sm text-zinc-50 bg-zinc-800 p-4 rounded-lg w-full">
-              <p className="mb-2">$ ./distro_matcher --user-profile</p>
-              <div className="inline-flex items-center">
-                <FaSpinner className="mr-3 animate-spin" />
-                <span>Processing personality traits</span>
-              </div>
-            </div>
-          </CardFooter>
-        </Card>
-      </div>
-    );
-  }
 
   const shareOnWeibo = async () => {
     const imageUrl = `${getBasePath()}/share-cards/${result.id}.png`;

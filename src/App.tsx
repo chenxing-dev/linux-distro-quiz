@@ -70,8 +70,9 @@ function App() {
   };
 
   const completeQuiz = (answers: Record<number, string>) => {
-    calculateResult(answers);
+    const resultDistro = calculateResult(answers);
     setQuizState("results");
+    setResult(resultDistro)
   };
 
   const retakeQuiz = () => {
