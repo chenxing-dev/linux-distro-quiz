@@ -5,7 +5,7 @@ import QuizFlow from "@/components/Quiz/QuizFlow";
 import ResultScreen from "@/components/Quiz/ResultScreen";
 import distros, { type Distro } from "@/data/distros";
 import questions from "@/data/questions";
-import NotFound from "./pages/NotFound";
+import NotFound from "@/pages/NotFound";
 
 function App() {
   const location = useLocation();
