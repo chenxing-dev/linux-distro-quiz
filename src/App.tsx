@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import WelcomeScreen from "@/components/Quiz/WelcomeScreen";
 import QuizFlow from "@/components/Quiz/QuizFlow";
 import ResultScreen from "@/components/Quiz/ResultScreen";
 import distros, { type Distro } from "@/data/distros";
 import questions from "@/data/questions";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const location = useLocation();
@@ -23,7 +24,7 @@ function App() {
       const pathWithoutBase = location.pathname.replace(new RegExp(`^${basePath}`), '');
 
       // Split the path into segments
-      const segments = pathWithoutBase.split('/').filter(segment => segment !== '');
+      const segments = pathWithoutBase.split('/').filter(Boolean);
 
       // Check if we have a result path
       if (segments[0] === 'result' && segments[1]) {
@@ -35,7 +36,7 @@ function App() {
           setQuizState("results");
         } else {
           // Redirect to home if result not found
-          navigate(basePath || '/');
+          navigate('/NotFound');
         }
       }
     };
@@ -79,11 +80,21 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-800">
-      {quizState === "welcome" && <WelcomeScreen onStart={startQuiz} />}
-      {quizState === "quiz" && <QuizFlow onComplete={completeQuiz} />}
-      {quizState === "results" && result && <ResultScreen result={result} onRetake={retakeQuiz} />}
-    </div>
+    <Routes>
+      <Route path="*" element={<NotFound />} />
+      <Route path="/" element={
+        <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-800">
+          {quizState === "welcome" && <WelcomeScreen onStart={startQuiz} />}
+          {quizState === "quiz" && <QuizFlow onComplete={completeQuiz} />}
+          {quizState === "results" && result && <ResultScreen result={result} onRetake={retakeQuiz} />}
+        </div>} />
+      <Route path="/result/:distroId" element={
+        result &&
+        <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-800">
+          <ResultScreen result={result} onRetake={retakeQuiz} />
+        </div>
+      } />
+    </Routes>
   );
 }
 
