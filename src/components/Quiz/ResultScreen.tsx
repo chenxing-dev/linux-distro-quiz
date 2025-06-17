@@ -1,25 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import distros, { type Distro } from "@/data/distros";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter
-} from "@/components/ui/card";
+import questions from "@/data/questions";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { FaHeart, FaRedo, FaShareAlt, FaSpinner, FaCheck, FaDownload } from "react-icons/fa";
-import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
-import questions from "@/data/questions";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { FaHeart, FaRedo, FaSpinner, FaWeibo } from "react-icons/fa";
+import { IoLogoWechat } from "react-icons/io5";
+import { Check, ChevronRight, Copy, LinkIcon, X } from "lucide-react";
+
 import DistroTechnicalDetails from "./DistroTechnicalDetails";
+import { ShareCard } from "./ShareCard";
+import { QRCodeSVG } from "qrcode.react";
 
 // Calculate result based on accumulated traits
 const calculateResult = (answers: Record<number, string>) => {
@@ -29,16 +27,16 @@ const calculateResult = (answers: Record<number, string>) => {
   });
 
   Object.values(answers).forEach((answer, index) => {
-    const traits = questions[index].options.find((option) => option.id === answer)?.traits || {}
+    const traits = questions[index].options.find(option => option.id === answer)?.traits || {};
     Object.entries(traits).forEach(([distro, points]) => {
       traitScores[distro] += points;
     });
   });
 
   // Return distro with highest score
-  const distroId = Object.entries(traitScores).sort((a, b) => b[1] - a[1])[0][0]
-  console.log(traitScores)
-  const result = distros.find((distro) => distro.id == distroId)
+  const distroId = Object.entries(traitScores).sort((a, b) => b[1] - a[1])[0][0];
+  console.log(traitScores);
+  const result = distros.find(distro => distro.id == distroId);
   return result || distros[0];
 };
 
@@ -52,6 +50,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
   const [copied, setCopied] = useState(false);
   const [shareUrl, setShareUrl] = useState("");
   const [showCopiedAlert, setShowCopiedAlert] = useState(false);
+  const shareCardRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
 
   useEffect(() => {
     // Simulate calculation delay
@@ -61,7 +60,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
 
       // Generate shareable URL
       const baseUrl = window.location.origin + window.location.pathname;
-      const shareableUrl = `${baseUrl}?distro=${distroResult.id}`;
+      const shareableUrl = `${baseUrl}/result/${distroResult.id}`;
       setShareUrl(shareableUrl);
     }, 1000);
 
@@ -70,12 +69,12 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
 
   const handleCopyResult = () => {
     if (result) {
-      const resultText = `I got ${result.name} on the Linux Distro Personality Quiz! ${shareUrl}`;
+      const resultText = shareUrl;
       navigator.clipboard.writeText(resultText);
       setCopied(true);
       setShowCopiedAlert(true);
       setTimeout(() => {
-        setCopied(false)
+        setCopied(false);
         setShowCopiedAlert(false);
       }, 2000);
     }
@@ -87,9 +86,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
         <Card className="w-full max-w-md">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl font-bold">Analyzing your answers...</CardTitle>
-            <CardDescription className="mt-2">
-              Calculating your perfect Linux match
-            </CardDescription>
+            <CardDescription className="mt-2">Calculating your perfect Linux match</CardDescription>
           </CardHeader>
           <CardContent className="flex justify-center">
             <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-l-4 my-6"></div>
@@ -108,16 +105,35 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
     );
   }
 
+  const shareOnWeibo = async () => {
+    const baseUrl = window.location.origin + window.location.pathname;
+    const imageUrl = `${baseUrl}/share-cards/${result.id}.png`;
+
+    // Prepare sharing data
+    const text = `我在操作系统性格测试中得到了${result.name}！你也来试试吧：`;
+
+    const weiboUrl = new URL("http://service.weibo.com/share/share.php");
+    weiboUrl.searchParams.append("url", shareUrl);
+    weiboUrl.searchParams.append("title", text);
+    weiboUrl.searchParams.append("pic", imageUrl);
+
+    window.open(weiboUrl.toString(), "weibo_share", "width=550,height=420");
+  };
+
   return (
     <div className="min-h-screen p-4 flex justify-center items-center">
+      {/* Hidden share card for image generation */}
+      <div className="hidden">
+        <div ref={shareCardRef}>
+          <ShareCard distro={result} shareUrl={shareUrl} />
+        </div>
+      </div>
 
       {/* Copied Alert */}
       {showCopiedAlert && (
         <Alert className="fixed top-8 inset-x-4 md:inset-x-auto md:right-8 md:w-auto md:max-w-md border-zinc-900 z-50">
           <AlertTitle>Copied to clipboard!</AlertTitle>
-          <AlertDescription>
-            Share your Linux distro match with friends
-          </AlertDescription>
+          <AlertDescription>Share your Linux distro match with friends</AlertDescription>
         </Alert>
       )}
 
@@ -126,11 +142,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
           <Card>
             {/* Result header */}
             <CardHeader className="flex flex-col justify-center *:mx-auto">
-              <CardTitle className="text-2xl md:text-4xl font-bold text-center">
-                {result.id === "macos"
-                  && ("Your Personality Match Is...")
-                  || ("Your Linux Personality Match Is...")}
-              </CardTitle>
+              <CardTitle className="text-2xl md:text-4xl font-bold text-center">{(result.id === "macos" && "Your Personality Match Is...") || "Your Linux Personality Match Is..."}</CardTitle>
 
               {/* ASCII Art Logo */}
               <div className="font-mono font-bold text-xs md:text-sm leading-4 whitespace-pre mb-4">{result.ascii || result.name}</div>
@@ -139,28 +151,23 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
                 {result.name}
               </motion.h2>
 
-              <CardDescription className="text-xl max-w-3xl text-center">
-                {result.description}
-              </CardDescription>
+              <CardDescription className="text-xl max-w-3xl text-center">{result.description}</CardDescription>
             </CardHeader>
 
             <CardContent>
               {/* Personality insights */}
               <div className="md:px-8">
-                <div className="max-w-3xl mx-auto">
-
+                <div>
                   {/* Traits */}
                   <CardTitle className="text-xl font-bold mb-4 text-center">Your Key Traits</CardTitle>
                   <div className="flex flex-wrap gap-3 justify-center mb-8">
                     {result.traits.map((trait: string, index: number) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 1.0 + index * 0.1, duration: 0.3 }}
-                      >
+                      <motion.div key={index} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 1.0 + index * 0.1, duration: 0.3 }}>
                         <Badge className="px-2 text-sm">
-                          {trait.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                          {trait
+                            .split("-")
+                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                            .join(" ")}
                         </Badge>
                       </motion.div>
                     ))}
@@ -171,15 +178,12 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
                   {/* Technical details accordion */}
                   <Accordion type="single" collapsible className="border rounded-lg">
                     <AccordionItem value="technical">
-                      <AccordionTrigger className="text-lg font-bold px-6 flex items-center">
-                        Technical Details
-                      </AccordionTrigger>
+                      <AccordionTrigger className="text-lg font-bold px-6 flex items-center">Technical Details</AccordionTrigger>
                       <AccordionContent>
                         <DistroTechnicalDetails distro={result} />
                       </AccordionContent>
                     </AccordionItem>
                   </Accordion>
-
                 </div>
               </div>
             </CardContent>
@@ -187,74 +191,94 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
             {/* Action buttons */}
             <CardFooter className="flex-col md:px-14">
               {/* Shareable link */}
-              <Card className="py-4 mb-8 w-full">
+              <Card className="py-4 mb-8 w-full bg-zinc-50">
                 <CardHeader>
-                  <CardTitle className="text-lg font-bold text-center md:text-left">Share Your Result</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-col md:flex-row gap-2">
-                    <div className="flex-1">
-                      <Label htmlFor="share-url" className="sr-only">Share URL</Label>
-                      <Input
-                        id="share-url"
-                        value={shareUrl}
-                        readOnly
-                        className="truncate"
-                      />
+                  <CardTitle className="text-lg font-bold text-center md:text-left flex justify-between">
+                    <div className="flex items-center gap-2">
+                      <LinkIcon size={16} />
+                      Share Your Result
                     </div>
-                    <Button
-                      onClick={handleCopyResult}
-                      className="min-w-[120px]"
-                    >
+                    <Button size="sm" onClick={handleCopyResult} className="flex items-center gap-1">
                       {copied ? (
                         <>
-                          <FaCheck className="mr-2" /> Copied!
+                          <Check size={14} /> Copied!
                         </>
                       ) : (
                         <>
-                          <FaShareAlt className="mr-2" /> Copy Link
+                          <Copy size={14} /> Copy
                         </>
                       )}
                     </Button>
-
-
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <Button variant="outline">
-                          <FaDownload className="mr-2" /> Save Result
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent className="max-w-md">
-                        <DialogHeader>
-                          <DialogTitle className="text-2xl">Save Your Result</DialogTitle>
-                          <DialogDescription>
-                            Download your Linux distro match as an image
-                          </DialogDescription>
-                        </DialogHeader>
-                        <div className="space-y-4">
-                          <div className="bg-zinc-800 p-4 rounded-lg border border-zinc-700 text-center">
-                            <p className="text-zinc-50 mb-4">
-                              Your result will be saved as a PNG image that you can share on social media
-                            </p>
-                            <Button variant="secondary">
-                              <FaDownload className="mr-2" /> Download Image
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-col md:flex-row gap-2">
+                    <div className="flex-1 bg-white text-zinc-700">
+                      <Label htmlFor="share-url" className="sr-only">
+                        Share URL
+                      </Label>
+                      <Input id="share-url" value={shareUrl} readOnly className="truncate font-mono" />
+                    </div>
+                    <div className="flex gap-2 text-sm font-semibold">
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button className="flex-1 bg-[#07C160] hover:bg-[#06ae56] text-white">
+                            <IoLogoWechat />
+                            微信
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent className="max-w-md p-0 overflow-hidden border-0" showCloseButton={false}>
+                          <DialogClose asChild>
+                            <Button variant="ghost" className="absolute top-4 right-4 hover:bg-white/20 text-zinc-800 w-4 h-6">
+                              <X size={20} />
                             </Button>
-                          </div>
-                        </div>
-                      </DialogContent>
-                    </Dialog>
+                          </DialogClose>
+                          <div>
+                            <div className="bg-gradient-to-r from-[#07C160] to-[#06ae56] p-6">
+                              <DialogHeader>
+                                <DialogTitle className="flex items-center gap-2 text-white text-2xl">
+                                  <IoLogoWechat size={28} />
+                                  微信分享
+                                </DialogTitle>
+                                <DialogDescription className="text-white/90">扫描二维码分享测试结果</DialogDescription>
+                              </DialogHeader>
+                            </div>
 
+                            <div className="p-6">
+                              <div className="flex justify-center">
+                                <div className="p-5 rounded-xl border-4 border-[#07C160] shadow-lg">
+                                  <QRCodeSVG value={shareUrl} size={200} bgColor={"#FFFFFF"} fgColor={"#000000"} level={"L"} includeMargin={false} />
+                                </div>
+                              </div>
+
+                              <div className="mt-6 text-center">
+                                <div className="flex items-center justify-center gap-2 text-zinc-600 mb-2">
+                                  <span>1. 打开微信</span>
+                                  <ChevronRight size={16} />
+                                  <span>2. 发现</span>
+                                  <ChevronRight size={16} />
+                                  <span>3. 扫一扫</span>
+                                </div>
+
+                                <p className="text-sm text-zinc-500">扫描二维码，分享给你的好友</p>
+                              </div>
+                            </div>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
+
+                      <Button onClick={shareOnWeibo} className="flex-1 bg-[#E6162D] hover:bg-[#c91427] text-white">
+                        <FaWeibo />
+                        微博
+                      </Button>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
-              <Button
-                onClick={onRetake}
-              >
+              <Button onClick={onRetake}>
                 <FaRedo className="mr-2" />
                 Retake Quiz
               </Button>
-
-
 
               <Separator className="my-4" />
 
@@ -266,9 +290,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ answers, onRetake }) => {
                   for the Linux community
                 </p>
               </div>
-
             </CardFooter>
-
           </Card>
         </motion.div>
       </AnimatePresence>

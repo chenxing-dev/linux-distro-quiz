@@ -10,9 +10,9 @@ export type Distro = {
     packageManager: string;
     releaseCycle: string;
     defaultDesktop: string;
-    bestFor: string
+    bestFor: string;
   };
-  note?: () => JSX.Element
+  note?: () => JSX.Element;
 };
 
 const distros: Distro[] = [
@@ -46,21 +46,17 @@ const distros: Distro[] = [
       defaultDesktop: "Aqua (proprietary)",
       bestFor: "Those invested in the Apple ecosystem"
     },
-    note: () => (<div className="my-6 p-4 rounded-lg border-l-4" >
-      <p className="font-bold" >
-        Another premium laptop ?
-        Did you know the repair cost for your last laptop could have bought:
-      </p>
-      < ul className="mt-2 list-disc pl-5" >
-        <li>Two decent Thinkpads </li>
-        < li > A weekend getaway </li>
-        < li > 87 cups of coffees </li>
-        < li > 1.5 months of groceries </li>
-      </ul>
-      < p className="mt-2 italic" >
-        "But it just works" - until it doesn't, and you're out $300 for a simple repair.
-      </p>
-    </div>
+    note: () => (
+      <div className="my-6 p-4 rounded-lg border-l-4">
+        <p className="font-bold">Another premium laptop ? Did you know the repair cost for your last laptop could have bought:</p>
+        <ul className="mt-2 list-disc pl-5">
+          <li>Two decent Thinkpads </li>
+          <li> A weekend getaway </li>
+          <li> 87 cups of coffees </li>
+          <li> 1.5 months of groceries </li>
+        </ul>
+        <p className="mt-2 italic">"But it just works" - until it doesn't, and you're out $300 for a simple repair.</p>
+      </div>
     )
   },
   {
@@ -265,7 +261,7 @@ yMMNNNNNNNmmmmmNNMmhs+/-\`
   {
     id: "nixos",
     name: "NixOS",
-    description: "You spend more time writing configuration files than using your computer. You believe reproducibility is more important than actually getting work done.",
+    description: "You write Nix configs like poetry and value reproducibility over productivity. Your system rebuilds more often than you blink.",
     traits: ["configuration-obsessed", "reproducibility-fanatic", "functional-programmer"],
     ascii: ` 
           ▗▄▄▄       ▗▄▄▄▄    ▄▄▄▖
@@ -366,7 +362,7 @@ MMMMMMMMMMM.                     MMMM
   {
     id: "artix",
     name: "Artix Linux",
-    description: "You think systemd is literally Satan and enjoy spending 3 hours debugging init scripts just to boot your toaster. You consider 'rc.conf' poetry and believe OpenRC is a spiritual experience.",
+    description: "You'd debug init scripts for 3 hours to avoid systemd. Your boot process is a spiritual journey with OpenRC.",
     traits: ["init-obsessive", "anti-systemd-crusader", "masochistic-tinkerer"],
     ascii: `
                    '
