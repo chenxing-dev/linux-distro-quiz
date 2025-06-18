@@ -62,7 +62,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
     const imageUrl = `${getBasePath()}share-cards/${result.id}.png`;
 
     // Prepare sharing data
-    const text = `💻 操作系统人格测试！我是${result.name}型！包准，不准不收钱！#linux# #macos# #小测试# 👇测试链接\n`;
+    const text = `💻 操作系统性格测试！测出你的本命系统~ 我是${result.name}型！包准，不准不收钱！#linux# #macos# #性格测试# 👇点击测试\n`;
 
     // Construct the URL with proper encoding
     const encodedText = encodeURIComponent(text);
@@ -99,7 +99,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
               <CardTitle className="text-2xl md:text-4xl font-bold text-center">{(result.id === "macos" && "Your Personality Match Is...") || "Your Linux Personality Match Is..."}</CardTitle>
 
               {/* ASCII Art Logo */}
-              <div className="font-mono font-bold text-xs md:text-sm leading-4 whitespace-pre md:mb-4">{result.ascii || result.name}</div>
+              <div className="font-mono font-bold text-xs md:text-sm leading-3 md:leading-4 whitespace-pre md:mb-4">{result.ascii || result.name}</div>
 
               <motion.h2 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.5 }} className="text-3xl md:text-5xl font-bold">
                 {result.name}
