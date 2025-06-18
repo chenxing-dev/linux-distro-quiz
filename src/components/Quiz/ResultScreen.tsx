@@ -62,15 +62,16 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
     const imageUrl = `${getBasePath()}share-cards/${result.id}.png`;
 
     // Prepare sharing data
-    const text = `我在操作系统性格测试中得到了${result.name}！你也来试试吧：`;
+    const text = `💻 操作系统人格测试！我是${result.name}型！包准，不准不收钱！#linux# #macos# #小测试# 👇测试链接\n`;
 
-    const weiboUrl = new URL("http://service.weibo.com/share/share.php");
-    weiboUrl.searchParams.append("language", "zh_cn");
-    weiboUrl.searchParams.append("url", shareUrl);
-    weiboUrl.searchParams.append("title", text);
-    weiboUrl.searchParams.append("pic", imageUrl);
+    // Construct the URL with proper encoding
+    const encodedText = encodeURIComponent(text);
+    const encodedUrl = encodeURIComponent(shareUrl);
 
-    window.open(weiboUrl.toString(), "weibo_share");
+    // Use template literals
+    const weiboUrl = `http://service.weibo.com/share/share.php?language=zh_cn&pic=${imageUrl}&url=${encodedUrl}&title=${encodedText}`;
+
+    window.open(weiboUrl, "weibo_share");
   };
 
   return (
@@ -131,9 +132,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
                   {/* Technical details accordion */}
                   <Accordion type="single" collapsible className="border rounded-lg">
                     <AccordionItem value="technical">
-                      <AccordionTrigger className="text-lg font-bold px-4 md:px-6 flex items-center">
-                        Technical Details
-                      </AccordionTrigger>
+                      <AccordionTrigger className="text-lg font-bold px-4 md:px-6 flex items-center">Technical Details</AccordionTrigger>
                       <AccordionContent>
                         <DistroTechnicalDetails distro={result} />
                       </AccordionContent>
