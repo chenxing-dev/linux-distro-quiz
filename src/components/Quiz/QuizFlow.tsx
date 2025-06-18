@@ -88,11 +88,11 @@ const QuizFlow: React.FC<{ onComplete: (answers: Record<number, string>) => void
       <AnimatePresence mode="wait">
         <motion.div key={currentQuestion} initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -50 }} transition={{ duration: 0.3 }}>
           <Card className="p-6 border border-zinc-500">
-            <CardHeader className="flex items-center p-0 mb-6">
-              <div className="bg-zinc-900/60 w-10 h-10 rounded-full flex flex-shrink-0 items-center justify-center mr-4">
-                <span className="text-xl font-bold text-zinc-300">{currentQuestion + 1}</span>
+            <CardHeader className="flex items-center p-0 md:mb-6">
+              <div className="bg-zinc-900/60 w-8 h-8 md:w-10 md:h-10 rounded-full flex flex-shrink-0 items-center justify-center mr-2 md:mr-4">
+                <span className="text-lg md:text-xl font-bold text-zinc-300">{currentQuestion + 1}</span>
               </div>
-              <CardTitle className="text-2xl font-bold">
+              <CardTitle className="text-xl md:text-2xl font-bold">
                 {questions[currentQuestion].text}
               </CardTitle>
             </CardHeader>
@@ -102,7 +102,7 @@ const QuizFlow: React.FC<{ onComplete: (answers: Record<number, string>) => void
               <RadioGroup
                 value={selectedOption || ""}
                 onValueChange={handleOptionSelect}
-                className="grid grid-cols-1 md:grid-cols-2 gap-4"
+                className="grid grid-cols-1 md:grid-cols-2 md:gap-4"
               >
                 {questions[currentQuestion].options.map((option) => (
                   <motion.div
@@ -117,7 +117,7 @@ const QuizFlow: React.FC<{ onComplete: (answers: Record<number, string>) => void
                     />
                     <Label
                       htmlFor={`option-${option.id}`}
-                      className={`h-full p-4 rounded-lg border-2 transition-all duration-200 cursor-pointer ${selectedOption === option.id
+                      className={`h-full px-4 py-2 md:py-4 rounded-lg border-2 transition-all duration-200 cursor-pointer ${selectedOption === option.id
                         ? 'border-zinc-500 bg-zinc-950/20 shadow-lg shadow-zinc-500/20'
                         : 'border-zinc-800 hover:border-zinc-400'
                         }`}

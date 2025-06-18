@@ -98,7 +98,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
               <CardTitle className="text-2xl md:text-4xl font-bold text-center">{(result.id === "macos" && "Your Personality Match Is...") || "Your Linux Personality Match Is..."}</CardTitle>
 
               {/* ASCII Art Logo */}
-              <div className="font-mono font-bold text-xs md:text-sm leading-4 whitespace-pre mb-4">{result.ascii || result.name}</div>
+              <div className="font-mono font-bold text-xs md:text-sm leading-4 whitespace-pre md:mb-4">{result.ascii || result.name}</div>
 
               <motion.h2 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.5 }} className="text-3xl md:text-5xl font-bold">
                 {result.name}
