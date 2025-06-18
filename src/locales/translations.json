@@ -1,0 +1,22 @@
+{
+  "en": {
+    "command": "./quiz --start",
+    "loadingMatrix": "Loading personality matrix...",
+    "catCommand": "cat welcome.txt",
+    "welcome": "Welcome to Linux Distro Quiz!",
+    "title": "Linux Distro Quiz",
+    "description": "Discover which Linux distribution matches your personality! Answer a few fun questions and find out.",
+    "loadingQuiz": "Loading Quiz...",
+    "startQuiz": "Start the Quiz"
+  },
+  "zh": {
+    "command": "./quiz --start",
+    "loadingMatrix": "正在加载操作系统数据...",
+    "catCommand": "cat welcome.txt",
+    "welcome": "欢迎来到操作系统性格测试！",
+    "title": "操作系统性格测试",
+    "description": "测测哪个操作系统与您的个性匹配！回答十个问题即可找到答案。",
+    "loadingQuiz": "正在加载测试...",
+    "startQuiz": "开始测试"
+  }
+}

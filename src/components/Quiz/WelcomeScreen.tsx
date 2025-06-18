@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Toaster } from "@/components/ui/sonner"
-import { toast } from "sonner"
+import { Toaster } from "@/components/ui/sonner";
+import { toast } from "sonner";
 import { FaLinux, FaSpinner, FaTerminal } from "react-icons/fa";
+import { useLocale } from "@/context/useLocale";
+import translations from "@/locales/translations.json";
 
 const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
+  const { locale, setLocale } = useLocale();
+  const t = translations[locale];
   const [isLoading, setIsLoading] = useState(false);
 
   const handleStartQuiz = () => {
@@ -23,9 +27,7 @@ const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
   };
 
   return (
-    <div
-      className="min-h-screen flex justify-center items-center p-5"
-    >
+    <div className="min-h-screen flex justify-center items-center p-5">
       {/* Toast Provider */}
       <Toaster />
 
@@ -37,8 +39,8 @@ const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
           <div className="w-3 h-3 rounded-full bg-green-500"></div>
         </div>
         <div className="p-3 font-mono text-zinc-50 text-sm">
-          <p className="overflow-hidden border-r-2 border-zinc-500">$ ./quiz --start</p>
-          <p className="mt-2 animate-pulse">Loading personality matrix...</p>
+          <p className="overflow-hidden border-r-2 border-zinc-500">$ {t.command}</p>
+          <p className="mt-2 animate-pulse">{t.loadingMatrix}</p>
         </div>
       </Card>
 
@@ -49,37 +51,40 @@ const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
           <div className="w-3 h-3 rounded-full bg-green-500"></div>
         </div>
         <div className="p-3 font-mono text-zinc-50 text-sm">
-          <p className="overflow-hidden border-r-2 border-zinc-500">$ cat welcome.txt</p>
-          <p className="mt-2">Welcome to Linux Distro Quiz!</p>
+          <p className="overflow-hidden border-r-2 border-zinc-500">$ {t.catCommand}</p>
+          <p className="mt-2">{t.welcome}</p>
         </div>
       </Card>
 
       {/* Main content */}
-      <Card className="w-full max-w-4xl">
+      <Card className="w-full max-w-4xl pt-4 pb-0">
         {/* Hero section */}
         <CardHeader className="p-8 md:p-12 text-center">
+          {/* ADD LANGUAGE SWITCHER */}
+          <div className="absolute top-0 right-4">
+            <button onClick={() => setLocale(locale === "en" ? "zh" : "en")} className="text-base px-2 py-1 rounded-md border border-zinc-300 bg-zinc-100 hover:bg-zinc-200 transition cursor-pointer">
+              {locale === "en" ? "EN" : "中"}
+            </button>
+          </div>
           <div>
             <CardTitle className="text-3xl md:text-5xl font-bold mb-6 inline-flex">
               <FaLinux className="mr-3" />
-              Linux Distro Quiz
+              {t.title}
             </CardTitle>
 
-            <CardDescription className="text-lg md:text-xl max-w-2xl mx-auto mb-10">
-              Discover which Linux distribution matches your personality!
-              Answer a few fun questions and find out.
-            </CardDescription>
+            <CardDescription className="text-lg md:text-xl max-w-2xl mx-auto mb-10">{t.description}</CardDescription>
 
             {/* Start button */}
             <Button onClick={handleStartQuiz} disabled={isLoading} className="px-8 py-6 text-lg md:text-xl font-bold">
               {isLoading ? (
                 <>
                   <FaSpinner className="mr-3 animate-spin" />
-                  Loading Quiz...
+                  {t.loadingQuiz}
                 </>
               ) : (
                 <>
                   <FaTerminal className="mr-2" />
-                  Start the Quiz
+                  {t.startQuiz}
                 </>
               )}
             </Button>
