@@ -58,7 +58,7 @@ const QuizFlow: React.FC<{ onComplete: (answers: Record<number, string>) => void
   return (
     <div className="min-h-screen max-w-3xl p-5 mx-auto flex flex-col justify-center">
       {/* Terminal Progress Bar */}
-      <div className="my-8 bg-zinc-900/80 border border-zinc-600/50 rounded-lg text-sm font-mono text-zinc-50 hidden md:block">
+      <div className="my-8 bg-zinc-900/80 border border-zinc-600/50 rounded-lg text-base font-mono text-zinc-50 hidden md:block">
         <div className="flex items-center p-2 bg-zinc-800/80 border-b border-zinc-700">
           <div className="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
           <div className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
@@ -112,11 +112,11 @@ const QuizFlow: React.FC<{ onComplete: (answers: Record<number, string>) => void
             <CardFooter className="flex justify-between mt-4 p-0">
               <Button onClick={handlePrevious} disabled={currentQuestion === 0} variant="outline" className={currentQuestion === 0 ? "opacity-50 cursor-not-allowed" : ""}>
                 <FaArrowLeft className="mr-2" />
-                Previous
+                {t.previous}
               </Button>
 
               <Button onClick={handleNext} disabled={!selectedOption} className={!selectedOption ? "opacity-50 cursor-not-allowed" : ""}>
-                {currentQuestion < questions.length - 1 ? "Next Question" : "See Results"}
+                {currentQuestion < questions.length - 1 ? t.nextQuestion : t.seeResults}
                 <FaArrowRight className="ml-2" />
               </Button>
             </CardFooter>

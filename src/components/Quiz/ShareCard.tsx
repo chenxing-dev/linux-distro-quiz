@@ -1,4 +1,4 @@
-import { type Distro } from "@/data/distros";
+import { type Distro } from "@/data/distros-en";
 import { QRCodeSVG } from "qrcode.react";
 
 export const ShareCard = ({ distro, shareUrl }: { distro: Distro; shareUrl: string }) => {

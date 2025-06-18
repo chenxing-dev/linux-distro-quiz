@@ -80,7 +80,7 @@ const questions = [
     text: "The monitor(s) you use:",
     options: [
       { id: "a", text: "Whatever's built into my laptop", traits: { macos: 1, mint: 1 } },
-      { id: "b", text: "One decent 1080p monitor - does the job", traits: { ubuntu: 3, mint: 2, debian: 3, rhel: 2 } },
+      { id: "b", text: "One decent 1920p monitor - does the job", traits: { ubuntu: 3, mint: 2, debian: 3, rhel: 2 } },
       { id: "c", text: "Ultrawide monitor", traits: { popos: 3, nixos: 3 } },
       { id: "d", text: "I don't need a monitor, I SSH from my phone", traits: { kali: 2 } }
     ]
@@ -101,7 +101,7 @@ const questions = [
     id: 10,
     text: "When you hear 'Linux':",
     options: [
-      { id: "a", text: "Isn't that what hackers use?", traits: { macos: 3, kali: 1 } },
+      { id: "a", text: "What's Linux?", traits: { macos: 3 } },
       { id: "b", text: "That thing I use instead of paying for Windows and macOS", traits: {} },
       { id: "c", text: "A cost-effective, supportable enterprise solution", traits: { rhel: 3 } },
       { id: "d", text: "My personal crusade against proprietary code", traits: { artix: 2 } }

@@ -12,7 +12,14 @@
     "gettingQuestionsReady": "Getting your questions ready...",
     "progress": "Progress:",
     "complete": "complete",
-    "questionNumber": "Question {current} of {total}"
+    "questionNumber": "Question {current} of {total}",
+    "previous": "Previous",
+    "nextQuestion": "Next Question",
+    "seeResults": "See Results",
+    "copied": "Copied to clipboard!",
+    "sharePrompt": "Share your Linux distro match with friends",
+    "personalityMatch": "Your Personality Match Is...",
+    "linuxMatch": "Your Linux Personality Match Is..."
   },
   "zh": {
     "command": "./quiz --start",
@@ -27,6 +34,13 @@
     "gettingQuestionsReady": "正在准备问题...",
     "progress": "进度:",
     "complete": "完成",
-    "questionNumber": "第 {current} 题，共 {total} 题"
+    "questionNumber": "第 {current} 题，共 {total} 题",
+    "previous": "上一题",
+    "nextQuestion": "下一题",
+    "seeResults": "查看结果",
+    "copied": "已复制到剪贴板！",
+    "sharePrompt": "与朋友分享你的本命操作系统",
+    "personalityMatch": "你的本命操作系统是...",
+    "linuxMatch": "你的本命操作系统是..."
   }
 }

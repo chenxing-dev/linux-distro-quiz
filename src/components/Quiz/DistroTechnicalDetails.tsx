@@ -1,4 +1,4 @@
-import { type Distro } from "@/data/distros";
+import { type Distro } from "@/data/distros-en";
 
 const DistroTechnicalDetails = ({ distro }: { distro: Distro }) => {
     const details = distro.details;

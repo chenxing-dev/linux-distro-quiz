@@ -35,7 +35,7 @@ const questions = [
   },
   {
     id: 4,
-    text: "选择一个命令行配色方案:",
+    text: "选择一个命令行配色方案：",
     options: [
       { id: "a", text: "默认 - 我不怎么用命令行", traits: { macos: 3, mint: 2, ubuntu: 1 } },
       { id: "b", text: "我是来工作的，不是来欣赏颜色配搭的", traits: { gentoo: 3, debian: 3, rhel: 3 } },
@@ -45,66 +45,66 @@ const questions = [
   },
   {
     id: 5,
-    text: "Your Saturday night usually involves:",
+    text: "你的周六晚上通常：",
     options: [
-      { id: "a", text: "Trying that new restaurant everyone's talking about", traits: {} },
-      { id: "b", text: "Compiling software while watching a movie", traits: { gentoo: 3, artix: 3 } },
-      { id: "c", text: "Gaming with friends online", traits: { popos: 3, macos: 2 } },
-      { id: "d", text: "Explaining my favorite distro to uninterested friends", traits: { arch: 2, nixos: 3, ubuntu: 2, mint: 2 } },
-      { id: "e", text: "Reorganizing my dotfiles", traits: { arch: 2, nixos: 3 } },
-      { id: "f", text: "Hacking", traits: { kali: 2 } }
+      { id: "a", text: "打卡新网红餐厅", traits: {} },
+      { id: "b", text: "一边编译软件一边看电影", traits: { gentoo: 3, artix: 3 } },
+      { id: "c", text: "和朋友五排开黑", traits: { popos: 3, macos: 2 } },
+      { id: "d", text: "向不感兴趣的朋友推荐我最爱的操作系统", traits: { arch: 2, nixos: 3, ubuntu: 2, mint: 2 } },
+      { id: "e", text: "重新整理我的dotfiles配置文件", traits: { arch: 2, nixos: 3 } },
+      { id: "f", text: "黑进公司服务器", traits: { kali: 2 } }
     ]
   },
   {
     id: 6,
-    text: "How do you feel about systemd?",
+    text: "你对systemd的看法是：",
     options: [
-      { id: "a", text: "What's a systemd?", traits: { macos: 3, mint: 1, popos: 1 } },
-      { id: "b", text: "It just works, no complaints", traits: {} },
-      { id: "c", text: "Tolerate it under protest - it violates functional purity", traits: {} },
-      { id: "d", text: "BURN IT WITH FIRE", traits: { gentoo: 3, artix: 5 } }
+      { id: "a", text: "systemd是什么?", traits: { macos: 3, mint: 1, popos: 1 } },
+      { id: "b", text: "能用就行", traits: {} },
+      { id: "c", text: "勉强容忍", traits: {} },
+      { id: "d", text: "始终坚持零容忍，用火烧了它！", traits: { gentoo: 3, artix: 5 } }
     ]
   },
   {
     id: 7,
-    text: "Your approach to software updates:",
+    text: "你更新应用软件的频率：",
     options: [
-      { id: "a", text: "Automatically install whatever the notification pushes", traits: { macos: 3, ubuntu: 1, popos: 2 } },
-      { id: "b", text: "Wait 6 months to ensure stability", traits: { debian: 3, rhel: 2, mint: 2 } },
-      { id: "c", text: "Update daily, break things, fix at 3AM", traits: { arch: 3, nixos: 2, gentoo: 2, kali: 3, artix: 3 } },
-      { id: "d", text: "Upgrade every 2 years when the next LTS drops", traits: { mint: 2, ubuntu: 3 } }
+      { id: "a", text: "系统推送通知更新时更新", traits: { macos: 3, ubuntu: 1, popos: 2 } },
+      { id: "b", text: "等待6个月确保稳定性后更新", traits: { debian: 3, rhel: 2, mint: 2 } },
+      { id: "c", text: "每日更新系统，凌晨3点修复更新导致的崩溃", traits: { arch: 3, nixos: 2, gentoo: 2, kali: 3, artix: 3 } },
+      { id: "d", text: "每2年出LTS长期支持版时升级", traits: { mint: 2, ubuntu: 3 } }
     ]
   },
   {
     id: 8,
-    text: "The monitor(s) you use:",
+    text: "你使用的显示器：",
     options: [
-      { id: "a", text: "Whatever's built into my laptop", traits: { macos: 1, mint: 1 } },
-      { id: "b", text: "One decent 1080p monitor - does the job", traits: { ubuntu: 3, mint: 2, debian: 3, rhel: 2 } },
-      { id: "c", text: "Ultrawide monitor", traits: { popos: 3, nixos: 3 } },
-      { id: "d", text: "I don't need a monitor, I SSH from my phone", traits: { kali: 2 } }
+      { id: "a", text: "笔记本自带屏幕", traits: { macos: 1, mint: 1 } },
+      { id: "b", text: "一台1920p显示器 - 够用就行", traits: { ubuntu: 3, mint: 2, debian: 3, rhel: 2 } },
+      { id: "c", text: "超宽曲面屏", traits: { popos: 3, nixos: 3 } },
+      { id: "d", text: "不需要显示器，我用手机SSH连接", traits: { kali: 2 } }
     ]
   },
   {
     id: 9,
-    text: "Your computer's most noticeable feature is:",
+    text: "你电脑最显著的特点是：",
     options: [
-      { id: "a", text: "The shiny logo on the lid", traits: { macos: 3 } },
-      { id: "b", text: "The collection of obscure stickers", traits: { arch: 3, macos: 2, nixos: 3, kali: 3 } },
-      { id: "c", text: "Custom RGB lighting synced to my music", traits: { popos: 3 } },
-      { id: "d", text: "Dust bunnies from 2018", traits: { debian: 2 } },
-      { id: "e", text: "The constant fan noise", traits: { gentoo: 3, debian: 2 } },
-      { id: "f", text: "Complete lack of noticeable features", traits: { mint: 3, ubuntu: 2, debian: 1, rhel: 3 } }
+      { id: "a", text: "闪亮的Logo", traits: { macos: 3 } },
+      { id: "b", text: "各种小众贴纸", traits: { arch: 3, macos: 2, nixos: 3, kali: 3 } },
+      { id: "c", text: "随音乐同步的自定义RGB灯光", traits: { popos: 3 } },
+      { id: "d", text: "积攒自2018年的灰尘", traits: { debian: 2 } },
+      { id: "e", text: "一刻不停的风扇噪音", traits: { gentoo: 3, debian: 2 } },
+      { id: "f", text: "没有任何显著特点", traits: { mint: 3, ubuntu: 2, debian: 1, rhel: 3 } }
     ]
   },
   {
     id: 10,
-    text: "When you hear 'Linux':",
+    text: "当你听到'Linux'时：",
     options: [
-      { id: "a", text: "Isn't that what hackers use?", traits: { macos: 3, kali: 1 } },
-      { id: "b", text: "That thing I use instead of paying for Windows and macOS", traits: {} },
-      { id: "c", text: "A cost-effective, supportable enterprise solution", traits: { rhel: 3 } },
-      { id: "d", text: "My personal crusade against proprietary code", traits: { artix: 2 } }
+      { id: "a", text: "Linux是什么?", traits: { macos: 3 } },
+      { id: "b", text: "Windows和macOS的平替", traits: {} },
+      { id: "c", text: "一个经济高效的企业解决方案", traits: { rhel: 3 } },
+      { id: "d", text: "一次自我革命，走进自由开源新世界", traits: { artix: 2 } }
     ]
   }
 ];

@@ -3,13 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { FaLinux, FaSpinner, FaTerminal } from "react-icons/fa";
 import { useLocale } from "@/context/useLocale";
 import translations from "@/locales/translations.json";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
-  const { locale, setLocale } = useLocale();
+  const { locale } = useLocale();
   const t = translations[locale];
   const [isLoading, setIsLoading] = useState(false);
 
@@ -58,21 +58,12 @@ const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
       </Card>
 
       {/* Main content */}
-      <Card className="w-full max-w-4xl pt-4 pb-0">
+      <Card className="relative w-full max-w-4xl pt-4 pb-0">
         {/* Hero section */}
         <CardHeader className="p-8 md:p-12 text-center">
           {/* ADD LANGUAGE SWITCHER */}
-          <div className="absolute top-0 right-4">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <button onClick={() => setLocale(locale === "en" ? "zh" : "en")} className="inline-flex items-center justify-center rounded-lg w-8 h-8 text-sm font-semibold bg-zinc-800 border border-zinc-700 text-zinc-200 hover:bg-zinc-700 transition-all focus:outline-none">
-                    {locale === "en" ? "EN" : "中"}
-                  </button>
-                </TooltipTrigger>
-                <TooltipContent className="bg-zinc-800 border border-zinc-700 text-zinc-200">{locale === "en" ? "Select language: current language is English" : "选择语言：当前语言是中文"}</TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+          <div className="absolute top-4 right-4">
+            <LanguageSwitcher />
           </div>
           <div>
             <CardTitle className="text-3xl md:text-5xl font-bold mb-6 inline-flex">

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { type Distro } from "@/data/distros";
+import { type Distro } from "@/data/distros-en";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -17,6 +17,9 @@ import { Check, ChevronRight, Copy, LinkIcon, X } from "lucide-react";
 import DistroTechnicalDetails from "./DistroTechnicalDetails";
 import { ShareCard } from "./ShareCard";
 import { QRCodeSVG } from "qrcode.react";
+import { useLocale } from "@/context/useLocale";
+import translations from "@/locales/translations.json"
+import LanguageSwitcher from "./LanguageSwitcher";
 
 interface ResultScreenProps {
   result: Distro;
@@ -29,6 +32,8 @@ const getBasePath = () => {
 };
 
 const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
+  const { locale } = useLocale();
+  const t = translations[locale];
   const [copied, setCopied] = useState(false);
   const [shareUrl, setShareUrl] = useState("");
   const [showCopiedAlert, setShowCopiedAlert] = useState(false);
@@ -86,22 +91,26 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
       {/* Copied Alert */}
       {showCopiedAlert && (
         <Alert className="fixed top-8 inset-x-4 md:inset-x-auto md:right-8 md:w-auto md:max-w-md border-zinc-900 z-50">
-          <AlertTitle>Copied to clipboard!</AlertTitle>
-          <AlertDescription>Share your Linux distro match with friends</AlertDescription>
+          <AlertTitle>{t.copied}</AlertTitle>
+          <AlertDescription>{t.sharePrompt}</AlertDescription>
         </Alert>
       )}
 
       <AnimatePresence>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="w-full max-w-4xl">
-          <Card className="pb-2 md:pb-6">
+          <Card className="relative pb-2 md:pb-6">
+            {/* ADD LANGUAGE SWITCHER */}
+            <div className="absolute top-4 right-4">
+              <LanguageSwitcher />
+            </div>
             {/* Result header */}
             <CardHeader className="flex flex-col justify-center *:mx-auto">
-              <CardTitle className="text-2xl md:text-4xl font-bold text-center">{(result.id === "macos" && "Your Personality Match Is...") || "Your Linux Personality Match Is..."}</CardTitle>
+              <CardTitle className="text-2xl md:text-4xl font-bold text-center">{(result.id === "macos" && t.personalityMatch) || t.linuxMatch}</CardTitle>
 
               {/* ASCII Art Logo */}
               <div className="font-mono font-bold text-xs md:text-sm leading-3 md:leading-4 whitespace-pre md:mb-4">{result.ascii || result.name}</div>
 
-              <motion.h2 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.5 }} className="text-3xl md:text-5xl font-bold">
+              <motion.h2 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.5 }} className="text-3xl md:text-5xl font-bold mb-2">
                 {result.name}
               </motion.h2>
 
