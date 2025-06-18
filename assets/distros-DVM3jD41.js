@@ -1,4 +1,4 @@
-import{j as M}from"./ui-D6mPz056.js";const e=[{id:"macos",name:"macOS",description:"You prioritize aesthetics over functionality and have more money than sense. You enjoy paying the Apple Tax™ and being locked into an ecosystem.",traits:["wealthy","aesthetic-driven","ecosystem-locked"],ascii:`
+import{j as M}from"./ui-BL27xxkJ.js";const e=[{id:"macos",name:"macOS",description:"You prioritize aesthetics over functionality and have more money than sense. You enjoy paying the Apple Tax™ and being locked into an ecosystem.",traits:["wealthy","aesthetic-driven","ecosystem-locked"],ascii:`
                      ..'
                  ,xNMM.
                .OMMMMo
