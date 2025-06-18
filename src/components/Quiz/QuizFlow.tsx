@@ -57,7 +57,7 @@ const QuizFlow: React.FC<{ onComplete: (answers: Record<number, string>) => void
   return (
     <div className="min-h-screen max-w-3xl p-5 mx-auto flex flex-col justify-center">
       {/* Terminal Progress Bar */}
-      <div className="my-8 bg-zinc-900/80 border border-zinc-600/50 rounded-lg text-sm font-mono text-zinc-50">
+      <div className="my-8 bg-zinc-900/80 border border-zinc-600/50 rounded-lg text-sm font-mono text-zinc-50 hidden md:block">
         <div className="flex items-center p-2 bg-zinc-800/80 border-b border-zinc-700">
           <div className="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
           <div className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
@@ -89,7 +89,7 @@ const QuizFlow: React.FC<{ onComplete: (answers: Record<number, string>) => void
         <motion.div key={currentQuestion} initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -50 }} transition={{ duration: 0.3 }}>
           <Card className="p-6 border border-zinc-500">
             <CardHeader className="flex items-center p-0 mb-6">
-              <div className="bg-zinc-900/60 w-10 h-10 rounded-full flex items-center justify-center mr-4">
+              <div className="bg-zinc-900/60 w-10 h-10 rounded-full flex flex-shrink-0 items-center justify-center mr-4">
                 <span className="text-xl font-bold text-zinc-300">{currentQuestion + 1}</span>
               </div>
               <CardTitle className="text-2xl font-bold">

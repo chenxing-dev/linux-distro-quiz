@@ -37,7 +37,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
   useEffect(() => {
     // Generate clean URL for sharing
     const getShareableLink = () => {
-      const hashUrl = `${getBasePath()}/#/result/${result.id}`;
+      const hashUrl = `${getBasePath()}#/result/${result.id}`;
       return hashUrl;
     };
 
@@ -59,7 +59,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
   };
 
   const shareOnWeibo = async () => {
-    const imageUrl = `${getBasePath()}/share-cards/${result.id}.png`;
+    const imageUrl = `${getBasePath()}share-cards/${result.id}.png`;
 
     // Prepare sharing data
     const text = `我在操作系统性格测试中得到了${result.name}！你也来试试吧：`;
@@ -92,7 +92,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
 
       <AnimatePresence>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="w-full max-w-4xl">
-          <Card>
+          <Card className="pb-2 md:pb-6">
             {/* Result header */}
             <CardHeader className="flex flex-col justify-center *:mx-auto">
               <CardTitle className="text-2xl md:text-4xl font-bold text-center">{(result.id === "macos" && "Your Personality Match Is...") || "Your Linux Personality Match Is..."}</CardTitle>
@@ -131,7 +131,9 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
                   {/* Technical details accordion */}
                   <Accordion type="single" collapsible className="border rounded-lg">
                     <AccordionItem value="technical">
-                      <AccordionTrigger className="text-lg font-bold px-6 flex items-center">Technical Details</AccordionTrigger>
+                      <AccordionTrigger className="text-lg font-bold px-4 md:px-6 flex items-center">
+                        Technical Details
+                      </AccordionTrigger>
                       <AccordionContent>
                         <DistroTechnicalDetails distro={result} />
                       </AccordionContent>
@@ -145,11 +147,11 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
             <CardFooter className="flex-col md:px-14">
               {/* Shareable link */}
               <Card className="py-4 mb-8 w-full bg-zinc-50">
-                <CardHeader>
-                  <CardTitle className="text-lg font-bold text-center md:text-left flex justify-between">
-                    <div className="flex items-center gap-2">
+                <CardContent className="px-4 md:px-6">
+                  <CardTitle className="text-lg font-bold text-center md:text-left flex justify-between mb-2">
+                    <div className="flex items-center gap-2 text-nowrap">
                       <LinkIcon size={16} />
-                      Share Your Result
+                      <span className="text-base md:text-lg">Share Your Result</span>
                     </div>
                     <Button size="sm" onClick={handleCopyResult} className="flex items-center gap-1">
                       {copied ? (
@@ -163,14 +165,12 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
                       )}
                     </Button>
                   </CardTitle>
-                </CardHeader>
-                <CardContent>
                   <div className="flex flex-col md:flex-row gap-2">
                     <div className="flex-1 bg-white text-zinc-700">
                       <Label htmlFor="share-url" className="sr-only">
                         Share URL
                       </Label>
-                      <Input id="share-url" value={shareUrl} readOnly className="truncate font-mono font-bold" />
+                      <Input id="share-url" value={shareUrl} readOnly className="truncate font-mono font-bold text-xs" />
                     </div>
                     <div className="flex gap-2 text-sm font-bold">
                       <Dialog>
@@ -236,7 +236,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
               <Separator className="my-4" />
 
               {/* Footer */}
-              <div className="py-4 text-center">
+              <div className="pb-4 text-center">
                 <p className="inline-flex items-center text-nowrap">
                   Made with
                   <FaHeart className="mx-2" />
