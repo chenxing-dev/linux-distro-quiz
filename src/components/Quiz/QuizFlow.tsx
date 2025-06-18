@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import questions from "@/data/questions";
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardFooter
-} from "@/components/ui/card";
+import questionsEN from "@/data/questions";
+import questionsZH from "@/data/questions-zh";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useLocale } from "@/context/useLocale";
+import translations from "@/locales/translations.json";
 
 const QuizFlow: React.FC<{ onComplete: (answers: Record<number, string>) => void }> = ({ onComplete }) => {
+  const { locale } = useLocale();
+  const t = translations[locale];
+  const questions = locale === "zh" ? questionsZH : questionsEN;
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -25,7 +26,7 @@ const QuizFlow: React.FC<{ onComplete: (answers: Record<number, string>) => void
     const answeredQuestions = Object.keys(answers).length;
     const totalQuestions = questions.length;
     setProgress((answeredQuestions / totalQuestions) * 100);
-  }, [answers]);
+  }, [answers, questions.length]);
 
   const handleOptionSelect = (optionId: string) => {
     setSelectedOption(optionId);
@@ -64,21 +65,16 @@ const QuizFlow: React.FC<{ onComplete: (answers: Record<number, string>) => void
           <div className="w-3 h-3 rounded-full bg-green-500"></div>
         </div>
         <div className="p-4">
-          <div className="flex">
+          <div className="flex items-center">
             <span className="">user@linux-quiz:~$</span>
-            <Label className="text-sm font-medium ml-2">
-              Question {currentQuestion + 1} of {questions.length}
-            </Label>
-            <span className="animate-pulse">▋</span>
+            <Label className="text-sm font-medium ml-2">{t.questionNumber.replace("{current}", (currentQuestion + 1).toString()).replace("{total}", questions.length.toString())}</Label>
+            <span className="animate-pulse text-base pl-0 pb-[2px]">▋</span>
           </div>
-          <div className="mt-1 inline-flex w-full items-center gap-2">
-            <span>Progress:</span>
-            <Progress
-              value={progress}
-              className="bg-zinc-600 border border-zinc-500 mt-1"
-            />
+          <div className="mt-1 inline-flex w-full items-center gap-2 text-nowrap">
+            <span>{t.progress}</span>
+            <Progress value={progress} className="bg-zinc-600 border border-zinc-500 mt-1" />
             <Label className="text-nowrap text-sm font-medium">
-              {Math.round(progress)}% complete
+              {Math.round(progress)}% {t.complete}
             </Label>
           </div>
         </div>
@@ -92,45 +88,18 @@ const QuizFlow: React.FC<{ onComplete: (answers: Record<number, string>) => void
               <div className="bg-zinc-900/60 w-8 h-8 md:w-10 md:h-10 rounded-full flex flex-shrink-0 items-center justify-center mr-2 md:mr-4">
                 <span className="text-lg md:text-xl font-bold text-zinc-300">{currentQuestion + 1}</span>
               </div>
-              <CardTitle className="text-xl md:text-2xl font-bold">
-                {questions[currentQuestion].text}
-              </CardTitle>
+              <CardTitle className="text-xl md:text-2xl font-bold">{questions[currentQuestion].text}</CardTitle>
             </CardHeader>
 
             <CardContent className="p-0">
               {/* Options */}
-              <RadioGroup
-                value={selectedOption || ""}
-                onValueChange={handleOptionSelect}
-                className="grid grid-cols-1 md:grid-cols-2 md:gap-4"
-              >
-                {questions[currentQuestion].options.map((option) => (
-                  <motion.div
-                    key={option.id}
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <RadioGroupItem
-                      value={option.id}
-                      id={`option-${option.id}`}
-                      className="sr-only"
-                    />
-                    <Label
-                      htmlFor={`option-${option.id}`}
-                      className={`h-full px-4 py-2 md:py-4 rounded-lg border-2 transition-all duration-200 cursor-pointer ${selectedOption === option.id
-                        ? 'border-zinc-500 bg-zinc-950/20 shadow-lg shadow-zinc-500/20'
-                        : 'border-zinc-800 hover:border-zinc-400'
-                        }`}
-                    >
+              <RadioGroup value={selectedOption || ""} onValueChange={handleOptionSelect} className="grid grid-cols-1 md:grid-cols-2 md:gap-4">
+                {questions[currentQuestion].options.map(option => (
+                  <motion.div key={option.id} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+                    <RadioGroupItem value={option.id} id={`option-${option.id}`} className="sr-only" />
+                    <Label htmlFor={`option-${option.id}`} className={`h-full px-4 py-2 md:py-4 rounded-lg border-2 transition-all duration-200 cursor-pointer ${selectedOption === option.id ? "border-zinc-500 bg-zinc-950/20 shadow-lg shadow-zinc-500/20" : "border-zinc-800 hover:border-zinc-400"}`}>
                       <div className="flex items-center">
-                        <div className={`mr-3 w-5 h-5 rounded-full border-2 flex-shrink-0 flex items-center justify-center ${selectedOption === option.id
-                          ? 'border-zinc-500 bg-zinc-800'
-                          : 'border-zinc-500'
-                          }`}>
-                          {selectedOption === option.id && (
-                            <div className="w-2 h-2 bg-white rounded-full"></div>
-                          )}
-                        </div>
+                        <div className={`mr-3 w-5 h-5 rounded-full border-2 flex-shrink-0 flex items-center justify-center ${selectedOption === option.id ? "border-zinc-500 bg-zinc-800" : "border-zinc-500"}`}>{selectedOption === option.id && <div className="w-2 h-2 bg-white rounded-full"></div>}</div>
                         <span className="leading-tight">{option.text}</span>
                       </div>
                     </Label>
@@ -141,21 +110,12 @@ const QuizFlow: React.FC<{ onComplete: (answers: Record<number, string>) => void
 
             {/* Navigation buttons */}
             <CardFooter className="flex justify-between mt-4 p-0">
-              <Button
-                onClick={handlePrevious}
-                disabled={currentQuestion === 0}
-                variant="outline"
-                className={currentQuestion === 0
-                  ? "opacity-50 cursor-not-allowed"
-                  : ""}>
+              <Button onClick={handlePrevious} disabled={currentQuestion === 0} variant="outline" className={currentQuestion === 0 ? "opacity-50 cursor-not-allowed" : ""}>
                 <FaArrowLeft className="mr-2" />
                 Previous
               </Button>
 
-              <Button onClick={handleNext} disabled={!selectedOption} className={!selectedOption
-                ? 'opacity-50 cursor-not-allowed'
-                : ''
-              }>
+              <Button onClick={handleNext} disabled={!selectedOption} className={!selectedOption ? "opacity-50 cursor-not-allowed" : ""}>
                 {currentQuestion < questions.length - 1 ? "Next Question" : "See Results"}
                 <FaArrowRight className="ml-2" />
               </Button>

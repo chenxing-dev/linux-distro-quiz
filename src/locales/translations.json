@@ -7,7 +7,12 @@
     "title": "Linux Distro Quiz",
     "description": "Discover which Linux distribution matches your personality! Answer a few fun questions and find out.",
     "loadingQuiz": "Loading Quiz...",
-    "startQuiz": "Start the Quiz"
+    "startQuiz": "Start the Quiz",
+    "quizStarting": "Quiz Starting!",
+    "gettingQuestionsReady": "Getting your questions ready...",
+    "progress": "Progress:",
+    "complete": "complete",
+    "questionNumber": "Question {current} of {total}"
   },
   "zh": {
     "command": "./quiz --start",
@@ -17,6 +22,11 @@
     "title": "操作系统性格测试",
     "description": "测测哪个操作系统与您的个性匹配！回答十个问题即可找到答案。",
     "loadingQuiz": "正在加载测试...",
-    "startQuiz": "开始测试"
+    "startQuiz": "开始测试",
+    "quizStarting": "测试开始!",
+    "gettingQuestionsReady": "正在准备问题...",
+    "progress": "进度:",
+    "complete": "完成",
+    "questionNumber": "第 {current} 题，共 {total} 题"
   }
 }

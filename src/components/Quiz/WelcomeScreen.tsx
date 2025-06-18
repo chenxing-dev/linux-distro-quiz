@@ -17,8 +17,8 @@ const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
     setIsLoading(true);
 
     // Show toast notification
-    toast("Quiz Starting!", {
-      description: "Getting your questions ready..."
+    toast(t.quizStarting, {
+      description: t.gettingQuestionsReady
     });
 
     setTimeout(() => {
