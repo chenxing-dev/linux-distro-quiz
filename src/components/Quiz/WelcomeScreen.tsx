@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { FaLinux, FaSpinner, FaTerminal } from "react-icons/fa";
 import { useLocale } from "@/context/useLocale";
 import translations from "@/locales/translations.json";
@@ -32,7 +33,7 @@ const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
       <Toaster />
 
       {/* Decorative terminal windows */}
-      <Card className="top-[8%] left-[5%] p-0 hidden md:block absolute w-64 h-48 bg-black/90 border border-zinc-500/30 shadow-xl overflow-hidden">
+      <Card className="top-[8%] left-[5%] p-0 hidden md:block absolute w-64 h-48 bg-black/90 border border-zinc-500/30 shadow-xl overflow-hidden z-10">
         <div className="flex items-center p-2 bg-zinc-800 border-b border-zinc-700">
           <div className="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
           <div className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
@@ -44,7 +45,7 @@ const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
         </div>
       </Card>
 
-      <Card className="bottom-[8%] right-[5%] p-0 hidden md:block absolute w-64 h-48 bg-black/90 border border-zinc-500/30 shadow-xl overflow-hidden">
+      <Card className="bottom-[8%] right-[5%] p-0 hidden md:block absolute w-64 h-48 bg-black/90 border border-zinc-500/30 shadow-xl overflow-hidden z-10">
         <div className="flex items-center p-2 bg-zinc-800 border-b border-zinc-700">
           <div className="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
           <div className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
@@ -62,9 +63,16 @@ const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
         <CardHeader className="p-8 md:p-12 text-center">
           {/* ADD LANGUAGE SWITCHER */}
           <div className="absolute top-0 right-4">
-            <button onClick={() => setLocale(locale === "en" ? "zh" : "en")} className="text-base px-2 py-1 rounded-md border border-zinc-300 bg-zinc-100 hover:bg-zinc-200 transition cursor-pointer">
-              {locale === "en" ? "EN" : "中"}
-            </button>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button onClick={() => setLocale(locale === "en" ? "zh" : "en")} className="inline-flex items-center justify-center rounded-lg w-8 h-8 text-sm font-semibold bg-zinc-800 border border-zinc-700 text-zinc-200 hover:bg-zinc-700 transition-all focus:outline-none">
+                    {locale === "en" ? "EN" : "中"}
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent className="bg-zinc-800 border border-zinc-700 text-zinc-200">{locale === "en" ? "Select language: current language is English" : "选择语言：当前语言是中文"}</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
           <div>
             <CardTitle className="text-3xl md:text-5xl font-bold mb-6 inline-flex">
