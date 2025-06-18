@@ -17,10 +17,9 @@ import { Check, ChevronRight, Copy, LinkIcon, X } from "lucide-react";
 import DistroTechnicalDetails from "./DistroTechnicalDetails";
 import { ShareCard } from "./ShareCard";
 import { QRCodeSVG } from "qrcode.react";
-import { convertToCleanUrl, isGitHubPages } from "@/lib/urlUtils";
 
 interface ResultScreenProps {
-  result: Distro
+  result: Distro;
   onRetake: () => void;
 }
 
@@ -38,8 +37,8 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
   useEffect(() => {
     // Generate clean URL for sharing
     const getShareableLink = () => {
-      const hashUrl = `${getBasePath()}#/result/${result.id}`;
-      return isGitHubPages() ? convertToCleanUrl() : hashUrl;
+      const hashUrl = `${getBasePath()}/#/result/${result.id}`;
+      return hashUrl;
     };
 
     const shareableLink = getShareableLink();
@@ -66,7 +65,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
     const text = `我在操作系统性格测试中得到了${result.name}！你也来试试吧：`;
 
     const weiboUrl = new URL("http://service.weibo.com/share/share.php");
-    weiboUrl.searchParams.append("language", "zh_cn")
+    weiboUrl.searchParams.append("language", "zh_cn");
     weiboUrl.searchParams.append("url", shareUrl);
     weiboUrl.searchParams.append("title", text);
     weiboUrl.searchParams.append("pic", imageUrl);
