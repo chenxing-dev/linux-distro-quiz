@@ -4,7 +4,7 @@ import WelcomeScreen from "@/components/Quiz/WelcomeScreen";
 import QuizFlow from "@/components/Quiz/QuizFlow";
 import ResultScreen from "@/components/Quiz/ResultScreen";
 import distrosEN, { type Distro } from "@/data/distros-en";
-import distrosZH from '@/data/distros-zh';
+import distrosZH from "@/data/distros-zh";
 import questions from "@/data/questions";
 import NotFound from "@/pages/NotFound";
 import { useLocale } from "@/context/useLocale";
@@ -13,7 +13,7 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const { locale } = useLocale();
-  const distros = locale === 'zh' ? distrosZH : distrosEN;
+  const distros = locale === "zh" ? distrosZH : distrosEN;
 
   const [quizState, setQuizState] = useState<"welcome" | "quiz" | "results">("welcome");
   const [result, setResult] = useState<Distro | null>(null);

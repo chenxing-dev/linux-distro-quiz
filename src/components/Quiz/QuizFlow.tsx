@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import questionsEN from "@/data/questions";
 import questionsZH from "@/data/questions-zh";
@@ -16,6 +17,8 @@ const QuizFlow: React.FC<{ onComplete: (answers: Record<number, string>) => void
   const { locale } = useLocale();
   const t = translations[locale];
   const questions = locale === "zh" ? questionsZH : questionsEN;
+
+  const navigate = useNavigate();
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
@@ -53,6 +56,11 @@ const QuizFlow: React.FC<{ onComplete: (answers: Record<number, string>) => void
       // Set selected option to previous answer if exists
       const prevAnswer = answers[questions[currentQuestion - 1].id];
       setSelectedOption(prevAnswer || null);
+    } else {
+      // 强制页面刷新
+      window.location.href = "/";
+      console.log("Navigating to home");
+      navigate("/", { replace: true }); // Navigate to home if at the first question
     }
   };
 
@@ -89,9 +97,9 @@ const QuizFlow: React.FC<{ onComplete: (answers: Record<number, string>) => void
           <Card className="p-6 border border-zinc-500">
             <CardHeader className="flex items-center p-0 md:mb-6">
               <div className="bg-zinc-900/60 w-8 h-8 md:w-10 md:h-10 rounded-full flex flex-shrink-0 items-center justify-center mr-2 md:mr-4">
-                <span className="text-lg md:text-xl font-bold text-zinc-300">{currentQuestion + 1}</span>
+                <span className="text-lg md:text-xl text-zinc-300">{currentQuestion + 1}</span>
               </div>
-              <CardTitle className="text-xl md:text-2xl font-bold">{questions[currentQuestion].text}</CardTitle>
+              <CardTitle className="text-xl md:text-2xl">{questions[currentQuestion].text}</CardTitle>
             </CardHeader>
 
             <CardContent className="p-0">
@@ -113,9 +121,9 @@ const QuizFlow: React.FC<{ onComplete: (answers: Record<number, string>) => void
 
             {/* Navigation buttons */}
             <CardFooter className="flex justify-between mt-4 p-0">
-              <Button onClick={handlePrevious} disabled={currentQuestion === 0} variant="outline" className={currentQuestion === 0 ? "opacity-50 cursor-not-allowed" : ""}>
+              <Button onClick={handlePrevious} variant="outline">
                 <FaArrowLeft className="mr-2" />
-                {t.previous}
+                {currentQuestion === 0 ? t.backToHome : t.previous}
               </Button>
 
               <Button onClick={handleNext} disabled={!selectedOption} className={!selectedOption ? "opacity-50 cursor-not-allowed" : ""}>

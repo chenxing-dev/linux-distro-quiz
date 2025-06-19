@@ -30,7 +30,8 @@
     "copied": "Copied!",
     "copy": "Copy",
     "retakeQuiz": "Retake Quiz",
-    "madeWithHeart": "Made with <heartIcon/> for the Linux community"
+    "madeWithHeart": "Made with <heartIcon/> for the Linux community",
+    "backToHome": "Back to Home"
   },
   "zh": {
     "command": "./quiz --start",
@@ -63,6 +64,7 @@
     "copied": "已复制!",
     "copy": "复制",
     "retakeQuiz": "重新测试",
-    "madeWithHeart": "Created by 陈刑 <heartIcon/>"
+    "madeWithHeart": "Created by 陈刑 <heartIcon/>",
+    "backToHome": "返回首页"
   }
 }
