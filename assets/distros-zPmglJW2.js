@@ -197,7 +197,7 @@ MMMMMMMMMMM.                     MMMM
     kMMMMMMMMMMMMMMMMMMMMMMd
      ;KMMMMMMMWXXWMMMMMMMk.
        "cooc*"    "*coo'"
-    `,details:{packageManager:"Homebrew 或 App Store",releaseCycle:"每年更新",defaultDesktop:"Aqua",bestFor:"已被苹果生态圈住的用户"},note:()=>M.jsxs("div",{className:"my-6 p-4 rounded-lg border-l-4",children:[M.jsx("p",{className:"font-bold",children:"你知道吗，MacBook一次维修的钱足够买："}),M.jsxs("ul",{className:"mt-2 list-disc pl-5",children:[M.jsx("li",{children:"两台不错的Thinkpad"}),M.jsx("li",{children:"一次周末度假"}),M.jsx("li",{children:"87杯咖啡"}),M.jsx("li",{children:"1.5个月的买菜钱"})]}),M.jsx("p",{className:"mt-2 italic",children:'"但它就是好用" - 直到它坏了，而你为一次简单的维修支付了2000元。'})]})},{id:"arch",name:"Arch Linux",description:"你享受折磨并且沉迷于技术文档。你用花在系统配置上的时间作为自我价值衡量标准",traits:["受虐倾向","文档依赖症","很闲"],ascii:" \n                  -`\n                 .o+`\n                `ooo/\n               `+oooo:\n              `+oooooo:\n              -+oooooo+:\n            `/:-:++oooo+:\n           `/++++/+++++++:\n          `/++++++++++++++:\n         `/+++ooooooooooooo/`\n        ./ooosssso++osssssso+`\n       .oossssso-````/ossssss+`\n      -osssssso.      :ssssssso.\n     :osssssss/        osssso+++.\n    /ossssssss/        +ssssooo/-\n  `/ossssso+/:-        -:/+osssso+-\n `+sso+:-`                 `.-/+oso:\n`++:.                           `-/+/\n.`                                 `/\n",details:{packageManager:"Pacman",releaseCycle:"滚动发行",defaultDesktop:"无 (用户选择)",bestFor:"中级用户、折腾党、极简主义者"}},{id:"gentoo",name:"Gentoo",description:"你真心相信从源码编译能让你的电脑'更快'。相比使用编译后的软件，你更享受盯着进度条的过程。",traits:["编译爱好者","进度条观赏家","时间浪费者"],ascii:`
+    `,details:{packageManager:"Homebrew 或 App Store",releaseCycle:"每年更新",defaultDesktop:"Aqua",bestFor:"已被苹果生态圈住的用户"},note:()=>M.jsxs("div",{className:"my-6 p-4 rounded-lg border-l-4",children:[M.jsx("p",{className:"font-bold",children:"你知道吗，一次MacBook维修的钱足够买："}),M.jsxs("ul",{className:"mt-2 list-disc pl-5",children:[M.jsx("li",{children:"两台不错的Thinkpad"}),M.jsx("li",{children:"一次周末度假"}),M.jsx("li",{children:"87杯咖啡"}),M.jsx("li",{children:"1.5个月的买菜钱"})]}),M.jsx("p",{className:"mt-2 italic",children:'"But it just works" - 是的，直到它坏了，而你为一次简单的维修支付了2000元。'})]}),lovePersona:{title:"macOS渣女",traits:["颜值天花板","端水艺术家"]}},{id:"arch",name:"Arch Linux",description:"你享受折磨并且沉迷于技术文档。你用花在系统配置上的时间作为自我价值衡量标准",traits:["受虐倾向","文档依赖症","很闲"],ascii:" \n                  -`\n                 .o+`\n                `ooo/\n               `+oooo:\n              `+oooooo:\n              -+oooooo+:\n            `/:-:++oooo+:\n           `/++++/+++++++:\n          `/++++++++++++++:\n         `/+++ooooooooooooo/`\n        ./ooosssso++osssssso+`\n       .oossssso-````/ossssss+`\n      -osssssso.      :ssssssso.\n     :osssssss/        osssso+++.\n    /ossssssss/        +ssssooo/-\n  `/ossssso+/:-        -:/+osssso+-\n `+sso+:-`                 `.-/+oso:\n`++:.                           `-/+/\n.`                                 `/\n",details:{packageManager:"Pacman",releaseCycle:"滚动发行",defaultDesktop:"无 (用户选择)",bestFor:"中级用户、折腾党、极简主义者"},lovePersona:{title:"Arch海王",traits:["生人勿近脸","实际撩遍全终端"]}},{id:"gentoo",name:"Gentoo",description:"你真心相信从源码编译能让你的电脑'更快'。相比使用编译后的软件，你更享受盯着进度条的过程。",traits:["编译爱好者","进度条观赏家","时间浪费者"],ascii:`
          -/oyddmdhs+:.
      -odNMMMMMMMMNNmhy+-\`
    -yNMMMMMMMMMMMNNNmmdhy+-
@@ -216,7 +216,7 @@ yMMNNNNNNNmmmmmNNMmhs+/-\`
 /hMMNNNNNNNNMNdhs++/-\`
 \`/ohdmmddhys+++/:.\`
   \`-//////:--.
-  `,details:{packageManager:"Portage (emerge)",releaseCycle:"滚动发行",defaultDesktop:"无 (用户编译)",bestFor:"高级用户、系统定制爱好者、性能调优师"}},{id:"popos",name:"Pop!_OS",description:"你叫自己'Gamer'而且觉得RGB灯效提升电脑性能。你的电脑的灯带数量远超CPU核数。",traits:["Gamer身份","RGB狂热粉","帧率偏执狂"],ascii:`
+  `,details:{packageManager:"Portage (emerge)",releaseCycle:"滚动发行",defaultDesktop:"无 (用户编译)",bestFor:"高级用户、系统定制爱好者、性能调优师"},lovePersona:{title:"Gentoo匠心伴侣",traits:["慢热但持久","细节偏执狂","时间投资型"]}},{id:"popos",name:"Pop!_OS",description:"你叫自己'Gamer'而且觉得RGB灯效提升电脑性能。你的电脑的灯带数量远超CPU核数。",traits:["Gamer身份","RGB狂热粉","帧率偏执狂"],ascii:`
              /////////////
          /////////////////////
       ///////*767////////////////
@@ -237,7 +237,7 @@ yMMNNNNNNNmmmmmNNMmhs+/-\`
       ///////////////////////////
          /////////////////////
              /////////////
-`,details:{packageManager:"APT (含定制仓库)",releaseCycle:"半年更新 + LTS",defaultDesktop:"COSMIC (基于GNOME)",bestFor:"游戏玩家、新手、NVIDIA显卡用户"}},{id:"debian",name:"Debian",description:"新功能诚可贵，稳定性价更高。你的电脑至今仍运行着2015年的软件。",traits:["稳定性偏执狂","抗拒改变","FOSS极端分子"],ascii:`
+`,details:{packageManager:"APT (含定制仓库)",releaseCycle:"半年更新 + LTS",defaultDesktop:"COSMIC (基于GNOME)",bestFor:"游戏玩家、新手、NVIDIA显卡用户"},lovePersona:{title:"Pop!_OS活力恋人",traits:["派对达人","氛围掌控者","及时行乐派"]}},{id:"debian",name:"Debian",description:"新功能诚可贵，稳定性价更高。你的电脑至今仍运行着2015年的软件。",traits:["稳定性偏执狂","抗拒改变","FOSS极端分子"],ascii:`
         _,met$$$$$$$$$$gg.
      ,g$$$$$$$$$$$$$$$$$$$$P.
    ,g$$$$P""       """Y$$$$.".
@@ -255,7 +255,7 @@ yMMNNNNNNNmmmmmNNMmhs+/-\`
        \`Y$$$$b.
          \`"Y$$b._
              \`""""
-`,details:{packageManager:"APT",releaseCycle:"稳定版(3-5年)",defaultDesktop:"GNOME",bestFor:"服务器、稳定环境"}},{id:"mint",name:"Linux Mint",description:"你想尝试Linux，但怀念Windows且害怕改变，认为Windows 7的UI设计是巅峰之作。",traits:["Windows难民","舒适区囚徒"],ascii:"\n             ...-:::::-...\n          .-MMMMMMMMMMMMMMM-.\n      .-MMMM`..-:::::::-..`MMMM-.\n    .:MMMM.:MMMMMMMMMMMMMMM:.MMMM:.\n   -MMM-M---MMMMMMMMMMMMMMMMMMM.MMM-\n `:MMM:MM`  :MMMM:....::-...-MMMM:MMM:`\n :MMM:MMM`  :MM:`  ``    ``  `:MMM:MMM:\n.MMM.MMMM`  :MM.  -MM.  .MM-  `MMMM.MMM.\n:MMM:MMMM`  :MM.  -MM-  .MM:  `MMMM-MMM:\n:MMM:MMMM`  :MM.  -MM-  .MM:  `MMMM:MMM:\n:MMM:MMMM`  :MM.  -MM-  .MM:  `MMMM-MMM:\n.MMM.MMMM`  :MM:--:MM:--:MM:  `MMMM.MMM.\n :MMM:MMM-  `-MMMMMMMMMMMM-`  -MMM-MMM:\n  :MMM:MMM:`                `:MMM:MMM:\n   .MMM.MMMM:--------------:MMMM.MMM.\n     '-MMMM.-MMMMMMMMMMMMMMM-.MMMM-'\n       '.-MMMM``--:::::--``MMMM-.'\n            '-MMMMMMMMMMMMM-'\n               ``-:::::-``\n",details:{packageManager:"APT",releaseCycle:"LTS(5年支持)",defaultDesktop:"Cinnamon/XFCE/MATE",bestFor:"Windows移民"}},{id:"ubuntu",name:"Ubuntu",description:"你的个性是毫无个性，堪称Linux用户中的路人甲。",traits:["平庸","无趣","默认选择"],ascii:`
+`,details:{packageManager:"APT",releaseCycle:"稳定版(3-5年)",defaultDesktop:"GNOME",bestFor:"服务器、稳定环境"},lovePersona:{title:"Debian老干部",traits:["传统守护者","拒绝快餐爱情","稳定安全感"]}},{id:"mint",name:"Linux Mint",description:"你想尝试Linux，但怀念Windows且害怕改变，认为Windows 7的UI设计是巅峰之作。",traits:["Windows难民","舒适区囚徒"],ascii:"\n             ...-:::::-...\n          .-MMMMMMMMMMMMMMM-.\n      .-MMMM`..-:::::::-..`MMMM-.\n    .:MMMM.:MMMMMMMMMMMMMMM:.MMMM:.\n   -MMM-M---MMMMMMMMMMMMMMMMMMM.MMM-\n `:MMM:MM`  :MMMM:....::-...-MMMM:MMM:`\n :MMM:MMM`  :MM:`  ``    ``  `:MMM:MMM:\n.MMM.MMMM`  :MM.  -MM.  .MM-  `MMMM.MMM.\n:MMM:MMMM`  :MM.  -MM-  .MM:  `MMMM-MMM:\n:MMM:MMMM`  :MM.  -MM-  .MM:  `MMMM:MMM:\n:MMM:MMMM`  :MM.  -MM-  .MM:  `MMMM-MMM:\n.MMM.MMMM`  :MM:--:MM:--:MM:  `MMMM.MMM.\n :MMM:MMM-  `-MMMMMMMMMMMM-`  -MMM-MMM:\n  :MMM:MMM:`                `:MMM:MMM:\n   .MMM.MMMM:--------------:MMMM.MMM.\n     '-MMMM.-MMMMMMMMMMMMMMM-.MMMM-'\n       '.-MMMM``--:::::--``MMMM-.'\n            '-MMMMMMMMMMMMM-'\n               ``-:::::-``\n",details:{packageManager:"APT",releaseCycle:"LTS(5年支持)",defaultDesktop:"Cinnamon/XFCE/MATE",bestFor:"Windows移民"},lovePersona:{title:"Mint舒适派",traits:["佛系恋人","拒绝内卷"]}},{id:"ubuntu",name:"Ubuntu",description:"你的个性是毫无个性，堪称Linux用户中的路人甲。",traits:["平庸","无趣","默认选择"],ascii:`
                              ....
               .',:clooo:  .:looooo:.
            .;looooooooc  .oooooooooo'
@@ -277,7 +277,7 @@ yMMNNNNNNNmmmmmNNMmhs+/-\`
            .':loooooo;  ,oooooooooc
                ..';::c'  .;loooo:'
 
-`,details:{packageManager:"APT",releaseCycle:"半年版/两年LTS版",defaultDesktop:"GNOME",bestFor:"新手、开发者、企业用户"}},{id:"nixos",name:"NixOS",description:"你编写NixOS配置像写诗一般，可复现性是你的至高追求。你重装系统的频率比你眨眼还高。",traits:["编写配置成瘾","复现强迫症","函数式程序员"],ascii:` 
+`,details:{packageManager:"APT",releaseCycle:"半年版/两年LTS版",defaultDesktop:"GNOME",bestFor:"新手、开发者、企业用户"},lovePersona:{title:"Ubuntu暖男",traits:["在吗型备胎","中央空调","LTS式长情"]}},{id:"nixos",name:"NixOS",description:"你编写NixOS配置像写诗一般，可复现性是你的至高追求。你重装系统的频率比你眨眼还高。",traits:["编写配置成瘾","复现强迫症","函数式程序员"],ascii:` 
           ▗▄▄▄       ▗▄▄▄▄    ▄▄▄▖
           ▜███▙       ▜███▙  ▟███▛
            ▜███▙       ▜███▙▟███▛
@@ -298,7 +298,7 @@ yMMNNNNNNNmmmmmNNMmhs+/-\`
           ▟███▛▜███▙       ▜███▙
          ▟███▛  ▜███▙       ▜███▙
          ▝▀▀▀    ▀▀▀▀▘       ▀▀▀▘
-`,details:{packageManager:"Nix",releaseCycle:"滚动更新+稳定通道",defaultDesktop:"Plasma (可选)",bestFor:"可复现环境、开发者"}},{id:"rhel",name:"Red Hat Enterprise Linux",description:"你穿西装上班并按小时计算工资，为从未用过的支持服务付费并因此感到高人一等。",traits:["企业打工人","付费支持用户","商业思维"],ascii:`
+`,details:{packageManager:"Nix",releaseCycle:"滚动更新+稳定通道",defaultDesktop:"Plasma (可选)",bestFor:"可复现环境、开发者"},lovePersona:{title:"NixOS诗人",traits:["可复现浪漫","函数式恋爱"]}},{id:"rhel",name:"Red Hat Enterprise Linux",description:"你穿西装上班并按小时计算工资，为从未用过的支持服务付费并因此感到高人一等。",traits:["企业打工人","付费支持用户","商业思维"],ascii:`
            .MMM..:MMMMMMM
           MMMMMMMMMMMMMMMMMM
           MMMMMMMMMMMMMMMMMMMM.
@@ -317,7 +317,7 @@ MMMMMMMMMMM.                     MMMM
          MMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
             \`MMMMMMMMMMMMMMMMMMMMMMMM:
                 \`\`MMMMMMMMMMMMMMMMM'
-`,details:{packageManager:"DNF (YUM兼容)",releaseCycle:"3-5年大更新+6月小更新",defaultDesktop:"GNOME",bestFor:"企业用户"}},{id:"kali",name:"Kali Linux",description:"你至少有三件套头卫衣，并喜欢在命令行里打字「扮嘢」。你至少刷过两遍《黑客军团》。",traits:["黑客coser","卫衣收集家","扮嘢利器"],ascii:`
+`,details:{packageManager:"DNF (YUM兼容)",releaseCycle:"3-5年大更新+6月小更新",defaultDesktop:"GNOME",bestFor:"企业用户"},lovePersona:{title:"RHEL金领",traits:["西装暴徒","企业级恋人"]}},{id:"kali",name:"Kali Linux",description:"你至少有三件套头卫衣，并喜欢在命令行里打字「扮嘢」。你至少刷过两遍《黑客军团》。",traits:["黑客coser","卫衣收集家","扮嘢利器"],ascii:`
 ..............
             ..,;:ccc,.
           ......''';lxO.
@@ -339,7 +339,7 @@ MMMMMMMMMMM.                     MMMM
                                             c
                                             .'
                                              .
-    `,details:{packageManager:"APT",releaseCycle:"滚动更新(季度发布)",defaultDesktop:"GNOME (极简版)",bestFor:"模拟黑客、渗透测试"}},{id:"artix",name:"Artix Linux",description:"你宁肯调试3小时init脚本也不愿向'邪恶势力'systemd低头，Unix哲学是你的世界观的重要组成部分。",traits:["init偏执狂","反systemd斗士","自虐型折腾家"],ascii:`
+    `,details:{packageManager:"APT",releaseCycle:"滚动更新(季度发布)",defaultDesktop:"GNOME (极简版)",bestFor:"模拟黑客、渗透测试"},lovePersona:{title:"Kali神秘情人",traits:["若即若离感","危险吸引力","午夜浪漫者"]}},{id:"artix",name:"Artix Linux",description:"你宁肯调试3小时init脚本也不愿向'邪恶势力'systemd低头，Unix哲学是你的世界观的重要组成部分。",traits:["init偏执狂","反systemd斗士","自虐型折腾家"],ascii:`
                    '
                   'o'
                  'ooo'
@@ -360,4 +360,4 @@ MMMMMMMMMMM.                     MMMM
   'ooooi:'\`                \`'';ioxxo'
  'i:'\`                          '':io'
 '\`                                   \`'
-    `,details:{packageManager:"Pacman",releaseCycle:"滚动发行",defaultDesktop:"无 (用户选择)",bestFor:"systemd反对者"}}];export{e as a,s as d};
+    `,details:{packageManager:"Pacman",releaseCycle:"滚动发行",defaultDesktop:"无 (用户选择)",bestFor:"systemd反对者"},lovePersona:{title:"Artix自由灵魂",traits:["不羁爱自由","原则坚守者","深度关系恐惧症"]}}];export{e as a,s as d};
