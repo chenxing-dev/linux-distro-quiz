@@ -1,6 +1,6 @@
 # Linux Distro Personality Quiz
 
-![Project Banner](banner.png)
+![Project Banner](public/banner.png)
 
 Discover which Linux distribution matches your personality! This fun, interactive quiz helps you find your perfect Linux distro based on your preferences and personality traits. Built with React and TypeScript, styled with Tailwind CSS, and animated with Framer Motion.
 
@@ -18,7 +18,7 @@ Discover which Linux distribution matches your personality! This fun, interactiv
 ## Technologies Used
 
 - **Frontend**: React, TypeScript
-- **Styling**: Tailwind CSS
+- **Styling**: Tailwind CSS, shadcn/ui
 - **Animations**: Framer Motion
 - **Icons**: React Icons
 - **Build Tool**: Vite
@@ -46,11 +46,11 @@ npm run dev
 ```
 src/
 ├── components/
-│   ├── WelcomeScreen.tsx      # Welcome screen with Tux animation
+│   ├── WelcomeScreen.tsx      # Welcome screen
 │   ├── QuizFlow.tsx           # Quiz questions and navigation
 │   └── ResultScreen.tsx       # Result display with distro match
 ├── data/
-│   ├── distros.ts             # Distro database
+│   ├── distros-en.ts          # Distro database
 │   └── questions.ts           # Quiz questions
 ├── App.tsx                    # Main application component
 └── main.tsx                   # Entry point
@@ -59,7 +59,7 @@ src/
 ## Screenshots
 
 ### Quiz Flow
-![Quiz Flow]()
+![Quiz Flow](public/quiz.png)
 
 ### Result Screen
 ![Result Screen]()

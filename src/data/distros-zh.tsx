@@ -33,16 +33,20 @@ const distros: Distro[] = [
     },
     note: () => (
       <div className="my-6 p-4 rounded-lg border-l-4">
-        <p className="font-bold">你知道吗，MacBook一次维修的钱足够买：</p>
+        <p className="font-bold">你知道吗，一次MacBook维修的钱足够买：</p>
         <ul className="mt-2 list-disc pl-5">
           <li>两台不错的Thinkpad</li>
           <li>一次周末度假</li>
           <li>87杯咖啡</li>
           <li>1.5个月的买菜钱</li>
         </ul>
-        <p className="mt-2 italic">"但它就是好用" - 直到它坏了，而你为一次简单的维修支付了2000元。</p>
+        <p className="mt-2 italic">"But it just works" - 是的，直到它坏了，而你为一次简单的维修支付了2000元。</p>
       </div>
-    )
+    ),
+    lovePersona: {
+      title: "macOS渣女",
+      traits: ["颜值天花板", "端水艺术家"]
+    }
   },
   {
     id: "arch",
@@ -75,6 +79,10 @@ const distros: Distro[] = [
       releaseCycle: "滚动发行",
       defaultDesktop: "无 (用户选择)",
       bestFor: "中级用户、折腾党、极简主义者"
+    },
+    lovePersona: {
+      title: "Arch海王",
+      traits: ["生人勿近脸", "实际撩遍全终端"]
     }
   },
   {
@@ -107,6 +115,10 @@ yMMNNNNNNNmmmmmNNMmhs+/-\`
       releaseCycle: "滚动发行",
       defaultDesktop: "无 (用户编译)",
       bestFor: "高级用户、系统定制爱好者、性能调优师"
+    },
+    lovePersona: {
+      title: "Gentoo匠心伴侣",
+      traits: ["慢热但持久", "细节偏执狂", "时间投资型"]
     }
   },
   {
@@ -141,6 +153,10 @@ yMMNNNNNNNmmmmmNNMmhs+/-\`
       releaseCycle: "半年更新 + LTS",
       defaultDesktop: "COSMIC (基于GNOME)",
       bestFor: "游戏玩家、新手、NVIDIA显卡用户"
+    },
+    lovePersona: {
+      title: "Pop!_OS活力恋人",
+      traits: ["派对达人", "氛围掌控者", "及时行乐派"]
     }
   },
   {
@@ -172,6 +188,10 @@ yMMNNNNNNNmmmmmNNMmhs+/-\`
       releaseCycle: "稳定版(3-5年)",
       defaultDesktop: "GNOME",
       bestFor: "服务器、稳定环境"
+    },
+    lovePersona: {
+      title: "Debian老干部",
+      traits: ["传统守护者", "拒绝快餐爱情", "稳定安全感"]
     }
   },
 
@@ -206,6 +226,10 @@ yMMNNNNNNNmmmmmNNMmhs+/-\`
       releaseCycle: "LTS(5年支持)",
       defaultDesktop: "Cinnamon/XFCE/MATE",
       bestFor: "Windows移民"
+    },
+    lovePersona: {
+      title: "Mint舒适派",
+      traits: ["佛系恋人", "拒绝内卷"]
     }
   },
   {
@@ -241,6 +265,10 @@ yMMNNNNNNNmmmmmNNMmhs+/-\`
       releaseCycle: "半年版/两年LTS版",
       defaultDesktop: "GNOME",
       bestFor: "新手、开发者、企业用户"
+    },
+    lovePersona: {
+      title: "Ubuntu暖男",
+      traits: ["在吗型备胎", "中央空调", "LTS式长情"]
     }
   },
   {
@@ -275,6 +303,10 @@ yMMNNNNNNNmmmmmNNMmhs+/-\`
       releaseCycle: "滚动更新+稳定通道",
       defaultDesktop: "Plasma (可选)",
       bestFor: "可复现环境、开发者"
+    },
+    lovePersona: {
+      title: "NixOS诗人",
+      traits: ["可复现浪漫", "函数式恋爱"]
     }
   },
   {
@@ -307,6 +339,10 @@ MMMMMMMMMMM.                     MMMM
       releaseCycle: "3-5年大更新+6月小更新",
       defaultDesktop: "GNOME",
       bestFor: "企业用户"
+    },
+    lovePersona: {
+      title: "RHEL金领",
+      traits: ["西装暴徒", "企业级恋人"]
     }
   },
   {
@@ -342,6 +378,10 @@ MMMMMMMMMMM.                     MMMM
       releaseCycle: "滚动更新(季度发布)",
       defaultDesktop: "GNOME (极简版)",
       bestFor: "模拟黑客、渗透测试"
+    },
+    lovePersona: {
+      title: "Kali神秘情人",
+      traits: ["若即若离感", "危险吸引力", "午夜浪漫者"]
     }
   },
   {
@@ -376,6 +416,10 @@ MMMMMMMMMMM.                     MMMM
       releaseCycle: "滚动发行",
       defaultDesktop: "无 (用户选择)",
       bestFor: "systemd反对者"
+    },
+    lovePersona: {
+      title: "Artix自由灵魂",
+      traits: ["不羁爱自由", "原则坚守者", "深度关系恐惧症"]
     }
   }
 ];

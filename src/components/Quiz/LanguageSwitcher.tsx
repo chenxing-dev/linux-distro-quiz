@@ -8,7 +8,7 @@ const LanguageSwitcher = () => {
         <TooltipProvider>
             <Tooltip>
                 <TooltipTrigger asChild>
-                    <button onClick={() => setLocale(locale === "en" ? "zh" : "en")} className="inline-flex items-center justify-center rounded-lg w-8 h-8 text-sm font-semibold bg-zinc-800 border border-zinc-700 text-zinc-200 hover:bg-zinc-700 transition-all focus:outline-none">
+                    <button onClick={() => setLocale(locale === "en" ? "zh" : "en")} className="inline-flex items-center justify-center rounded-lg w-8 h-8 text-sm font-semibold bg-zinc-800 border border-zinc-700 text-zinc-200 hover:bg-zinc-700 transition-all focus:outline-none cursor-pointer">
                         {locale === "en" ? "EN" : "中"}
                     </button>
                 </TooltipTrigger>

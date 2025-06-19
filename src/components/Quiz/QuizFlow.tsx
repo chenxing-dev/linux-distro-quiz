@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useLocale } from "@/context/useLocale";
 import translations from "@/locales/translations.json";
+import "@/components/Quiz/styles/terminal-glow.css";
 
 const QuizFlow: React.FC<{ onComplete: (answers: Record<number, string>) => void }> = ({ onComplete }) => {
   const { locale } = useLocale();
@@ -58,24 +59,26 @@ const QuizFlow: React.FC<{ onComplete: (answers: Record<number, string>) => void
   return (
     <div className="min-h-screen max-w-3xl p-5 mx-auto flex flex-col justify-center">
       {/* Terminal Progress Bar */}
-      <div className="my-8 bg-zinc-900/80 border border-zinc-600/50 rounded-lg text-base font-mono text-zinc-50 hidden md:block">
-        <div className="flex items-center p-2 bg-zinc-800/80 border-b border-zinc-700">
-          <div className="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
-          <div className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
-          <div className="w-3 h-3 rounded-full bg-green-500"></div>
-        </div>
-        <div className="p-4">
-          <div className="flex items-center">
-            <span className="">user@linux-quiz:~$</span>
-            <Label className="text-sm font-medium ml-2">{t.questionNumber.replace("{current}", (currentQuestion + 1).toString()).replace("{total}", questions.length.toString())}</Label>
-            <span className="animate-pulse text-base pl-0 pb-[2px]">▋</span>
+      <div className="my-8 text-base font-mono text-zinc-50 hidden md:block z-10 terminal-glow">
+        <div className="overflow-hidden rounded-lg border border-zinc-600/50 ">
+          <div className="flex items-center p-2 bg-zinc-800/80 border-b border-zinc-700">
+            <div className="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
+            <div className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+            <div className="w-3 h-3 rounded-full bg-green-500"></div>
           </div>
-          <div className="mt-1 inline-flex w-full items-center gap-2 text-nowrap">
-            <span>{t.progress}</span>
-            <Progress value={progress} className="bg-zinc-600 border border-zinc-500 mt-1" />
-            <Label className="text-nowrap text-sm font-medium">
-              {Math.round(progress)}% {t.complete}
-            </Label>
+          <div className="p-4 bg-zinc-900">
+            <div className="flex items-center">
+              <span className="">user@linux-quiz:~$</span>
+              <Label className="text-sm font-medium ml-2">{t.questionNumber.replace("{current}", (currentQuestion + 1).toString()).replace("{total}", questions.length.toString())}</Label>
+              <span className="animate-pulse text-base pl-0 pb-[2px]">▋</span>
+            </div>
+            <div className="mt-1 inline-flex w-full items-center gap-2 text-nowrap">
+              <span>{t.progress}</span>
+              <Progress value={progress} className="bg-zinc-600 border border-zinc-500 mt-1" />
+              <Label className="text-nowrap text-sm font-medium">
+                {Math.round(progress)}% {t.complete}
+              </Label>
+            </div>
           </div>
         </div>
       </div>

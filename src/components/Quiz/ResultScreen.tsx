@@ -18,7 +18,7 @@ import DistroTechnicalDetails from "./DistroTechnicalDetails";
 import { ShareCard } from "./ShareCard";
 import { QRCodeSVG } from "qrcode.react";
 import { useLocale } from "@/context/useLocale";
-import translations from "@/locales/translations.json"
+import translations from "@/locales/translations.json";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 interface ResultScreenProps {
@@ -100,7 +100,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="w-full max-w-4xl">
           <Card className="relative pb-2 md:pb-6">
             {/* ADD LANGUAGE SWITCHER */}
-            <div className="absolute top-4 right-4">
+            <div className="absolute top-4 right-4 z-10">
               <LanguageSwitcher />
             </div>
             {/* Result header */}
@@ -135,6 +135,34 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
                       </motion.div>
                     ))}
                   </div>
+                  {/* 恋爱人设展示 */}
+                  {result.lovePersona && (
+                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.5 }} className="mb-8">
+                      <div className="flex items-center justify-center mb-3">
+                        <div className="w-10 h-px bg-zinc-300 flex-1"></div>
+                        <div className="mx-3 flex items-center">
+                          <FaHeart className="text-pink-500 mr-2" />
+                          <h3 className="text-lg font-bold text-pink-700">系统人设恋爱版</h3>
+                        </div>
+                        <div className="w-10 h-px bg-zinc-300 flex-1"></div>
+                      </div>
+
+                      <div className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-xl p-4 border border-pink-200 shadow-sm">
+                        <div className="text-center mb-3">
+                          <p className="text-sm text-pink-600 mb-1">你的操作系统人格在恋爱中的表现</p>
+                          <h4 className="text-xl font-bold text-pink-700">{result.lovePersona.title}</h4>
+                        </div>
+
+                        <div className="flex flex-wrap justify-center gap-2">
+                          {result.lovePersona.traits.map((trait, i) => (
+                            <Badge key={i} variant="secondary" className="bg-pink-100 text-pink-700 hover:bg-pink-200">
+                              {trait}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
 
                   {result.note && <result.note />}
 

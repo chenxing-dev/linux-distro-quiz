@@ -58,11 +58,11 @@ const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
       </Card>
 
       {/* Main content */}
-      <Card className="relative w-full max-w-4xl pt-4 pb-0">
+      <Card className="w-full max-w-4xl pt-4 pb-0">
         {/* Hero section */}
-        <CardHeader className="p-8 md:p-12 text-center">
+        <CardHeader className="relative p-8 md:p-12 text-center">
           {/* ADD LANGUAGE SWITCHER */}
-          <div className="absolute top-4 right-4">
+          <div className="absolute top-0 right-4 z-10">
             <LanguageSwitcher />
           </div>
           <div>

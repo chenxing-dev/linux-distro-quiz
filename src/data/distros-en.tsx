@@ -13,6 +13,10 @@ export type Distro = {
     bestFor: string;
   };
   note?: () => JSX.Element;
+  lovePersona?: {
+    title: string;
+    traits: string[];
+  };
 };
 
 const distros: Distro[] = [
