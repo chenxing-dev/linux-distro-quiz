@@ -1,9 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@700&display=swap");
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --font-mono: "Ubuntu Mono", monospace;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -117,4 +120,9 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+pre {
+  font-kerning: none; /* 禁用字距调整 */
+  font-variant-ligatures: none; /* 禁用连字 */
 }
