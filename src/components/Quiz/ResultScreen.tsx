@@ -223,7 +223,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
                             微信
                           </Button>
                         </DialogTrigger>
-                        <DialogContent className="max-w-md p-0 overflow-hidden border-0" showCloseButton={false}>
+                        <DialogContent className="max-w-xs md:max-w-md p-0 overflow-hidden border-0" showCloseButton={false}>
                           <DialogClose asChild>
                             <Button variant="ghost" className="absolute top-4 right-4 hover:bg-white/20 text-zinc-800 w-4 h-6">
                               <X size={20} />
@@ -273,7 +273,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
               </Card>
               <Button onClick={onRetake}>
                 <FaRedo className="mr-2" />
-                Retake Quiz
+                {t.retakeQuiz}
               </Button>
 
               <Separator className="my-4" />
