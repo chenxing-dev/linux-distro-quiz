@@ -58,9 +58,9 @@ const QuizFlow: React.FC<{ onComplete: (answers: Record<number, string>) => void
       setSelectedOption(prevAnswer || null);
     } else {
       // 强制页面刷新
-      window.location.href = "/";
       console.log("Navigating to home");
       navigate("/", { replace: true }); // Navigate to home if at the first question
+      window.location.reload(); // Force page reload to reset state
     }
   };
 
