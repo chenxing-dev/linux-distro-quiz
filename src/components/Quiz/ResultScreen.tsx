@@ -110,15 +110,15 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="w-full max-w-4xl">
           <Card className="relative pb-2 md:pb-6">
             {/* ADD LANGUAGE SWITCHER */}
-            <div className="absolute top-4 right-4 z-10">
+            <div className="absolute top-2 md:top-4 right-2 md:right-4 z-10">
               <LanguageSwitcher />
             </div>
             {/* Result header */}
-            <CardHeader className="flex flex-col justify-center *:mx-auto">
+            <CardHeader className="flex flex-col justify-center *:mx-auto pt-4 md:pt-10">
               <CardTitle className="text-2xl md:text-4xl font-bold text-center">{(result.id === "macos" && t.personalityMatch) || t.linuxMatch}</CardTitle>
 
               {/* ASCII Art Logo */}
-              <div className="font-mono font-bold text-xs md:text-sm leading-3 md:leading-4 whitespace-pre md:mb-4">{result.ascii || result.name}</div>
+              <div className="font-mono font-bold text-[10px] md:text-sm leading-[10px] md:leading-4 whitespace-pre md:mb-4">{result.ascii}</div>
 
               <motion.h2 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.5 }} className="text-3xl md:text-5xl font-bold mb-2">
                 {result.name}

@@ -33,7 +33,7 @@ const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
       <Toaster />
 
       {/* Decorative terminal windows */}
-      <Card className="top-[8%] left-[5%] p-0 hidden md:block absolute w-64 h-48 bg-black/90 border border-zinc-500/30 shadow-xl overflow-hidden z-10">
+      <Card className="top-[8%] left-[5%] p-0 hidden md:block absolute w-64 h-48 bg-black/75 border border-zinc-500/30 shadow-xl overflow-hidden z-10">
         <div className="flex items-center p-2 bg-zinc-800 border-b border-zinc-700">
           <div className="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
           <div className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
@@ -45,7 +45,7 @@ const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
         </div>
       </Card>
 
-      <Card className="bottom-[8%] right-[5%] p-0 hidden md:block absolute w-64 h-48 bg-black/90 border border-zinc-500/30 shadow-xl overflow-hidden z-10">
+      <Card className="bottom-[8%] right-[5%] p-0 hidden md:block absolute w-64 h-48 bg-black/75 border border-zinc-500/30 shadow-xl overflow-hidden z-10">
         <div className="flex items-center p-2 bg-zinc-800 border-b border-zinc-700">
           <div className="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
           <div className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
@@ -62,7 +62,7 @@ const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
         {/* Hero section */}
         <CardHeader className="relative p-8 md:p-12 text-center">
           {/* ADD LANGUAGE SWITCHER */}
-          <div className="absolute top-0 right-4 z-10">
+          <div className="absolute -top-2 md:top-2 right-2 md:right-4 z-10">
             <LanguageSwitcher />
           </div>
           <div>
