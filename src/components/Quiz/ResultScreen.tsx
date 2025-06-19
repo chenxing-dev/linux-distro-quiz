@@ -5,7 +5,6 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -79,6 +78,17 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
     window.open(weiboUrl, "weibo_share");
   };
 
+  const renderFooter = () => {
+    const parts = t.madeWithHeart.split("<heartIcon/>");
+    return (
+      <span className="flex items-center">
+        {parts[0]}
+        <FaHeart className="mx-2 text-red-500" />
+        {parts[1]}
+      </span>
+    );
+  };
+
   return (
     <div className="min-h-screen p-4 flex justify-center items-center">
       {/* Hidden share card for image generation */}
@@ -91,7 +101,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
       {/* Copied Alert */}
       {showCopiedAlert && (
         <Alert className="fixed top-8 inset-x-4 md:inset-x-auto md:right-8 md:w-auto md:max-w-md border-zinc-900 z-50">
-          <AlertTitle>{t.copied}</AlertTitle>
+          <AlertTitle>{t.copiedClipboard}</AlertTitle>
           <AlertDescription>{t.sharePrompt}</AlertDescription>
         </Alert>
       )}
@@ -122,7 +132,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
               <div className="md:px-8">
                 <div>
                   {/* Traits */}
-                  <CardTitle className="text-xl font-bold mb-4 text-center">Your Key Traits</CardTitle>
+                  <CardTitle className="text-xl font-bold mb-4 text-center">{t.yourKeyTraits}</CardTitle>
                   <div className="flex flex-wrap gap-3 justify-center mb-8">
                     {result.traits.map((trait: string, index: number) => (
                       <motion.div key={index} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 1.0 + index * 0.1, duration: 0.3 }}>
@@ -169,7 +179,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
                   {/* Technical details accordion */}
                   <Accordion type="single" collapsible className="border rounded-lg">
                     <AccordionItem value="technical">
-                      <AccordionTrigger className="text-lg font-bold px-4 md:px-6 flex items-center">Technical Details</AccordionTrigger>
+                      <AccordionTrigger className="text-lg font-bold px-4 md:px-6 flex items-center">{t.technicalDetails}</AccordionTrigger>
                       <AccordionContent>
                         <DistroTechnicalDetails distro={result} />
                       </AccordionContent>
@@ -187,25 +197,22 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
                   <CardTitle className="text-lg font-bold text-center md:text-left flex justify-between mb-2">
                     <div className="flex items-center gap-2 text-nowrap">
                       <LinkIcon size={16} />
-                      <span className="text-base md:text-lg">Share Your Result</span>
+                      <span className="text-base md:text-lg">{t.shareYourResult}</span>
                     </div>
                     <Button size="sm" onClick={handleCopyResult} className="flex items-center gap-1">
                       {copied ? (
                         <>
-                          <Check size={14} /> Copied!
+                          <Check size={14} /> {t.copied}
                         </>
                       ) : (
                         <>
-                          <Copy size={14} /> Copy
+                          <Copy size={14} /> {t.copy}
                         </>
                       )}
                     </Button>
                   </CardTitle>
                   <div className="flex flex-col md:flex-row gap-2">
                     <div className="flex-1 bg-white text-zinc-700">
-                      <Label htmlFor="share-url" className="sr-only">
-                        Share URL
-                      </Label>
                       <Input id="share-url" value={shareUrl} readOnly className="truncate font-mono font-bold text-xs" />
                     </div>
                     <div className="flex gap-2 text-sm font-bold">
@@ -273,11 +280,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ result, onRetake }) => {
 
               {/* Footer */}
               <div className="pb-4 text-center">
-                <p className="inline-flex items-center text-nowrap">
-                  Made with
-                  <FaHeart className="mx-2" />
-                  for the Linux community
-                </p>
+                <p className="inline-flex items-center text-nowrap">{renderFooter()}</p>
               </div>
             </CardFooter>
           </Card>

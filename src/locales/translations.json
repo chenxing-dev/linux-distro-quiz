@@ -16,10 +16,21 @@
     "previous": "Previous",
     "nextQuestion": "Next Question",
     "seeResults": "See Results",
-    "copied": "Copied to clipboard!",
+    "copiedClipboard": "Copied to clipboard!",
     "sharePrompt": "Share your Linux distro match with friends",
     "personalityMatch": "Your Personality Match Is...",
-    "linuxMatch": "Your Linux Personality Match Is..."
+    "linuxMatch": "Your Linux Personality Match Is...",
+    "yourKeyTraits": "Your Key Traits",
+    "technicalDetails": "Technical Details",
+    "packageManager": "Package Manager",
+    "releaseCycle": "Release Cycle",
+    "defaultDesktop": "Default Desktop",
+    "bestFor": "Best For",
+    "shareYourResult": "Share Your Result",
+    "copied": "Copied!",
+    "copy": "Copy",
+    "retakeQuiz": "Retake Quiz",
+    "madeWithHeart": "Made with <heartIcon/> for the Linux community"
   },
   "zh": {
     "command": "./quiz --start",
@@ -38,9 +49,20 @@
     "previous": "上一题",
     "nextQuestion": "下一题",
     "seeResults": "查看结果",
-    "copied": "已复制到剪贴板！",
+    "copiedClipboard": "已复制到剪贴板！",
     "sharePrompt": "与朋友分享你的本命操作系统",
     "personalityMatch": "你的本命操作系统是...",
-    "linuxMatch": "你的本命操作系统是..."
+    "linuxMatch": "你的本命操作系统是...",
+    "yourKeyTraits": "核心特质",
+    "technicalDetails": "技术参数",
+    "packageManager": "程序包管理器",
+    "releaseCycle": "发布周期",
+    "defaultDesktop": "默认桌面",
+    "bestFor": "适用于",
+    "shareYourResult": "分享结果",
+    "copied": "已复制!",
+    "copy": "复制",
+    "retakeQuiz": "重新测试",
+    "madeWithHeart": "Created by 陈刑 <heartIcon/>"
   }
 }
