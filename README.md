@@ -62,7 +62,7 @@ src/
 ![Quiz Flow](public/quiz.png)
 
 ### Result Screen
-![Result Screen]()
+![Result Screen](public/result.png)
 
 ## Contributing
 
